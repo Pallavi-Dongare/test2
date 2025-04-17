@@ -1,0 +1,323 @@
+
+-->Numpy:
+NumPy stands for Numericak python. It is the fundamental python package for scientific computing.
+It contains a collection of tools and technique to solve mathematical problem and it is written in C and python.
+
+
+a = np.array([1,2,3,4,5]) --> 1D array
+array([1, 2, 3, 4, 5])
+
+a = np.array([[1,2,3],[4,5,6]])  --> 2D array
+array([[1, 2, 3],
+       [4, 5, 6]])
+	   
+
+a = np.array([[1,2,3],[4,5,6]])  --> 3D array
+array([[1, 2, 3],
+       [4, 5, 6]])	   
+
+
+-->Why is NumPy Fast?
+Vectorization describes the absence of any explicit looping, indexing, etc., in the code - these things are taking place, of course, just “behind the scenes” in optimized, pre-compiled C code. Vectorized code has many advantages, among which are:
+
+vectorized code is more concise and easier to read
+
+fewer lines of code generally means fewer bugs
+
+the code more closely resembles standard mathematical notation (making it easier, typically, to correctly code mathematical constructs)
+
+vectorization results in more “Pythonic” code. Without vectorization, our code would be littered with inefficient and difficult to read for loops.
+	   
+
+--> Memory layout:
+
+ndarray.flags	 -->   Information about the memory layout of the array.
+
+ndarray.shape	 -->   Tuple of array dimensions.
+
+ndarray.strides	 -->   Tuple of bytes to step in each dimension when traversing an array.
+
+ndarray.ndim	 -->   Number of array dimensions.
+
+ndarray.data	 -->   Python buffer object pointing to the start of the array’s data.
+
+ndarray.size	 -->   Number of elements in the array.
+
+ndarray.itemsize -->   Length of one array element in bytes.
+
+ndarray.nbytes	 -->   Total bytes consumed by the elements of the array.
+
+ndarray.base	 -->   Base object if memory is from some other object.
+
+
+Initial Placeholders:
+
+np.zeros((3,4))    -->  Create an array of zeros --> 2D array --> 3*4
+np.ones((2,3,4))   -->  Create an array of ones  --> 3D array
+np.arange(10,25,5) -->  Create an array of evenly spaced values (step value) --> start 10, stop 25, step 5
+np.linspace(0,2,9) -->  Create an array of evenly spaced values (number of samples)  --> It returns a 9 number from 0 to 2
+np.full((2,2),7)   -->  Create a constant array  --> create 2D(2*2) array filled with 7 only
+np.eye(2)          -->  Create a 2X2 identity matrix --> digonal array
+np.empty((3,2))    -->  Create an empty array
+np.random.random((2,2)) -->  Create an array with random
+
+
+
+Arithmetic Operations:
+
+np.subtract(a,b)  -->  Subtraction
+np.add(b,a) 	  -->  Addition
+np.divide(a,b)    -->  Division
+np.multiply(a,b)  -->  Multiplication
+np.mod(a,b)       -->  Mod
+np.power(a,b)     -->  Power
+np.exp(b)         -->  Exponentiation
+np.sqrt(b) 		  -->  Square root
+np.sin(a) 		  -->  Print sines of an array
+np.cos(b) 		  -->  Element-wise cosine
+np.log(a) 		  -->  Element-wise natural logarithm
+e.dot(f)  		  -->  Dot
+
+
+
+Aggregate Functions:
+
+a.sum() 	  	      -->  Array-wise sum
+
+a.min() 	  	      -->  Array-wise minimum value
+
+ndarray.argmax([axis, out])   -->  Return indices of the maximum values along the given axis.
+
+ndarray.argmin([axis, out])   -->  Return indices of the minimum values along the given axis.
+
+b.max(axis=0)  	   -->  Maximum value of an array row  --> axis =0(find max value from rows) and axis=1(find max value from column)
+
+ndarray.ptp([axis, out, keepdims])  -->  It return the value by substracting minimum value from max value(max-min), return the diff between max value and min value
+
+ndarray.clip([min, max, out])       -->  It return the value from min to max. Return an array whose values are limited to [min, max].
+
+ndarray.trace()      -->  It returns the sum of diagonal of array.
+
+b.cumsum(axis=1)     -->  Return the cumulative sum of the elements along the given axis
+
+a.mean()    -->  Mean
+
+a.var()     --> varience
+
+a.std()     -->  standard deviation
+
+a.prod()   --> product of all elements 
+
+ndarray.cumprod()  -->   Return the cumulative product of the elements along the given axis.
+
+ndarray.all()  -->   Returns True if all elements evaluate to True.
+
+ndarray.any()  -->   Returns True if any of the elements of a evaluate to True.
+
+b.median() 		 -->  Median
+
+a.corrcoef() 	         -->  Correlation coefficient
+
+np.std(b) 		 -->  Standard deviation
+
+
+
+Shape manipulation:
+
+1.np.resize():
+Return a new array with the specified shape.
+If the new array is larger than the original array, then the new array is filled with repeated copies of a.
+
+np.resize(a,(2,3)) --> array([[0, 1, 2],  --> remaining space filled with 0
+							  [3, 4, 0]])
+
+2.np.reshape():
+Gives a new shape to an array without changing its data.
+np.arange(1,10).reshape(3,3)  --> create 2D array(3 row,3 col) contains elements from 1 to 10(1-9)
+
+difference between reshape and resize --> 
+When we talk about reshape then an array changes it’s shape as temporary but when we talk about resize then 
+the changes made permanently.
+
+
+3.ndarray.flatten(order='C'):
+Return a copy of the array collapsed into one dimension.
+
+a = np.array([[1,2,3],[4,5,6]])
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+a.flatten()
+-->array([1, 2, 3, 4, 5, 6])
+
+
+4.ndarray.ravel([order]) --> Return a flattened array.
+
+
+5.ndarray.transpose(*axes) --> Returns a view of the array with axes transposed.
+
+a = np.array([[1,2,3],[4,5,6]])
+a -->  array([[1, 2, 3],
+			  [4, 5, 6]])
+
+np.transpose(a)	--> array([[1, 4],
+			   [2, 5],
+			   [3, 6]])
+						   
+						   
+
+6.ndarray.swapaxes(axis1, axis2) --> Return a view of the array with axis1 and axis2 interchanged.						   
+
+a = np.array([[1,2,3],[4,5,6]])
+a --> array([[1, 2, 3],
+			 [4, 5, 6]])
+			 
+np.swapaxes(a,0,1)  -->  array([[1, 4],
+				[2, 5],
+				[3, 6]])
+
+
+
+--> Broadcasting:
+
+Broadcasting is the term used to describe the implicit element-by-element behavior of operations; generally speaking, in NumPy all operations, not just arithmetic operations, but logical, bit-wise, functional, etc., behave in this implicit element-by-element fashion, i.e., they broadcast. 			 
+
+
+
+--> Array conversion
+
+1.ndarray.item(*args) - It returns a single element from given index
+
+2. ndarray.tolist() - Convert that ndarray into a python normal list
+ 
+3.ndarray.itemset(*args) - Insert particular set into an existing array
+
+
+
+--> Arithmetic, matrix multiplication, and comparison operations
+Truth value of an array (bool())
+
+1. ndarray.__lt__(value, /)  --> Return self<value.
+
+2. ndarray.__le__(value, /)  -->  Return self<=value.
+
+3. ndarray.__gt__(value, /)  -->  Return self>value.
+
+4. ndarray.__ge__(value, /)  -->  Return self>=value
+
+5. ndarray.__eq__(value, /)  --> Return self==value.
+
+6. ndarray.__ne__(value, /)  --> Return self!=value.
+
+
+
+Arithmetic:
+
+ndarray.__add__(value)       -->  Return self+value.
+
+ndarray.__sub__(value)       -->  Return self-value.
+
+ndarray.__mul__(value)       -->  Return self*value.
+
+ndarray.__truediv__(value)   -->  Return self/value.
+
+ndarray.__floordiv__(value)  -->  Return self//value.
+
+ndarray.__mod__(value)       -->  Return self%value.
+
+ndarray.__divmod__(value)    -->  Return divmod(self, value).
+
+ndarray.__pow__(value)       -->  Return pow(self, value, mod).
+
+ndarray.__lshift__(value)    -->  Return self<<value.
+
+ndarray.__rshift__(value)    -->  Return self>>value.
+
+ndarray.__and__(value)       -->  Return self&value.
+
+ndarray.__or__(value)        -->  Return self|value.
+
+ndarray.__xor__(value)       -->  Return self^value.
+
+
+
+--> Array creation
+
+empty(shape)  -->  Return a new array of given shape and type, without initializing entries.
+
+empty_like(a)  -->  Return a new array with the same shape and type as a given array.
+
+eye(shape)   -->  Return a 2-D array with ones on the diagonal and zeros elsewhere.
+
+identity(shape)  -->  Return the identity array.
+
+ones(shape)  -->  Return a new array of given shape and type, filled with ones.
+
+ones_like(a)  -->  Return an array of ones with the same shape and type as a given array.
+
+zeros(shape)  -->  Return a new array of given shape and type, filled with zeros.
+
+zeros_like(a)  -->  Return an array of zeros with the same shape and type as a given array.
+
+full(shape)  -->  Return a new array of given shape and type, filled with fill_value.
+
+full_like(a)  -->  Return a full array with the same shape and type as a given array.
+
+
+
+*******************************************************************************************************************************************************************
+
+
+Pandas --> 
+
+1. series
+2. dataframe
+3. panel
+
+
+1.series:
+The Pandas Series can be defined as a one-dimensional array that is capable of storing various data types. We can easily convert the list, tuple, and dictionary into series using "series' method. The row labels of series are called the index. A Series cannot contain multiple columns.
+
+
+2.Python Pandas DataFrame
+Pandas DataFrame is a widely used data structure which works with a two-dimensional array with labeled axes (rows and columns). DataFrame is defined as a standard way to store data that has two different indexes, i.e., row index and column index. It consists of the following properties:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

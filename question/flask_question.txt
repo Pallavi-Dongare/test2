@@ -1,0 +1,225 @@
+Q #1) What is Flask?
+
+Flask is a web development framework created in Python language.
+Flask is pretty simple and lets you make your own choices.
+Flask is based on the concept of doing one thing and doing it well.
+You are free to choose whatever you like.
+It is classified as a microframework because it does not require particular tools or libraries.
+It has no database abstraction layer, form validation, or any other components where pre-existing third-party 
+libraries provide common functions. However, Flask supports extensions that can add application features as if 
+they were implemented in Flask itself. Extensions exist for object-relational mappers(SQLAlchmey), form validation(WTForms), 
+upload handling, caching(Flask-Caching), various open authentication(Flask-Login: to handle the user sessions after 
+authentication) technologies and several common framework related tools.
+
+
+Q #4) How to add the mailing feature in the Flask Application?
+
+Answer: To send emails, we need to install the Flask-Mail flask extension using the below-given command.
+
+pip install Flask-Mail
+
+Once installed, then we need to use Flask Config API to configure MAIL-SERVER, MAIL_PORT, MAIL_USERNAME, 
+MAIL_PASSWORD, etc. Then we need to import Message Class, instantiate it and form a message object before 
+sending the email by using the mail.send() method.
+
+
+from flask_mail import Mail,Message
+from flask import Flask
+
+app = Flask(__name__)
+mail = Mail(app)
+
+@app.route("/mail")
+def email():
+    msg = Message("Good Morning",sender="dongarepallavi1996@gmail.com",recipients=["pallavidongare.22@gmail.com"])
+    mail.send(msg)
+	
+	
+Q #5) What is WSGI?
+
+Answer: WSGI stands for the Web Server Gateway Interface. It is a Python standard defined in PEP 3333. 
+It is a specification that describes how a web server communicates with a web application.	
+	
+	
+Q #11) Which Flask extension can be used to create an Ajax application?
+
+Answer: We can use Flask-Sijax to create an Ajax application. Flask-Sijax is an extension that uses Python/JQuery. 
+		Sijax stands for Simple Ajax. Once configured and initialized, it enables the use of @flask_sijax decorator, 
+		which we can use for making Ajax aware of the views in a Flask Application.	
+
+
+
+Q #13) How to get query String in Flask?
+
+Answer: We can get the argument’s value using the request object in Flask.
+
+
+from flask import Flask
+from flask import request
+ 
+app = Flask(__name__)
+ 
+@app.route("/")
+def index():
+val = request.args.get("var") 
+ 
+return "Hello, World! {}".format(val)
+ 
+if __name__=="__main__":
+app.run(host="0.0.0.0", port=8080)
+
+
+
+Q #15) How to use url_for in the Flask application?
+
+The url_for() function is used to build a URL to the specific function dynamically. 
+The first argument is the name of the specified function, and then we can pass any number of keyword 
+argument corresponding to the variable part of the URL.
+
+This function is useful in the sense that we can avoid hard-coding the URLs into the templates by 
+dynamically building them using this function.
+
+Benefits of the Dynamic URL Building
+	- It avoids hard coding of the URLs.
+	- We can change the URLs dynamically instead of remembering the manually changed hard-coded URLs.
+	- URL building handles the escaping of special characters and Unicode data transparently.
+	- The generated paths are always absolute, avoiding unexpected behavior of relative paths in browsers.
+	- If your application is placed outside the URL root, for example, in /myapplication instead of /, url_for() 
+	  properly handles that for you.
+
+
+
+Q #16) How to create an Admin interface in Flask?
+
+Answer: We can create an Admin interface in Flask using the Flask-Admin extension. 
+It helps in grouping individual views together in classes. We can use the Flask-Appbuilder extension too. 
+Flask-Appbuilder already comes with an Admin interface.
+
+
+Q #18) Why is Flask called a Microframework?
+
+Answer: Flask is called a microframework because Flask only provides core features such as request, routing, 
+and blueprints. For other features, such as Caching, ORM, forms, etc., we need to make use of Flask-Extensions.
+
+
+Q #19) What are the benefits of using the Flask framework?
+
+Answer: Some benefits of using the Flask framework are:
+
+It has an inbuilt development server.
+It has vast third-party extensions.
+It has a tiny API and can be quickly learned by a web developer.
+It is WSGI compliant.
+It supports Unicode.
+
+
+Q. What are the features of Flask Python?
+Flask Python is one of the newest frameworks of Python and is used for designing web applications for the following features:
+
+Flask comes with built-in development server as well as fast debugger
+It also contains the integrated support required for unit testing
+It has the feature of restful request dispatching
+Comes with Jinja2 templating technique
+Flask supports secure cookies i.e. client-side sessions
+Also has the WSGI 1.0 compliant feature.
+It is based on Unicode.
+Python Flask is extensively documented.
+
+
+
+Q #21) What do you mean by template engines in the Flask framework?
+
+Answer: A template is a file that contains two types of data, i.e., static and dynamic. 
+Dynamic data in a template is populated during run time. Flask makes use of Jinja2 template engine 
+to let developers create HTML templates with placeholders for dynamic data.
+
+These placeholders can be filled during run time by using Flask’s render_template method with required parameters and values.
+
+
+Q #24) Describe the features of Forms extension for Flask.
+
+Answer: Forms in Flask can be implemented by using an extension called Flask-WTF. Flask-WTF is created by 
+integrating Flask with WTForms. WTForms is a python-based form rendering and validation library. 
+It supports data validation, internationalization, and CSRF protection.
+
+Flask-WTF also provides reCAPTCHA support along with file uploads when tied with Flask-Uploads. You also can handle JavaScript requests, and customize the error response.
+Flask-WTF is featured to offer simple integration with WTForms. The Features include for Flask WTF are:
+
+Integration with wtforms
+Secure form with csrf token
+Global csrf protection
+Internationalization integration
+Recaptcha supporting
+File upload that works with Flask Uploads
+
+Q #26) What is the g object in Flask? How does it differ from the session object?
+
+Answer: Flask’s g object is used as a global namespace for holding any data during the application context. 
+g object is not appropriate for storing the data between requests. The letter g, in a sense, stands for global.
+
+In situations, when you need to keep global variables during an application context, then rather than creating 
+your global variable, it is best to use the g object as each request in Flask has a separate g object. 
+Flask’s g object saves us from accidental modifications of self-defined global variables.
+
+
+Q waht is args
+the args is a dictionary object which contains the list of pairs of form parameter and its corresponding value.
+
+
+Q. Types of Decorator
+
+	1. View Decorators
+	2. Login required Decorators
+	3. Caching Decorators
+	4. Templating Decorators
+	5. Endpoint Decorators
+
+
+
+
+
+
+
+
+
+
+
+
+
+Standard HTTP Codes
+The following HTTP codes are standardized.
+
+HTTP_300_MULTIPLE_CHOICES
+HTTP_301_MOVED_PERMANENTLY
+HTTP_302_FOUND
+HTTP_303_SEE_OTHER
+HTTP_304_NOT_MODIFIED
+HTTP_305_USE_PROXY
+HTTP_306_RESERVED
+HTTP_307_TEMPORARY_REDIRECT
+The default status code is HTTP_302_FOUND.
+
+
+400: for bad requests
+401: for unauthorized access
+403: for forbidden
+404: for not found
+406: for not acceptable
+415: for unsupported media types
+429: for too many requests
+
+Flask-Mail	 -->  To send emails
+Flask-Sijax  -->  to create an Ajax application
+Flask-Admin  -->  To reate an Admin interface
+Flask-Appbuilder
+Flask-Social --> To integrate with social platforms
+Flask-Security
+
+to create a RESTful application in Flask-->
+Flask-API
+Flask-RESTful
+Flask-RESTX
+Connexion
+
+Flask-DebugToolbar  -->  for easy debugging in the browser
+	

@@ -1,0 +1,410 @@
+SQLAlchemy -->
+SQLAlchemy (source code) is a well-regarded database toolkit and object-relational mapper (ORM) implementation written in Python.
+SQLAlchemy provides a generalized interface for creating
+and executing database-agnostic code without needing to write SQL statements.
+
+
+Object-relational Mappers (ORMs)
+An object-relational mapper (ORM) enables application to interact with the database.
+ORM automatically create a database schema from defined classes or models..
+It generate SQl from python code for a particular database which means developer do not need to write SQL code.
+ORM map object attribute to respective table fields.
+It is easier to change the database if we use ORMs hence project become more portible.
+
+
+Queryset-->
+Queryset can be defined as a list containing all those objects we have created using django model.
+Queryset allows you to read the data from database, filter it and order it.
+
+
+Why are ORMs useful?
+ORMs provide a high-level abstraction upon a relational database that allows a developer to write Python code instead of SQL 
+to create, read, update and delete data and schemas in their database. Developers can use the programming language they 
+are comfortable with to work with a database instead of writing SQL statements or stored procedures.
+
+
+1) django_admin startproject project_name   --> to create project
+
+2) manage.py startapp appname
+
+3) manage.py makemigrations
+You'll want to run python manage.py makemigrations whenever you make a change to a model, 
+even if it is updating the description on a field.    
+
+makemigrations basically generates the SQL commands for preinstalled apps (which can be viewed in installed apps in settings.py) 
+and your newly created apps’ model which you add in installed apps. It does not execute those commands in your database file. 
+So tables are not created after makemigrations.
+
+4) manage.py migrate
+which is responsible for applying and unapplying migrations.
+migrate executes those SQL commands in the database file. 
+So after executing migrate all the tables of your installed apps are created in your database file.
+
+5) manahe.py shell --> to open shell
+
+6) emp = Employee()  --> to save object in tables
+		emp.save()  --> savein default database
+		emp.save(using=dbname)   --> save in specific db
+		
+		emp.delete()
+		emp.delete(using=dbname)
+	
+
+7) e1 = Employee.objects.create(emp_fileds)  --> to create single onject
+
+7) Employee.objects.bulk_create([e1,e2,e3])  --> to create single onject	
+
+Employee.objects.all()
+Employee.objects.using('keyname').all()
+
+Employee.objects.filter().all()
+
+Employee.objects.get(id=111)   --> use get when u sure about the existence of id,bezoz it give error
+Employee.objects.using('keyname').get(id=111)
+Employee.objects.filter(id=111) --> use get when u are not sure about the existence of id , bezoz it does not give error
+
+
+	
+1) create table -->
+
+CREATE TABLE Person (
+id int,
+name varchar(50), 
+age int NOT NULL,
+gender varchar(10),
+);
+
+
+class Person(models.Model):
+     name = models.CharField(max_length=50, blank=True)
+     age = models.IntegerField() 
+     gender = models.CharField(max_length=10, blank=True)
+   
+   
+   
+2) Select --> 
+
+SELECT * from Person  
+
+
+Person.objects.all()
+
+-----Example print in django----
+persons = Person.objects.all()
+      
+for person in persons:
+   print(person.name)
+   print(person.gender)
+   print(person.age) 
+   
+   
+3) where--> 
+
+FILTER BY SINGLE COLUMN IN SQL --> SELECT * FROM Person WHERE id = 1;   
+
+FILTER BY SINGLE COLUMN IN DJANGO --> Person.objects.filter(id=1)
+
+FILTER BY COMPARISON OPERATORS IN SQL-->
+WHERE age > 18;
+WHERE age >= 18;
+WHERE age < 18;
+WHERE age <= 18;
+WHERE age != 18;
+
+FILTER BY COMPARISON OPERATORS IN DJANGO:
+Person.objects.filter(age__gt=18)
+Person.objects.filter(age__gte=18)
+Person.objects.filter(age__lt=18)
+Person.objects.filter(age__lte=18)
+Person.objects.exclue(age=18)
+
+BETWEEN IN SQL --> 
+SELECT * from Person where age BETWEEN 10 AND 40;
+
+BETWEEN IN DJANGO -->
+Person.objects.filter(age__range=(10,40))
+
+LIKE OPERATOR IN SQL --> 
+WHERE name like '%A%';
+WHERE name like binary '%A%';
+WHERE name like 'A%';
+WHERE name like binary 'A%';
+WHERE name like '%A';
+WHERE name like binary '%A';
+
+LIKE OPERATOR IN DJANGO -->
+Person.objects.filter(name__icontains='A')
+Person.objects.filter(name__contains='A')
+Person.objects.filter(name__istartswith='A')
+Person.objects.filter(name__startswith='A')
+Person.objects.filter(name__iendswith='A')
+Person.objects.filter(name__endswith='A')
+
+IN OPERATOR IN SQL --> 	WHERE id in (1, 2);
+
+IN OPERATOR IN DJANGO --> Person.objects.filter(id__in=[1,2])
+
+
+4. AND, OR, NOT
+
+AND IN SQL --> 
+SELECT * FROM Person
+WHERE gender='male' AND age > 25;
+
+AND IN DJANGO --> 
+Person.objects.filter(gender='male',age__gt=25)
+
+OR IN SQL -->
+SELECT * FROM Person
+WHERE gender='male' OR age > 25; 
+
+OR IN DJANGO --> 
+from django.db.models import Q
+Person.objects.filter(Q(gender='male')|Q(age__gt=25))
+
+NOT IN SQL --> 
+SELECT * FROM Person WHERE NOT gender='male';
+
+NOT IN DJANGO --> 
+Person.objects.exclue(gender='male')
+
+
+***************** NULL 	and NOT NULL *************************
+NULL IN SQL --> 
+SELECT * FROM Person WHERE age is NULL;
+
+DJANGO --> 
+Person.objects.filter(age__isnull=True)
+or
+Person.objects.filter(age=None)
+
+Not NULL IN SQL --> 
+SELECT * FROM Person WHERE age is Not NULL;
+
+DJANGO --> 
+Person.objects.filter(age__isnull=False)
+or
+Person.objects.exclue(age=None)
+
+
+************** ASCENDING and DESCENDING ***********************************
+
+ASCENDING ORDER IN SQL --> 
+SELECT * FROM Person order by age;
+
+ASCENDING ORDER IN DJANGO --> 
+Person.objects.order_by('age')
+
+DESCENDING ORDER IN SQL --> 
+SELECT * FROM Person order by age DESC;
+
+DESCENDING ORDER IN DJANGO --> 
+Person.objects.order_by('-age')
+
+
+********************* Insert **********************************
+
+INSERT INTO IN SQL --> 
+INSERT INTO Person
+VALUES ('Jack', '23', 'male');
+
+INSERT INTO IN DJANGO --> 
+Person.objects.create(name='jack', age=23, gender='male)
+
+******************** UPDATE *******************
+
+UPDATE SINGLE ROW IN SQL --> 
+UPDATE Person SET age=25 where id=1;
+
+UPDATE SINGLE ROW IN DJANGO --> 
+Person.objects.get(id=1)
+Person.age=25
+Person.save()
+
+UPDATE MULTIPLE ROWS IN SQL --> 
+UPDATE Person SET age * 1.5;
+
+UPDATE MULTIPLE ROWS IN DJANGO --> 
+from django.db.models import F
+Person.objects.update(age=F('age')*1.5)
+
+
+******************* DELETE **********************
+DELETE ALL ROWS IN SQL --> 
+DELETE FROM Person;
+
+DELETE ALL ROWS IN DJANGO --> 
+Person.objects.all().delete()
+
+DELETE SPECIFIC ROWS IN SQL --> 
+DELETE FROM Person
+WHERE age < 10;
+
+DELETE SPECIFIC ROWS IN DJANGO --> 
+Person.objects.filter(age__lt=10).delete()
+
+
+************* AGGREGATION ***************************
+MIN FUNCTION IN SQL --> SELECT MIN(age) FROM Person;
+
+MAX FUNCTION IN SQL --> SELECT MAX(age) FROM Person;
+
+AVG FUNCTION IN SQL --> SELECT AVG(age) FROM Person;
+
+SUM FUNCTION IN SQL --> SELECT SUM(age) FROM Person;
+
+COUNT FUNCTION IN SQL --> SELECT COUNT(*) FROM Person;
+
+
+MIN FUNCTION IN DJANGO --> 
+from djnago.db.model import Min
+Person.objects.all().aggregate(Min('age')
+{'age__min':0}
+
+MAX FUNCTION IN DJANGO --> 
+from djnago.db.model import Max
+Person.objects.all().aggregate(Max('age')
+{'age__max':100}
+
+AVG FUNCTION IN DJANGO --> 
+from djnago.db.model import Avg
+Person.objects.all().aggregate(Avg('age')
+{'age__avg':50}
+
+SUM FUNCTION IN DJANGO --> 
+from djnago.db.model import Sum
+Person.objects.all().aggregate(Sum('age')
+{'age__sum':5050}
+
+COUNT FUNCTION IN DJANGO --> 
+Person.objects.count()
+
+
+*********************** GROUP BY ***********************
+GROUP BY IN SQL --> 
+SELECT gender, COUNT(*) as count FROM Person
+GROUP BY gender; 
+
+GROUP BY IN DJANGO-->
+Person.objects.values('gender').annotate(count=Count('gender'))
+
+
+************************ Having ********************************
+HAVING IN SQL -->
+--Count of Person by gender if number of person is greater than 1 
+
+SELECT gender, COUNT('gender') as count
+FROM Person
+GROUP BY gender 
+HAVING count > 1;
+ 
+HAVING IN DJANGO-->
+Person.objects.annotate(count=Count('gender')).values('gender','count').filter(count__gt=1)
+
+
+****************************************************************************************************************
+
+Fetch Publisher Name For A Book IN SQL --> 
+SELECT name
+FROM Book
+LEFT JOIN Publisher
+ON Book.publisher_id = Publisher.id
+WHERE Book.id=1;
+
+Fetch Publisher Name For A Book IN DJANGO--> 
+book = Book.objects.select_related('publisher').get(id=1)
+book.publisher.name
+
+Fetch books which have specific publisher IN SQL --> 
+SELECT *
+FROM Book
+WHERE Book.publisher_id = 1;
+
+Fetch books which have specific publisher IN DJANGO --> 
+publisher = Publisher.objects.prefetch_related('book_set').get(id=1)
+books = publisher.book_set.all()
+
+
+
+Student.objects.get(id=1)
+ 
+Student.objects.first() --> get first row 
+
+Student.objects.order_by('name').first() --> order the name in ascending order and return first data
+
+Student.objects.order_by('-name').first() --> order the name in decending order and return first data
+
+Student.objects.last() --> get last row
+
+Student.objects.filter(dept__name='IT')  --> dept is foreign key in student
+
+Student.objects.get(name__exact='Pallavi')  --> return exact match of of name Pallavi. this is case sensitive
+
+Student.objects.get(name__iexact='Pallavi')  --> return exact match of of name Pallavi. this is case insensitive
+
+Student.objects.get(name__contains='Pallavi')  --> it return the name which contains Pallavi. This is case sensitive
+
+Student.objects.get(name__icontains='Pallavi')  --> it return the name which contains Pallavi. This is case insensitive
+
+Student.objects.filter(id__in = [1,2,4])
+
+Student.objects.filter(marks__lt=50) --> return student whose mark is less then 50
+
+
+Student.objects.filter(marks__lte=50) --> return student whose mark is less then equal to 50
+
+Student.objects.filter(marks__gt=50) --> return student whose mark is greater then 50
+
+Student.objects.filter(marks__gte=50) --> return student whose mark is greater then equal to 50
+
+Student.objects.filter(name__startswith = 'p')
+
+Student.objects.filter(name__istartswith = 'p')
+
+Student.objects.filter(name__endswith = 'p')
+
+Student.objects.filter(name__iendswith = 'p')
+
+Student.objects.filter(name__iendswith = 'p')
+
+Emp.objects.only('empName','empAge').filter(empName='Pooja').first()   --> it return name and age of emp whose name is pooja
+
+Emp.objects.values('empName','empAge').distinct().all()
+
+Emp.objects.values('dept').distinct().all()   --> foreign key
+
+Emp.objects.values('dept__deptName').distinct().all() --> get all distinct dept name (dept name is column of another table)
+
+Emp.objects.values('empAddress').distinct().all()  --> get all unique address of employee
+
+Emp.objects.all()[:5]  --> get first five employee(like LIMIT 5)
+
+Emp.objects.all()[5:10]  --> offset 5 limit 5
+
+Emp.objects.exclude(empAge=30)  --> get all employee except employee whose age is 30
+
+Emp.objects.filter(empAge__range=(30,35))  --> get all employee whose age range in between 30-35 (BETWEEN)
+
+Emp.objects.filter(empName__startswith='S',empAge__gt=30)  --> AND
+
+
+from django.db.models import Q,Min,Max,Sum,Avg,Count
+>>> Emp.objects.filter(Q(empName__startswith='S')|Q(empAge__gt=30))  --> OR
+
+>>> Emp.objects.aggregate(Avg('empSalary'))
+
+>>>Emp.objects.aggregate(Min('empSalary'))
+
+>>>Emp.objects.aggregate(Max('empSalary'))
+
+>>>Emp.objects.aggregate(Sum('empSalary'))
+
+
+Emp.objects.values('empAddress').annotate(count=Count('empAddress'))  --> get the count of address
+
+Emp.objects.values('empAddress').annotate(count=Count('empAddress')).filter(count__gt=1) --> HAVING
+
+
+>>> adr = Address.objects.select_related('emp').get(id=101)  # get emp name from address
+>>> adr.emp.name
+'Pallavi'

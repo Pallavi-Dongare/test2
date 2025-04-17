@@ -1,0 +1,1421 @@
+
+Trigger: A trigger is a stored procedure in database which automatically invokes whenever a special event in the database occurs.
+
+
+create table dept(id int PRIMARY KEY, dept_name varchar(100));
+
+CREATE TABLE Employee(emp_id int, emp_name varchar(100), emp_age int, emp_sal int, emp_adr varchar(100),emp_desg varchar(100),Joining_date int, deptid int, foreign key(deptid) references dept(id));
+
+
+1. “SQL query to list all employees name which starts with either A or T.”
+
+select employee_name 
+from employees
+where employee_name LIKE 'A%' OR employee_name LIKE 'B%'
+order by employee_name
+  
+  
+mysql> select * from emp;
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr  | emp_desg  | Joining_date | deptid |
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+|      1 | Pallavi  |      24 |   90000 | Pune     | Manager   | NULL         |    101 |
+|      2 | Pooja    |      25 |   60000 | Mumbai   | Developer | NULL         |    102 |
+|      3 | Neha     |      28 |   56000 | Nashik   | Tester    | NULL         |    103 |
+|      4 | Rupali   |      29 |   78000 | Nanded   | Lead      | NULL         |    104 |
+|      5 | Sujata   |      27 |   45000 | Latur    | Developer | NULL         |    105 |
+|      6 | Sneha    |      45 |   53000 | Jintur   | Manager   | NULL         |    101 |
+|      7 | Ravi     |      45 |   45000 | Pune     | Lead      | NULL         |    102 |
+|      8 | Suraj    |      35 |   74000 | Mumbai   | Tester    | NULL         |    103 |
+|      9 | Gopal    |      32 |   34000 | Latur    | Manager   | NULL         |    104 |
+|     10 | Lano     |      30 |   20000 | Banglore | Tester    | NULL         |    105 |
+|     11 | shraddha |      32 |   35000 | Latue    | Developer | NULL         |    101 |
+|     12 | Chanchal |      30 |   56000 | Nanded   | HR        | NULL         |    101 |
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+  
+
+mysql> select * from dept;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|     101 | CS        |
+|     102 | IT        |
+|     103 | ETC       |
+|     104 | MECH      |
+|     105 | CIVIL     |
++---------+-----------+  
+  
+2.get all employees with department id in 101,102,103
+select * from emp where deptid in (101,102,103);  
+
+
+3.get all employees with department id is 101 and 102
+select * from emp where deptid=101 or deptid=102;
+
+
+4.get all employees with department id is 101
+select * from emp where deptid=101;
+
+
+5.4.get all employees whose emp_name endswith 'a'
+select * from emp where emp_name like '%a';
+
+
+6. select emp name and salary in decendig order
+select emp_name,emp_sal from emp order by emp_sal desc;
+
+
+7.select employee in decending order whose name startswith 'S' and deprtment id=101.
+select * from emp 
+where emp_name like 'S%' and deptid=101 
+order by emp_name desc;
+
+
+8.select employee name and designation from emp table and department name from department table whose dept_id match 
+and designation is developer 
+	select e.emp_name,e.emp_desg, d.dept_name 
+	from emp e, dept d 
+	where e.deptid=d.dept_id and e.emp_desg='Developer';
+	
+	
+9.select e.emp_name, e.emp_desg, (12*e.emp_sal)"Annual Salary", d.dept_name 
+from emp e, dept d 
+where e.deptid=d.dept_id and e.emp_desg='Developer';
+
++----------+-----------+---------------+-----------+
+| emp_name | emp_desg  | Annual Salary | dept_name |
++----------+-----------+---------------+-----------+
+| Pooja    | Developer |        720000 | IT        |
+| Sujata   | Developer |        540000 | CIVIL     |
+| shraddha | Developer |        420000 | CS        |
++----------+-----------+---------------+-----------+	
+	
+
+10.select e.emp_name,e.emp_desg,12*e.emp_sal,d.dept_name from emp e, dept d where e.deptid=d.dept_id and e.emp_desg='Developer' and 12*e.emp_sal>40000;
++----------+-----------+--------------+-----------+
+| emp_name | emp_desg  | 12*e.emp_sal | dept_name |
++----------+-----------+--------------+-----------+
+| Pooja    | Developer |       720000 | IT        |
+| Sujata   | Developer |       540000 | CIVIL     |
+| shraddha | Developer |       420000 | CS        |
++----------+-----------+--------------+-----------+	
+
+
+11.select e.emp_id, e.emp_name, e.emp_age, e.emp_sal, e.emp_adr, e.emp_desg, d.dept_name from emp e, dept d where e.deptid=d.dept_id;
++--------+----------+---------+---------+----------+-----------+-----------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr  | emp_desg  | dept_name |
++--------+----------+---------+---------+----------+-----------+-----------+
+|      1 | Pallavi  |      24 |   90000 | Pune     | Manager   | CS        |
+|      6 | Sneha    |      45 |   53000 | Jintur   | Manager   | CS        |
+|     11 | shraddha |      32 |   35000 | Latue    | Developer | CS        |
+|     12 | Chanchal |      30 |   56000 | Nanded   | HR        | CS        |
+|      2 | Pooja    |      25 |   60000 | Mumbai   | Developer | IT        |
+|      7 | Ravi     |      45 |   45000 | Pune     | Lead      | IT        |
+|      3 | Neha     |      28 |   56000 | Nashik   | Tester    | ETC       |
+|      8 | Suraj    |      35 |   74000 | Mumbai   | Tester    | ETC       |
+|      4 | Rupali   |      29 |   78000 | Nanded   | Lead      | MECH      |
+|      9 | Gopal    |      32 |   34000 | Latur    | Manager   | MECH      |
+|      5 | Sujata   |      27 |   45000 | Latur    | Developer | CIVIL     |
+|     10 | Lano     |      30 |   20000 | Banglore | Tester    | CIVIL     |
++--------+----------+---------+---------+----------+-----------+-----------+
+
+
+12. get largest 3 salary from employee
+select emp_sal from emp order by emp_sal desc limit 3;
+
+
+13. select largest salary
+select max(emp_sal) from emp;
+
+
+14. select smallest salary
+select min(emp_sal) from emp;
+
+
+15. select average salary
+select avg(emp_sal) from emp;
+
+
+16.select e.emp_name,e.emp_desg, e.emp_sal, d.dept_name from emp e, dept d 
+where e.deptid=d.dept_id and e.emp_sal between 50000 and 90000 and e.emp_adr='Mumbai';
+
++----------+-----------+---------+-----------+
+| emp_name | emp_desg  | emp_sal | dept_name |
++----------+-----------+---------+-----------+
+| Pooja    | Developer |   60000 | IT        |
+| Suraj    | Tester    |   74000 | ETC       |
++----------+-----------+---------+-----------+
+
+
+17. select employee whose department name is 'CS'  
+select e.emp_name,d.dept_name from emp e, dept d 
+where e.deptid=d.dept_id and d.dept_name='CS';
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Pallavi  | CS        |
+| Sneha    | CS        |
+| shraddha | CS        |
+| Chanchal | CS        |
++----------+-----------+
+
+
+18. order a emp in decending order by salary.
+select * from emp order by emp_sal desc;
+
+
+19.Write a query in SQL to list the details of the employees in ascending order to the emp_id and descending order to the emp_sal.
+select * from emp order by emp_id asc, emp_sal desc;
+
+
+20.Write a query in SQL to display all the unique designation in descending order.
+select distinct emp_desg from emp order by emp_desg desc;
+
+
+21.Write a query in SQL to list the id, name, monthly salary, daily salary of all the employees in the ascending order 
+of their annual salary.
+
+select emp_id, emp_name, emp_sal Monthly_salary, emp_sal/10 Daily_salary, 12*emp_sal Annual_salary 
+from emp order by Annual_salary;
+
+
+22.Write a query in SQL to list the employees in descending order who are either 'CLERK' or 'ANALYST'.
+select * from emp 
+where emp_desg in ('Developer','Tester') 
+order by emp_desg desc; 
+
+
+23.Write a query in SQL to display the department name of employee 'Pallavi'.
+select emp_name,dept_name from dept d,emp e 
+where e.deptid=d.dept_id 
+and e.emp_name='Pallavi';
+
+
+24.Write a query in SQL to list the employees in ascending order on designation and descending order on employee id.
+ select * from emp 
+ order by emp_id desc, emp_desg asc;
+
+
+25. Write a query in SQL to list the unique designation of department 101 and 102 in descending order.
+select distinct emp_desg from emp 
+where deptid in (101,102) 
+order by emp_desg desc;
+
+
+26.Write a query in SQL to list all the employees except Manager and HR in ascending order of salaries
+select * from emp 
+where emp_desg not in ('Manager','HR') 
+order by emp_sal;
+
+
+27.Write a query in SQL to list the employees in ascending order of the salary whose annual salary is below 600000.
+select * from emp 
+where 12*emp_sal<600000 
+order by emp_sal asc;
+
+
+28.Write a query in SQL to list the employee id, name,designation,annual salary, daily salary of all the employees in the 
+ascending order of annual salary who works as a Developer. 
+
+select emp_id, emp_name, emp_desg, 12*emp_sal Annual_salary, (12*emp_sal)/365 Daily_salary from emp 
+where emp_desg='Developer' 
+order by Annual_salary asc;
++--------+----------+-----------+---------------+--------------------+
+| emp_id | emp_name | emp_desg  | Annual_salary | Daily_salary       |
++--------+----------+-----------+---------------+--------------------+
+|     11 | shraddha | Developer |        420000 | 1150.6849315068494 |
+|      5 | Sujata   | Developer |        540000 | 1479.4520547945206 |
+|      2 | Pooja    | Developer |        720000 | 1972.6027397260275 |
++--------+----------+-----------+---------------+--------------------+
+
+
+29. Write a query in SQL to list the total information of employees table along with department, 
+of all the employees working under CS and IT in the ascending department no.
+
+select * from emp e, dept d where d.dept_name in ('CS','IT') and e.deptid=d.dept_id order by e.deptid asc;
++--------+----------+---------+---------+---------+-----------+--------------+--------+---------+-----------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr | emp_desg  | Joining_date | deptid | dept_id | dept_name |
++--------+----------+---------+---------+---------+-----------+--------------+--------+---------+-----------+
+|      1 | Pallavi  |      24 |   90000 | Pune    | Manager   | NULL         |    101 |     101 | CS        |
+|      6 | Sneha    |      45 |   53000 | Jintur  | Manager   | NULL         |    101 |     101 | CS        |
+|     11 | shraddha |      32 |   35000 | Latue   | Developer | NULL         |    101 |     101 | CS        |
+|     12 | Chanchal |      30 |   56000 | Nanded  | HR        | NULL         |    101 |     101 | CS        |
+|      2 | Pooja    |      25 |   60000 | Mumbai  | Developer | NULL         |    102 |     102 | IT        |
+|      7 | Ravi     |      45 |   45000 | Pune    | Lead      | NULL         |    102 |     102 | IT        |
++--------+----------+---------+---------+---------+-----------+--------------+--------+---------+-----------+
+
+
+30.Write a query in SQL to list the name, designation, salary and department name of employees except MANAGER 
+and sort result set on the basis of highest salary.
+
+select e.emp_name, e.emp_desg, e.emp_sal, d.dept_name from emp e, dept d 
+where e.deptid=d.dept_id and e.emp_desg not in ('Manager') 
+order by e.emp_sal desc;
+
++----------+-----------+---------+-----------+
+| emp_name | emp_desg  | emp_sal | dept_name |
++----------+-----------+---------+-----------+
+| Rupali   | Lead      |   78000 | MECH      |
+| Suraj    | Tester    |   74000 | ETC       |
+| Pooja    | Developer |   60000 | IT        |
+| Neha     | Tester    |   56000 | ETC       |
+| Chanchal | HR        |   56000 | CS        |
+| Sujata   | Developer |   45000 | CIVIL     |
+| Ravi     | Lead      |   45000 | IT        |
+| shraddha | Developer |   35000 | CS        |
+| Lano     | Tester    |   20000 | CIVIL     |
++----------+-----------+---------+-----------+
+
+
+31.Write a query in SQL to list the employee ID, name, salary, department and annual salary of 
+employees working for department 101 or 102.
+
+select e.emp_id, e.emp_name, e.emp_desg, e.emp_sal, (12*e.emp_sal)"Annual salary", 
+d.dept_name from emp e, dept d 
+where e.deptid=d.dept_id and 
+e.deptid in (101,102);
+
++--------+----------+-----------+---------+---------------+-----------+
+| emp_id | emp_name | emp_desg  | emp_sal | Annual salary | dept_name |
++--------+----------+-----------+---------+---------------+-----------+
+|      1 | Pallavi  | Manager   |   90000 |       1080000 | CS        |
+|      6 | Sneha    | Manager   |   53000 |        636000 | CS        |
+|     11 | shraddha | Developer |   35000 |        420000 | CS        |
+|     12 | Chanchal | HR        |   56000 |        672000 | CS        |
+|      2 | Pooja    | Developer |   60000 |        720000 | IT        |
+|      7 | Ravi     | Lead      |   45000 |        540000 | IT        |
++--------+----------+-----------+---------+---------------+-----------+
+
+
+32.Write a query in SQL to list the details of the employees along with the details of their departments.
+
+select * from emp e ,dept d where e.deptid=d.dept_id;
+
++--------+----------+---------+---------+----------+-----------+--------------+--------+---------+-----------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr  | emp_desg  | Joining_date | deptid | dept_id | dept_name |
++--------+----------+---------+---------+----------+-----------+--------------+--------+---------+-----------+
+|      1 | Pallavi  |      24 |   90000 | Pune     | Manager   | NULL         |    101 |     101 | CS        |
+|      6 | Sneha    |      45 |   53000 | Jintur   | Manager   | NULL         |    101 |     101 | CS        |
+|     11 | shraddha |      32 |   35000 | Latue    | Developer | NULL         |    101 |     101 | CS        |
+|     12 | Chanchal |      30 |   56000 | Nanded   | HR        | NULL         |    101 |     101 | CS        |
+|      2 | Pooja    |      25 |   60000 | Mumbai   | Developer | NULL         |    102 |     102 | IT        |
+|      7 | Ravi     |      45 |   45000 | Pune     | Lead      | NULL         |    102 |     102 | IT        |
+|      3 | Neha     |      28 |   56000 | Nashik   | Tester    | NULL         |    103 |     103 | ETC       |
+|      8 | Suraj    |      35 |   74000 | Mumbai   | Tester    | NULL         |    103 |     103 | ETC       |
+|      4 | Rupali   |      29 |   78000 | Nanded   | Lead      | NULL         |    104 |     104 | MECH      |
+|      9 | Gopal    |      32 |   34000 | Latur    | Manager   | NULL         |    104 |     104 | MECH      |
+|      5 | Sujata   |      27 |   45000 | Latur    | Developer | NULL         |    105 |     105 | CIVIL     |
+|     10 | Lano     |      30 |   20000 | Banglore | Tester    | NULL         |    105 |     105 | CIVIL     |
++--------+----------+---------+---------+----------+-----------+--------------+--------+---------+-----------+
+
+
+33.Write a query in SQL to list all employee in ascending order of salary who works in the department 101.
+
+select * from emp where deptid=101 order by emp_sal asc;
+
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr | emp_desg  | Joining_date | deptid |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+|     11 | shraddha |      32 |   35000 | Latue   | Developer | NULL         |    101 |
+|      6 | Sneha    |      45 |   53000 | Jintur  | Manager   | NULL         |    101 |
+|     12 | Chanchal |      30 |   56000 | Nanded  | HR        | NULL         |    101 |
+|      1 | Pallavi  |      24 |   90000 | Pune    | Manager   | NULL         |    101 |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+
+
+34.Write a query in SQL to find the highest salary from all the employees.
+
+select max(emp_sal) from emp;
++--------------+
+| max(emp_sal) |
++--------------+
+|        90000 |
++--------------+
+
+
+35.Write a query in SQL to find the average salary for each type of designation.
+
+select emp_desg, avg(emp_sal) from emp group by emp_desg;
++-----------+--------------------+
+| emp_desg  | avg(emp_sal)       |
++-----------+--------------------+
+| Manager   |              59000 |
+| Developer | 46666.666666666664 |
+| Tester    |              50000 |
+| Lead      |              61500 |
+| HR        |              56000 |
++-----------+--------------------+
+
+
+
+36.Write a query in SQL to find the average salary for each type of Department.
+
+select d.dept_name,avg(e.emp_sal) from dept d,emp e group by d.dept_name;
++-----------+--------------------+
+| dept_name | avg(e.emp_sal)     |
++-----------+--------------------+
+| CS        | 53833.333333333336 |
+| IT        | 53833.333333333336 |
+| ETC       | 53833.333333333336 |
+| MECH      | 53833.333333333336 |
+| CIVIL     | 53833.333333333336 |
++-----------+--------------------+
+
+
+37.Write a query in SQL to find the total annual salary
+
+select emp_desg, sum(12*emp_sal) from emp group by emp_desg;
+
++-----------+-----------------+
+| emp_desg  | sum(12*emp_sal) |
++-----------+-----------------+
+| Manager   |         2124000 |
+| Developer |         1680000 |
+| Tester    |         1800000 |
+| Lead      |         1476000 |
+| HR        |          672000 |
++-----------+-----------------+
+
+
+38. Write a query in SQL to list the employee id, name, designation, department of all the departments 101 and 102
+
+select e.emp_id, e.emp_name, e.emp_desg, d.dept_name from emp e, dept d 
+where e.deptid=d.dept_id 
+and e.deptid in (101,102);
+
++--------+----------+-----------+-----------+
+| emp_id | emp_name | emp_desg  | dept_name |
++--------+----------+-----------+-----------+
+|      1 | Pallavi  | Manager   | CS        |
+|      6 | Sneha    | Manager   | CS        |
+|     11 | shraddha | Developer | CS        |
+|     12 | Chanchal | HR        | CS        |
+|      2 | Pooja    | Developer | IT        |
+|      7 | Ravi     | Lead      | IT        |
++--------+----------+-----------+-----------+
+
+
+39. Write a query in SQL to display the number of employee for each job in each department.
+
+select deptid, emp_desg, 
+count(*) from emp 
+group by deptid, emp_desg;
+
++--------+-----------+----------+
+| deptid | emp_desg  | count(*) |
++--------+-----------+----------+
+|    101 | Manager   |        2 |
+|    102 | Developer |        1 |
+|    103 | Tester    |        2 |
+|    104 | Lead      |        1 |
+|    105 | Developer |        1 |
+|    102 | Lead      |        1 |
+|    104 | Manager   |        1 |
+|    105 | Tester    |        1 |
+|    101 | Developer |        1 |
+|    101 | HR        |        1 |
++--------+-----------+----------+
+
+
+40.Write a query in SQL to list the department where at least three employees are working.
+
+select deptid,count(*) from emp group by deptid having count(*)>=3;
++--------+----------+
+| deptid | count(*) |
++--------+----------+
+|    101 |        4 |
++--------+----------+
+
+
+
+41.Write a query in SQL to list the department name where at least three employees are working.
+
+
+select d.dept_name, count(*) from emp e, dept d where e.deptid=d.dept_id group by d.dept_name having count(*)>=3;
++-----------+----------+
+| dept_name | count(*) |
++-----------+----------+
+| CS        |        4 |
++-----------+----------+
+
+
+42.Write a query in SQL to display the department name, grade, no. of employees where at least two employees are 
+working as a SALESMAN
+
+select d.dept_name, count(*) from emp e, dept d 
+where e.deptid=d.dept_id and e.emp_desg='Manager' 
+group by d.dept_name having count(*)>=2;
+
++-----------+----------+
+| dept_name | count(*) |
++-----------+----------+
+| CS        |        2 |
++-----------+----------+
+
+
+
+43.Write a query in SQL to display the number of employee for each job in each department name.
+
+select d.dept_name, e.emp_desg, count(*) from emp e, dept d 
+where e.deptid=d.dept_id 
+group by d.dept_name, e.emp_desg;
+
++-----------+-----------+----------+
+| dept_name | emp_desg  | count(*) |
++-----------+-----------+----------+
+| CS        | Manager   |        2 |
+| CS        | Developer |        1 |
+| CS        | HR        |        1 |
+| IT        | Developer |        1 |
+| IT        | Lead      |        1 |
+| ETC       | Tester    |        2 |
+| MECH      | Lead      |        1 |
+| MECH      | Manager   |        1 |
+| CIVIL     | Developer |        1 |
+| CIVIL     | Tester    |        1 |
++-----------+-----------+----------+
+
+
+44.Write a query in SQL to list the no. of employees in each department where the no. is less than 4.
+
+select deptid, count(*) from emp 
+group by deptid 
+having count(*)<=4;
+
++--------+----------+
+| deptid | count(*) |
++--------+----------+
+|    101 |        4 |
+|    102 |        2 |
+|    103 |        2 |
+|    104 |        2 |
+|    105 |        2 |
++--------+----------+
+
+
+45. Write a query in SQL to list the name of departments where atleast 2 employees are working in that department.
+
+select d.dept_name, count(*) from dept d, emp e 
+where e.deptid=d.dept_id 
+group by d.dept_name 
+having count(*)>=2;
+
++-----------+----------+
+| dept_name | count(*) |
++-----------+----------+
+| CS        |        4 |
+| IT        |        2 |
+| ETC       |        2 |
+| MECH      |        2 |
+| CIVIL     |        2 |
++-----------+----------+
+
+
+46.Write a query in SQL to check whether all the employees numbers are indeed unique.
+
+select emp_id, count(*) from emp group by emp_id;
+
++--------+----------+
+| emp_id | count(*) |
++--------+----------+
+|      1 |        1 |
+|      2 |        1 |
+|      3 |        1 |
+|      4 |        1 |
+|      5 |        1 |
+|      6 |        1 |
+|      7 |        1 |
+|      8 |        1 |
+|      9 |        1 |
+|     10 |        1 |
+|     11 |        1 |
+|     12 |        1 |
++--------+----------+
+
+
+47.Write a query in SQL to list the no. of employees and average salary within each department name for each job designation.
+
+select d.dept_name, e.emp_desg, avg(e.emp_sal), count(*) from emp e, dept d 
+where e.deptid=d.dept_id 
+group by d.dept_name, e.emp_desg;
+
++-----------+-----------+----------------+----------+
+| dept_name | emp_desg  | avg(e.emp_sal) | count(*) |
++-----------+-----------+----------------+----------+
+| CS        | Manager   |          71500 |        2 |
+| CS        | Developer |          35000 |        1 |
+| CS        | HR        |          56000 |        1 |
+| IT        | Developer |          60000 |        1 |
+| IT        | Lead      |          45000 |        1 |
+| ETC       | Tester    |          65000 |        2 |
+| MECH      | Lead      |          78000 |        1 |
+| MECH      | Manager   |          34000 |        1 |
+| CIVIL     | Developer |          45000 |        1 |
+| CIVIL     | Tester    |          20000 |        1 |
++-----------+-----------+----------------+----------+
+
+
+48.Write a query in SQL to list the names of those employees starting with 'A' and with six characters in length.
+
+select emp_name from emp where emp_name like 'S%' and length(emp_name)=6;
+
++----------+
+| emp_name |
++----------+
+| Sujata   |
++----------+
+
+
+49.Write a query in SQL to list the employees whose name is greater then six characters in length and third character must be 'a'.
+
+select * from emp where length(emp_name)>=6 and emp_name like '__a%';
+
++--------+----------+---------+---------+---------+----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr | emp_desg | Joining_date | deptid |
++--------+----------+---------+---------+---------+----------+--------------+--------+
+|     12 | Chanchal |      30 |   56000 | Nanded  | HR       | NULL         |    101 |
++--------+----------+---------+---------+---------+----------+--------------+--------+
+
+
+50.Write a query in SQL to list the name of the employee of six characters long and starting with 'S' and ending with 'a'.  
+
+select * from emp where length(emp_name)>=6 and emp_name like 'S%' and emp_name like '%a';
+
+or
+
+select * from emp where length(emp_name)>=6 and emp_name like 'S%a';
+
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr | emp_desg  | Joining_date | deptid |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+|      5 | Sujata   |      27 |   45000 | Latur   | Developer | NULL         |    105 |
+|     11 | shraddha |      32 |   35000 | Latue   | Developer | NULL         |    101 |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+
+
+51.Write a query in SQL to list the employees whose names containing the character set 'pa' together.
+
+select * from emp where emp_name like '%pa%';
+
++--------+----------+---------+---------+---------+----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr | emp_desg | Joining_date | deptid |
++--------+----------+---------+---------+---------+----------+--------------+--------+
+|      1 | Pallavi  |      24 |   90000 | Pune    | Manager  | NULL         |    101 |
+|      4 | Rupali   |      29 |   78000 | Nanded  | Lead     | NULL         |    104 |
+|      9 | Gopal    |      32 |   34000 | Latur   | Manager  | NULL         |    104 |
++--------+----------+---------+---------+---------+----------+--------------+--------+
+
+
+52.Write a query in SQL to list the employees whose names containing the letter 'A'.
+
+ select * from emp where emp_name like '%p%';
+ 
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr | emp_desg  | Joining_date | deptid |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+|      1 | Pallavi  |      24 |   90000 | Pune    | Manager   | NULL         |    101 |
+|      2 | Pooja    |      25 |   60000 | Mumbai  | Developer | NULL         |    102 |
+|      4 | Rupali   |      29 |   78000 | Nanded  | Lead      | NULL         |    104 |
+|      9 | Gopal    |      32 |   34000 | Latur   | Manager   | NULL         |    104 |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+
+
+53.
+select * from emp where not (emp_adr='Mumbai' or deptid in (101,102));
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr  | emp_desg  | Joining_date | deptid |
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+|      3 | Neha     |      28 |   56000 | Nashik   | Tester    | NULL         |    103 |
+|      4 | Rupali   |      29 |   78000 | Nanded   | Lead      | NULL         |    104 |
+|      5 | Sujata   |      27 |   45000 | Latur    | Developer | NULL         |    105 |
+|      9 | Gopal    |      32 |   34000 | Latur    | Manager   | NULL         |    104 |
+|     10 | Lano     |      30 |   20000 | Banglore | Tester    | NULL         |    105 |
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+
+54.Write a SQL statement to find those salesmen with all other information and name started with any letter within 'A' and 'Q'.
+
+select * from emp where emp_name between 'a' and 'q';  # q is excluded
+
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr  | emp_desg  | Joining_date | deptid |
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+|      1 | Pallavi  |      24 |   90000 | Pune     | Manager   | NULL         |    101 |
+|      2 | Pooja    |      25 |   60000 | Mumbai   | Developer | NULL         |    102 |
+|      3 | Neha     |      28 |   56000 | Nashik   | Tester    | NULL         |    103 |
+|      9 | Gopal    |      32 |   34000 | Latur    | Manager   | NULL         |    104 |
+|     10 | Lano     |      30 |   20000 | Banglore | Tester    | NULL         |    105 |
+|     12 | Chanchal |      30 |   56000 | Nanded   | HR        | NULL         |    101 |
++--------+----------+---------+---------+----------+-----------+--------------+--------+
+
+55.Write a SQL statement to find those salesmen with all other information and name started with other than any latter within 'A' and 'Q'.
+select * from emp where emp_name not between 'a' and 'q';
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr | emp_desg  | Joining_date | deptid |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+|      4 | Rupali   |      29 |   78000 | Nanded  | Lead      | NULL         |    104 |
+|      5 | Sujata   |      27 |   45000 | Latur   | Developer | NULL         |    105 |
+|      6 | Sneha    |      45 |   53000 | Jintur  | Manager   | NULL         |    101 |
+|      7 | Ravi     |      45 |   45000 | Pune    | Lead      | NULL         |    102 |
+|      8 | Suraj    |      35 |   74000 | Mumbai  | Tester    | NULL         |    103 |
+|     11 | shraddha |      32 |   35000 | Latue   | Developer | NULL         |    101 |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+
+
+56.Write a SQL statement to find those salesmen with all information whose name containing the 1st character is 's' and the 4th character is 'a' and rests may be any character.
+
+select * from emp where emp_name like 'S__a%';
+
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+| emp_id | emp_name | emp_age | emp_sal | emp_adr | emp_desg  | Joining_date | deptid |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+|      5 | Sujata   |      27 |   45000 | Latur   | Developer | NULL         |    105 |
+|      8 | Suraj    |      35 |   74000 | Mumbai  | Tester    | NULL         |    103 |
+|     11 | shraddha |      32 |   35000 | Latue   | Developer | NULL         |    101 |
++--------+----------+---------+---------+---------+-----------+--------------+--------+
+
+
+57.Write a SQL statement to find the number of departments currently listing for all of their employees.
+
+select count(distinct deptid) from emp;
++------------------------+
+| count(distinct deptid) |
++------------------------+
+|                      5 |
++------------------------+
+
+
+58.Write a SQL statement to know how many employee have listed their names.
+
+select count(*) from emp;
++----------+
+| count(*) |
++----------+
+|       12 |
++----------+
+
+
+59.Write a SQL statement to show the department name, employee name, employee designation of employee who has max salary 
+in each department
+
+select d.dept_name,e.emp_name,e.emp_desg,max(e.emp_sal) from dept d, emp e 
+where e.deptid=d.dept_id 
+group by d.dept_name;
+
++-----------+----------+-----------+----------------+
+| dept_name | emp_name | emp_desg  | max(e.emp_sal) |
++-----------+----------+-----------+----------------+
+| CS        | Pallavi  | Manager   |          90000 |
+| IT        | Pooja    | Developer |          60000 |
+| ETC       | Neha     | Tester    |          74000 |
+| MECH      | Rupali   | Lead      |          78000 |
+| CIVIL     | Sujata   | Developer |          45000 |
++-----------+----------+-----------+----------------+
+
+
+60 select employee name, employee designation who has max salary in each designation.
+
+select emp_name, emp_desg, max(emp_sal) from emp group by emp_desg;
++----------+-----------+--------------+
+| emp_name | emp_desg  | max(emp_sal) |
++----------+-----------+--------------+
+| Pallavi  | Manager   |        90000 |
+| Pooja    | Developer |        60000 |
+| Neha     | Tester    |        74000 |
+| Rupali   | Lead      |        78000 |
+| Chanchal | HR        |        56000 |
++----------+-----------+--------------+
+
+
+61.select employee name, employee designation who have highest salary in range 60000 and 100000 in each designation.
+
+select emp_name, emp_desg, max(emp_sal) from emp group by emp_desg having max(emp_sal) between 60000 and 100000;
++----------+-----------+--------------+
+| emp_name | emp_desg  | max(emp_sal) |
++----------+-----------+--------------+
+| Pallavi  | Manager   |        90000 |
+| Pooja    | Developer |        60000 |
+| Neha     | Tester    |        74000 |
+| Rupali   | Lead      |        78000 |
++----------+-----------+--------------+
+
+select emp_name, emp_desg, max(emp_sal) from emp group by emp_desg having max(emp_sal) in (50000,90000,45000);
++----------+----------+--------------+
+| emp_name | emp_desg | max(emp_sal) |
++----------+----------+--------------+
+| Pallavi  | Manager  |        90000 |
++----------+----------+--------------+
+
+
+62.Write a SQL statement to find the highest salary with their ID, for only those employee whose ID is within the range 
+1 and 5.
+
+select emp_id, max(emp_sal) from emp where emp_id between 1 and 5 group by emp_id;
+ 
++--------+--------------+
+| emp_id | max(emp_sal) |
++--------+--------------+
+|      1 |        90000 |
+|      2 |        60000 |
+|      3 |        56000 |
+|      4 |        78000 |
+|      5 |        45000 |
++--------+--------------+
+
+
+63.Write a SQL statement to display employee details (ID and only highest salary) whose IDs are within the 
+range 1 and 5 and highest salary is more than 70000.
+
+select emp_id,max(emp_sal) from emp where emp_id between 1 and 5 group by emp_id having max(emp_sal)>70000;
+
++--------+--------------+
+| emp_id | max(emp_sal) |
++--------+--------------+
+|      1 |        90000 |
+|      4 |        78000 |
++--------+--------------+
+
+64.Write a SQL statement to find the highest purchase amount with their ID, for only those salesmen whose ID is within the range 5003 and 5008.
+
+select emp_id,max(emp_sal) from emp where emp_id between 1 and 5 group by emp_id;
+
++--------+--------------+
+| emp_id | max(emp_sal) |
++--------+--------------+
+|      1 |        90000 |
+|      2 |        60000 |
+|      3 |        56000 |
+|      4 |        78000 |
+|      5 |        45000 |
++--------+--------------+
+
+
+65.Write a SQL query to find the number of products with a price more than or equal to Rs.350.
+
+select count(*) "Number of employees" from emp where emp_sal>=70000;
++---------------------+
+| Number of employees |
++---------------------+
+|                   3 |
++---------------------+
+
+66. select department name and their average salary.
+
+select dept_name, avg(emp_sal) "Average salary" from emp, dept where deptid=dept_id group by dept_name;
++-----------+----------------+
+| dept_name | Average salary |
++-----------+----------------+
+| CS        |          58500 |
+| IT        |          52500 |
+| ETC       |          65000 |
+| MECH      |          56000 |
+| CIVIL     |          32500 |
++-----------+----------------+
+
+
+67.select department name and their total annual salary.
+
+select dept_name, sum(12*emp_sal) "Total Annual salary" from emp, dept where deptid=dept_id group by dept_name;
++-----------+---------------------+
+| dept_name | Total Annual salary |
++-----------+---------------------+
+| CS        |             2808000 |
+| IT        |             1260000 |
+| ETC       |             1560000 |
+| MECH      |             1344000 |
+| CIVIL     |              780000 |
++-----------+---------------------+
+
+
+68.
+select distinct emp_name from emp 
+where deptid in (select dept_id from dept where dept_name='CS') 
+and emp_name like 'S%' order by emp_name;
+
++----------+
+| emp_name |
++----------+
+| shraddha |
+| Sneha    |
++----------+
+
+
+69.
+
+select dept_name from dept where dept_id in (select deptid from emp where emp_sal in (select min(emp_sal) from emp));
++-----------+
+| dept_name |
++-----------+
+| CIVIL     |
++-----------+
+
+----------------------------------------------------------------------------------------------------------
+
+Join -->
+
+1.Write a query in SQL to find the names of departments where more than three employees are working.
+
+select dept.dept_name from emp inner join dept on deptid=dept_id group by dept.dept_name having count(*)>3;
++-----------+
+| dept_name |
++-----------+
+| CS        |
++-----------+
+
+or 
+
+select dept.dept_name from dept,emp where deptid=dept_id group by dept_name having count(*)>3;  # without join
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**********************************************************************************************************************************
+
+emp_id | emp_name | job_name  | manager_id | hire_date  | salary  | commission | dep_id
+--------+----------+-----------+------------+------------+---------+------------+--------
+  68319 | KAYLING  | PRESIDENT |            | 1991-11-18 | 6000.00 |            |   1001
+  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 | 2750.00 |            |   3001
+  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 | 2550.00 |            |   1001
+  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 | 2957.00 |            |   2001
+  67858 | SCARLET  | ANALYST   |      65646 | 1997-04-19 | 3100.00 |            |   2001
+  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 | 3100.00 |            |   2001
+  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |  900.00 |            |   2001
+  64989 | ADELYN   | SALESMAN  |      66928 | 1991-02-20 | 1700.00 |     400.00 |   3001
+  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 | 1350.00 |     600.00 |   3001
+  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 | 1350.00 |    1500.00 |   3001
+  68454 | TUCKER   | SALESMAN  |      66928 | 1991-09-08 | 1600.00 |       0.00 |   3001
+  68736 | ADNRES   | CLERK     |      67858 | 1997-05-23 | 1200.00 |            |   2001
+  69000 | JULIUS   | CLERK     |      66928 | 1991-12-03 | 1050.00 |            |   3001
+  69324 | MARKER   | CLERK     |      67832 | 1992-01-23 | 1400.00 |            |   1001
+
+
+
+6.Write a query in SQL to display all the information of the employees.
+SELECT * FROM employees;
+
+
+7. Write a query in SQL to find the salaries of all employees.
+SELECT salary
+FROM employees;
+
+
+8.Write a query in SQL to display the unique designations for the employees.
+SELECT DISTINCT job_name 
+FROM employees;
+
+9.Write a query in SQL to list the employees with Hire date in the format like February 22, 1991.
+SELECT emp_id,
+       emp_name,
+       salary,
+       to_char(hire_date,'MONTH DD,YYYY')
+FROM employees;
+
+
+10.Write a query in SQL to count the no. of characters with out considering the spaces for each name.
+SELECT length(trim(emp_name))
+FROM employees;
+
+
+11.Write a query in SQL to list the emp_id, salary, and commission of all the employees.
+SELECT emp_id,
+       salary,
+       commission
+FROM employees;
+
+12. Write a query in SQL to list the employees who does not belong to department 2001.
+SELECT * FROM employees
+WHERE dep_id NOT IN (2001);
+
+
+13. select employee whose age is greater than 30.
+select * from emp where emp_age>30;
+
+
+14.Write a query in SQL to display the average salaries of all the employees who works as ANALYST.
+SELECT avg(salary)
+FROM employees
+WHERE job_name = 'ANALYST';
+
+
+15. Write a query in SQL to display the details of the employee BLAZE.
+SELECT *
+FROM employees
+WHERE emp_name = 'BLAZE';
+
+
+16. Write a query in SQL to display all the details of the employees whose commission is more than their salary.
+SELECT *
+FROM employees
+WHERE commission>salary;
+
+
+17.Write a query in SQL to list the employees whose salary is more than 3000 after giving 25% increment.
+SELECT *
+FROM employees
+WHERE (1.25*salary) > 3000;
+
+
+18.Write a query in SQL to list the name of the employees, those having six characters to their name.
+SELECT emp_name
+FROM employees
+WHERE length(emp_name)=6;
+
+
+18.. Write a query in SQL to list the employees who joined in the month January.
+SELECT *
+FROM employees
+WHERE to_char(hire_date, 'mon')='jan';
+
+
+19.Write a query in SQL to list all the employees whose designation is CLERK.
+SELECT *
+FROM employees
+WHERE job_name = 'CLERK';
+
+
+20.Write a query in SQL to list the employees whose experience is more than 27 years.
+SELECT *
+FROM employees
+WHERE EXTRACT(YEAR
+              FROM age(CURRENT_DATE, hire_date)) > 27;
+			  
+			
+21.Write a query in SQL to list the employees whose salaries are less than 3500.
+SELECT *
+FROM employees
+WHERE salary <3500;
+
+
+22.Write a query in SQL to list the name, job_name, and salary of any employee whose designation is ANALYST.
+SELECT emp_name,
+       job_name,
+       salary
+FROM employees
+WHERE job_name = 'ANALYST';
+
+
+23.Write a query in SQL to list the employees who have joined in the year 1991.
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'YYYY') = '1991';
+
+
+24. Write a query in SQL to list the name, id, hire_date, and salary of all the employees joined before 1 apr 91.
+SELECT e.emp_id,
+       e.emp_name,
+       e.hire_date,
+       e.salary
+FROM employees e
+WHERE hire_date <'1991-04-01';
+
+
+25.Write a query in SQL to list the id, name, salary, and experience of all the employees who earn more than 100 as daily salary.
+SELECT emp_id,
+       emp_name,
+       salary,
+       age(CURRENT_DATE, hire_date) "Experience"
+FROM employees
+WHERE (salary/30)>100;
+
+
+26. Write a query in SQL to list those employees whose salary is an odd value.
+SELECT *
+FROM employees
+WHERE mod(salary,2) = 1;
+
+
+27.Write a query in SQL to list those employees whose salary contain only 3 digits.
+SELECT *
+FROM employees
+WHERE length(TRIM(TO_CHAR(salary,'9999'))) = 3;
+
+
+28. Write a query in SQL to list the employees who joined in the month of APRIL.
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'MON') ='APR';
+
+
+29. Write a query in SQL to list the employees those who joined in company before 19th of the month.
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'DD') < '19';			
+			  
+
+30. Write a query in SQL to list the employees who are SALESMAN and gathered an experience which month portion is more than 10.
+SELECT *
+FROM employees
+WHERE job_name = 'SALESMAN'
+  AND EXTRACT(MONTH
+              FROM age(CURRENT_DATE, hire_date)) > 10;
+			  
+			  
+
+31.Write a query in SQL to list the ID, name, salary, and job_name of the employees for -
+1. Annual salary is below 34000 but receiving some commission which should not be more than the salary,
+2. And designation is SALESMAN and working for department 3001.
+SELECT emp_id,
+       emp_name,
+       salary,
+       job_name
+FROM employees
+WHERE 12*(salary+commission) < 34000
+  AND commission IS NOT NULL
+  AND commission < salary
+  AND job_name = 'SALESMAN'
+  AND dep_id = 3001;
+			  
+
+
+32. Write a query in SQL to list the employees who are either CLERK or MANAGER.
+SELECT *
+FROM employees
+WHERE job_name IN ('CLERK','MANAGER');
+
+
+33.Write a query in SQL to list the employees who joined in any year except the month February.
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'MON') NOT IN ('FEB');
+OR
+
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'MONTH') NOT LIKE 'FEB%';
+
+
+33.Write a query in SQL to list the employees who joined in the year 91.
+SELECT *
+FROM employees
+WHERE hire_date BETWEEN '1991-01-01' AND '1991-12-31';
+
+
+34. select employee whose age between 35 to 50
+select * from emp where emp_age between 35 and 50;			  
+
+
+35. Write a query in SQL to list the employees who joined in the year 91.
+SELECT *
+FROM employees
+WHERE hire_date BETWEEN '1991-01-01' AND '1991-12-31';
+
+
+36.Write a query in SQL to list the employees whose annual salary is within the range 24000 and 50000.
+SELECT *
+FROM employees
+WHERE 12*salary BETWEEN 24000 AND 50000;
+
+
+37. Write a query in SQL to list the employees who have joined on the following dates 1st May,20th Feb, and 03rd Dec in the year 1991.
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'DD-MON-YY') IN ('01-MAY-91',
+                                         '20-FEB-91',
+                                         '03-DEC-91');
+										 
+										 
+
+38.Write a query in SQL to list the employees working under the managers 63679, 68319, 66564, 69000.
+SELECT *
+FROM employees
+WHERE manager_id IN (63679,
+                     68319,
+                     66564,
+                     69000);										 
+					 
+					 
+39.Write a query in SQL to list the employees who joined after the month JUNE in the year 1991 and within this year.
+SELECT *
+FROM employees
+WHERE hire_date BETWEEN '01-JUL-91' AND '31-DEC-91';
+
+
+40.Write a query in SQL to list the employees who joined in 90's.
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'YY') BETWEEN '90' AND '99';					 
+
+
+41.Write a query in SQL to list the managers of department 1001 or 2001.
+SELECT *
+FROM employees
+WHERE job_name = 'MANAGER'
+and dept_id in (1001,2001);
+
+
+42.Write a query in SQL to list the employees, joined in the month FEBRUARY with a salary range between 1001 to 2000.
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'MON') = 'FEB'
+  AND salary BETWEEN 1000 AND 2000;
+  
+  
+43.Write a query in SQL to list all the employees who joined before or after 1991.
+SELECT *
+FROM employees
+WHERE to_char(hire_date,'YYYY') NOT IN ('1991');
+OR
+
+SELECT *
+FROM employees
+WHERE to_char (hire_date,'YYYY') NOT LIKE '1991';  
+
+
+44.Write a query in SQL to list the name, job name, annual salary, department id, department name and grade of the 
+employees who earn 60000 in a year or not working as an ANALYST.
+
+ dep_id |  dep_name  | dep_location
+--------+------------+--------------
+   1001 | FINANCE    | SYDNEY
+   2001 | AUDIT      | MELBOURNE
+   3001 | MARKETING  | PERTH
+   4001 | PRODUCTION | BRISBANE
+   
+ grade | min_sal | max_sal
+-------+---------+---------
+     1 |     800 |    1300
+     2 |    1301 |    1500
+     3 |    1501 |    2100
+     4 |    2101 |    3100
+     5 |    3101 |    9999
+
+	 
+SELECT e.emp_name,
+       e.job_name,
+       (12*e.salary)"Annual Salary",
+       e.dep_id,
+       d.dep_name,
+       s.grade
+FROM employees e,
+     department d,
+     salary_grade s
+WHERE e.dep_id = d.dep_id
+  AND e.salary BETWEEN s.min_sal AND s.max_sal
+  AND (((12*e.salary)>= 60000)
+       OR (e.job_name != 'ANALYST'))
+	   
+	   
+45.Write a query in SQL to list the employees along with department name.
+
+ dep_id |  dep_name  | dep_location
+--------+------------+--------------
+   1001 | FINANCE    | SYDNEY
+   2001 | AUDIT      | MELBOURNE
+   3001 | MARKETING  | PERTH
+   4001 | PRODUCTION | BRISBANE
+
+SELECT e.emp_id,
+       e.emp_name,
+       e.job_name,
+       e.manager_id,
+       e.hire_date,
+       e.salary,
+       e.commission,
+       e.dep_id,
+       d.dep_name
+FROM employees e,
+     department d
+WHERE e.dep_id = d.dep_id;   
+
+
+46.Write a query in SQL to list the name, job name, manager id, salary, manager name, manager's salary for those employees 
+whose salary is greater than the salary of their managers.
+SELECT w.emp_name,
+       w.job_name,
+       w.manager_id,
+       w.salary,
+       m.emp_name "Manager",
+       m.emp_id,
+       m.salary "Manager_Salary"
+FROM employees w,
+     employees m
+WHERE w.manager_id = m.emp_id
+  AND w.salary > m.salary;
+  
+  
+  
+*********************************************************************************************************************************
+
+actor -->
+
++--------+-----------+-------------+------------+
+| act_id | act_fname | act_lname   | act_gender |
++--------+-----------+-------------+------------+
+|    101 | James     | Stewart     | M          |
+|    102 | Deborah   | kerr        | F          |
+|    103 | Peter     | Otoole      | M          |
+|    104 | Robert    | De Niro     | M          |
+|    105 | F. Murray | Abraham     | M          |
+|    106 | Pallavi   | Dongare     | F          |
+|    107 | Sujata    | Ambhore     | F          |
+|    108 | Sneha     | Deshmuk     | F          |
+|    109 | Ruplai    | Appane      | F          |
+|    109 | Amol      | Lahane      | M          |
+|    110 | Nikhil    | Patil       | M          |
+|    111 | Chris     | Evans       | M          |
+|    112 | Chris     | Heamworth   | M          |
+|    113 | Tom       | Hiddlestone | M          |
+|    114 | Scarlett  | Wilson      | F          |
+|    115 | Divya     | Pawar       | F          |
++--------+-----------+-------------+------------+  
+  
+
+movie_cast -->
++--------+--------+-----------------------+
+| act_id | mov_id | role                  |
++--------+--------+-----------------------+
+|    101 |    901 | John Scottie Ferguson |
+|    102 |    902 | Miss Giddens          |
+|    103 |    903 | T.E. Lawrence         |
+|    104 |    904 | Michael               |
+|    105 |    905 | Antonio Salieri       |
+|    106 |    906 | Rick Deckard          |
+|    107 |    907 | Alice Harford         |
+|    108 |    908 | McManus               |
+|    109 |    909 | Eddie Adams           |
+|    110 |    910 | Alvy Singer           |
+|    111 |    911 | San                   |
+|    112 |    912 | Andy                  |
+|    113 |    913 | Lester                |
+|    114 |    914 | Rose                  |
+|    115 |    915 | Sean                  |
+|    115 |    915 | Sean                  |
++--------+--------+-----------------------+  
+  
+  
+movie -->
++--------+---------------+----------+----------+----------+--------------+-----------------+
+| mov_id | mov_title     | mov_year | mov_time | mov_lang | mov_rel_date | mob_rel_country |
++--------+---------------+----------+----------+----------+--------------+-----------------+
+|    901 | Vertigo       |     1958 |      128 | English  | 1958-08-23   | SW              |
+|    902 | The Innocents |     1951 |      100 | English  | 1962-02-19   | UK              |
+|    903 | Avengers      |     1962 |      150 | English  | 1962-12-11   | UK              |
+|    905 | Hunters       |     1998 |      140 | English  | 1999-06-17   | US              |
+|    906 | Men in Black  |     1978 |      140 | English  | 1979-11-05   | US              |
++--------+---------------+----------+----------+----------+--------------+-----------------+ 
+
+
+director -->
+
++--------+-----------+-----------+
+| dir_id | dir_fname | dir_lname |
++--------+-----------+-----------+
+|    201 | Alfred    | Hitchock  |
+|    202 | Jack      | Clayton   |
+|    203 | David     | Lean      |
+|    204 | Michael   | Cimino    |
+|    205 | Milos     | Forman    |
+|    206 | Ridley    | Scott     |
+|    207 | Stanley   | Kubrick   |
+|    208 | Bryan     | Singer    |
+|    209 | Roman     | Polansik  |
+|    210 | Paul      | Thomas    |
+|    211 | Remo      | Disuza    |
+|    212 | Danny     | Boyle     |
++--------+-----------+-----------+
+
+
+movie diection -->
+
++--------+--------+
+| dir_id | mov_id |
++--------+--------+
+|    201 |    901 |
+|    202 |    902 |
+|    203 |    903 |
+|    204 |    904 |
+|    205 |    905 |
+|    206 |    906 |
+|    207 |    907 |
+|    208 |    908 |
+|    209 |    909 |
+|    210 |    910 |
+|    211 |    911 |
+|    212 |    912 |
++--------+--------+
+
+
+reviewer;
++--------+----------+
+| rev_id | rev_name |
++--------+----------+
+|   9001 | Josef    |
+|   9002 | Harry    |
+|   9003 | Albus    |
+|   9004 | Ron      |
+|   9005 | Thor     |
+|   9006 | Steave   |
+|   9007 | Natasha  |
+|   9008 | Baner    |
+|   9009 | Loky     |
+|   9010 | Jane     |
++--------+----------+
+
+
+rating;
++--------+--------+-----------+---------------+
+| mov_id | rev_id | rev_stars | num_of_rating |
++--------+--------+-----------+---------------+
+|    901 |   9001 |      5.56 |         35566 |
+|    902 |   9002 |      6.25 |       1456552 |
+|    903 |   9003 |      7.25 |       1455822 |
+|    904 |   9004 |      5.21 |       1565822 |
+|    905 |   9005 |      5.51 |       5665822 |
+|    906 |   9006 |      9.51 |       2565822 |
+|    907 |   9007 |      7.31 |       7965822 |
+|    908 |   9008 |      6.31 |       4236822 |
+|    909 |   9009 |      6.24 |       4566822 |
+|    910 |   9010 |      6.31 |       4236822 |
++--------+--------+-----------+---------------+
+
+
+1. Write a query in SQL to list all the information of the actors who played a role in the movie 'Avengers'.
+
+select * from actor where act_id in 
+(select act_id from movie_cast where mov_id in 
+(select mov_id from movie where mov_title='Avengers'));
+
++--------+-----------+-----------+------------+
+| act_id | act_fname | act_lname | act_gender |
++--------+-----------+-----------+------------+
+|    103 | Peter     | Otoole    | M          |
++--------+-----------+-----------+------------+
+
+
+2.Write a query in SQL to find the name of the director (first and last names) who directed a movie that casted a role for 
+'Avengers'.
+
+select dir_fname,dir_lname from director where dir_id in 
+(select dir_id from movie_direction where mov_id in 
+(select mov_id from movie_cast where role in (
+select role from movie_cast where mov_id in 
+(select mov_id from movie where mov_title='Avengers'))));
+
++-----------+-----------+
+| dir_fname | dir_lname |
++-----------+-----------+
+| David     | Lean      |
++-----------+-----------+
+
+
+3.Write a query in SQL to list all the movies which released in the country other than UK.
+
+select mov_title from movie where not mob_rel_country='UK';
++--------------+
+| mov_title    |
++--------------+
+| Vertigo      |
+| Hunters      |
+| Men in Black |
++--------------+

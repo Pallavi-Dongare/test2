@@ -1,0 +1,144 @@
+1.admin.py is a configuration file for the built-in Django Admin app,It is a Django's command line utility for administrative tasks.
+2.apps.py is a configuration file for the app itself
+3.migrations/ keeps track of any changes to our models.py file so our database and models.py stay in sync
+4.models.py is where we define our database models which Django automatically translates into database tables
+5.tests.py is for our app-specific tests
+6.views.py is where we handle the request/response logic for our web app
+
+**manage.py --> 
+1.is the command-line utility of your Django project and this file is used to control your Django project 
+on the server or even to begin one.
+
+2.The manage.py file is used to execute various Django commands such as running the local web server or creating a new app.
+
+3.When Django server is started, the manage.py file searches for settings.py file, which contains information of all the 
+applications installed in the project, middleware used, database connections and path to the main urls config.
+	
+**urls.py-->
+urls.py tells Django which pages to build in response to a browser or URL request	
+
+**__init__.py-->
+The __init__.py file is an empty file which is there to make the python interpreter understand that the directory consisting 
+settings.py is a module/ package.
+the folder which contain __init__.py file is considered as python models/package
+
+**wsgi.py-->
+WSGI stands for “Web Server Gateway Interface”. It is used to forward requests from a web server (such as Apache or NGINX)
+to a backend Python web application or framework
+
+**Django comes with a built-in web server for local development purposes which we can now start with the runserver command.
+	
+
+
+-->Which architectural pattern does Django follow?
+
+a user requests for a resource to the Django, Django works as a controller and check to the available resource in URL.
+If URL maps, a view is called that interact with model and template, it renders a template.
+Django responds back to the user and sends a template as a response.
+
+											or
+									
+-->When a visitor lands on Django page:
+
+	Django checks the various URLs pattern you have created and uses the information to retrieve the view.
+	The view processes the request, querying your database if necessary.
+	The view passes the requested information on to your template.
+	The template renders the data in a layout you have created and displays the page.	
+
+--> Explain Django architecture.
+Django follows MVT (Model View Template) pattern. It is slightly different from MVC.
+
+Model: 
+The model is responsible to handle database. It is the data access layer which handles the data. 
+It contains everything about the data, i.e., how to access it, how to validate it, 
+its behaviors and the relationships between the data.
+	   
+View: 
+It is the business logic layer.It is like a bridge between the model and the template.
+The user sends a request by interacting with the template, views handle these request and send to the model and get appropriate
+response from the model, and send it to the template. 
+
+Template: 
+It is a presentation layer. It represent how data should be presented to the application user. user can read or write
+the data to the template.
+
+
+-->What is Rest API ?
+A REST API is an application program interface that uses HTTP requests to GET, PUT, POST and DELETE data.
+
+
+-->What is Authentication ?
+Authentication is the process or action of verifying the identity of a user or process.
+
+-->Types of Authentication in REST API ?
+Token based authentication and Session based authentication.
+
+-->What is token based authentication system ?
+A token based authentication system is a security system that authenticates the users who attempt to log in to a server,
+a network, or some other secure system, using a security token provided by the server
+
+-->Explain Mixins in Django ?
+A mixin is a special kind of multiple inheritance. There are two main situations where mixins are used: 
+to provide a lot of optional features for a class and to use one particular feature in a lot of different classes
+
+
+--> Serializers :
+In Django REST Framework, Serializers are responsible for converting complex data such as queryset and model instance to 
+native python datatype this process is called serialization, and these data can be easily render into JSON, XML and in 
+any other content type which is understamd by front end.
+
+Serializers are also responsible for deserialization which means it allows parsed data to be converted back into complex
+types, after first validating the incoming data.
+
+Serialization
+Deserialization
+
+
+--> Template inheritance:
+Template inheritance allows you to build a base skeleton template which contain all the common elements of your site and 
+defines a block that child templates can ovrried.
+The 'extend' tag is used to inherit the template.
+extend tag tells the template engine that this template 'extends' another template.
+
+syntax:  {% extends parent_template_name%}
+ex : {% extends base.html %}
+
+
+'Block' tag is used for ovrriding specific parts of a template.
+syntas:
+{% block blockname %}....{% endblock %}
+{% block blockname %}....{% endblock blockname %}
+
+
+
+
+
+
+
+--> form rendering option:
+
+{{form}} will render them all.
+{{form.as_table}} will render them as table cells wrapped in <tr> tag.
+{{form.as_p}} will render them as wrapped in <p> tag.
+{{form.as_ul}} will render them as wrapped in <li> tag.
+{{form.name_of_field}} will render field manually as given.
+
+
+
+
+
+
+
+-->Types of Session handling methods in Django
+Session handling types  include 
+	1.database-backed sessions, 
+	2.Using cached sessions, 
+	3.Using file-based sessions, 
+	4.Using cookie-based sessions.
+		
+	
+		
+		
+	   
+	
+												

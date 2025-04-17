@@ -1,0 +1,220 @@
+
+
+
+Foreignkey is always on many side.Foreignkey constraints -->
+
+1.nullable-->
+
+nullable = True   --> loosley coupled
+nullable = False   --> Tightley coupled
+
+	  emp								address		     							
+emp_id  emp_name  adrref            adr_id  adr_name  eid --FK(Foreignkey)
+	1    pallvi							1		Pune     1
+	2    Pooja							2     Mumbai	Null    if nullable = Ture,they are loosely coupled,both table are 
+																independent	address table with Foreignkey and without Foreignkey.
+														
+2.unique -->
+
+if unique=True --> Foreignkey(eid) is unique --> which means eid must be unique for each address. it can not be duplicate.
+
+if unique=False --> Foreignkey(eid) is can be duplicate --> which means one eid for multiple address.
+														
+Foreignkey(eid) is primary key of opposite table(emp)
+
+---------------------------------------------------------------------------------
+relationship constraints -->
+
+1.uselist:
+ if uselist=True --> it retuen a list
+ 
+ if uselist=False --> it return a single element
+
+
+2. backref 
+
+In above example you have Foreignkey in address table so you can't insert a value in address table first unless you have value 
+in emp table. and also tou cam't delete address table first because you have Foreignkey(eid) in this table.you have to delete 
+emp table first then address table.
+
+------------------------------------------------------------------------------------------
+
+1.one-to-one -->
+
+In one-to-one relationship, on which side we put the Foreignkey ? so decide which side is first emp or address.
+if address side is first then the relation is 'employee-has-a-address' which means employee has a Foreignkey of address.
+we have to put the value in address table first then in employee table and delete address table first then employee.
+		
+if employee side is first then the relation is 'address-has-a-employee' which means address has a Foreignkey of employee.
+we have to put the value in employee table first then in address table and delete employee table first then address.
+				
+				
+In one-to-one unique key if always True --> unique=True
+and nullable can be True ot False, it depent on you.  --> nullable=True or False
+
+In one-to-one uselist is always False --> uselist=False
+which means it return only single element.
+
+Foreignkey is always on second side.for example 'address-has-a-employee' then address is second side.
+
+
+------------------------------------------------------------------------------------------
+
+2. one-to-mant -->
+
+Foreignkey key is always on many side.
+
+unique = False --> always
+
+uselist = True --> always
+
+
+------------------------------------------------------------------------------------------
+
+1.Emp.query.filter(Emp.empName.startswith('P')).all()   --> to get employee whose name startswith 'P'
+
+2.Emp.query.order_by(Emp.empSalary.desc()).all() --> order emp salary in desc order 
+
+3.emp = Emp.query.order_by(Emp.empName.desc()).all()  --> order emp name in desc order
+
+4.emp = Emp.query.filter(Emp.empName=='Pallavi').all()  --> get all employee whose name is 'Pallavi'
+
+5.emp = Emp.query.filter_by(empId=1).first()  -- get employee whose id is 1
+ 
+ 
+6.Order emp in ascending order whose anme startswith 'S'
+
+-->Emp.query.filter(Emp.empName.startswith('S')).order_by(Emp.empName).all()  
+ 
+ 
+7.Order emp in decending order whose anme startswith 'S'
+
+-->Emp.query.filter(Emp.empName.startswith('S')).order_by(Emp.empName.desc()).all()
+ 
+ 
+8. limiting the query(it print one employee that is first employee) 
+
+--> Emp.query.limit(1).all()
+ 
+
+9. it will print one employee by skipping first employee
+
+--> Emp.query.limit(1).offset(1).all()
+ 
+ 
+10. it will print two employee by skipping first two employee(offset means skipping)
+
+--> Emp.query.limit(2).offset(2).all()
+ 
+ 
+11. it will return employee whose id is 1.
+
+--> Emp.query.get(1)
+
+
+12. get the employees decending order whose department name is 'CS' and name startswith 'S'
+
+-->emp = Emp.query.join(Dept).filter(Emp.did==Dept.deptId, Dept.deptName=='CS',Emp.empName.startswith('S')).order_by(Emp.empName.desc()).all()
+
+
+13. get all employee whose salary is greater than 70000
+
+-->Emp.query.filter(Emp.empSalary>70000).all()
+
+
+14.get employee whose name starts with 'S' or 'P'
+
+--> Emp.query.filter(Emp.empName.startswith('S')|Emp.empName.startswith('P')).all()
+
+or
+
+-->Emp.query.filter(db.or_(Emp.empName.startswith('S'),Emp.empName.startswith('P'))).all()
+
+or
+
+-->from sqlalchemy import or_
+   Emp.query.filter(or_(Emp.empName.startswith('S'),Emp.empName.startswith('P'))).all()
+
+
+15. like queries :
+
+--> Emp.query.filter(Emp.empName.like('%Pallavi%')).all()
+
+--> emp = Emp.query.filter(Emp.empName.like('___a%')).all()
+
+--> Emp.query.filter(Emp.empName.like('_a%')).all()
+
+
+
+16. In query:
+
+--> Emp.query.filter(Emp.empId.in_([1,2,3])).all()
+
+
+17. Not In:
+
+--> Emp.query.filter(~Emp.empId.in_([1,2,3])).all()
+
+
+18.ordering emp name with limit 2
+
+--> Emp.query.order_by(Emp.empName.desc()).limit(2).all()
+
+
+19.get all employees except first two
+
+--> Emp.query.offset(2).all()
+
+
+20. get 4 employee except first two
+
+--> Emp.query.offset(2).limit(4).all()
+
+
+21. count() :
+
+--> Emp.query.filter(Emp.empName.startswith('S')).count()      # count no. of employee whose name startswith 's'
+
+--> Emp.query.join(Dept).filter(Dept.deptName=='CS').count()   # count no. of employee whose name department is 'CS'
+ 
+ 
+22. count of employee in each department
+
+--> db.session.query(Dept.deptName, db.func.count(Emp.empName)).join(Dept,Emp.did==Dept.deptId).group_by(Dept.deptName).all()
+	[('CS', 3), ('IT', 2), ('ETC', 2), ('MECH', 2), ('CIVIL', 2)]
+ 
+ 
+23. get the department name where more than 2 employee are working
+
+--> db.session.query(Dept.deptName, db.func.count(Emp.empName)).join(Dept,Emp.did==Dept.deptId).group_by(Dept.deptName)
+    .having(db.func.count(Emp.empName)>2).all()
+
+	[('CS', 3)]
+	
+	
+24. get all employee salary in decending order
+
+--> Emp.query.order_by(Emp.empSalary.desc()).all()
+
+
+25. get first three largest salry from employee.
+
+--> Emp.query.order_by(Emp.empSalary.desc()).limit(3).all()
+
+
+26. get first largest salry from employee.
+
+-->  Emp.query.order_by(Emp.empSalary.desc()).limit(1).all()
+
+
+27.get second largest salry from employee.
+
+-->  Emp.query.order_by(Emp.empSalary.desc()).limit(1).offset(1).all()
+
+ 
+	
+	
+ Flask URL Building
+The url_for() function is used to build a URL to the specific function dynamically. 
+The first argument is the name of the specified function, and then we can pass any number of keyword argument 
+corresponding to the variable part of the URL.

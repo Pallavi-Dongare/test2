@@ -1,0 +1,90 @@
+
+sprint -->
+collections of tasks to be completed in 2-3 weeks.
+duration os 1 sprint - 2-3 weeks (21 days)
+
+
+No of environment -->
+DEV - QA - UAT - PRODUCTION
+
+
+Scrum Master --> Lead
+
+total Sprint in 1 years -- 16
+1.5 years --> 1 year   +  7 month
+			 15 sprint + 8 sprint = 24 sprint total
+current sprint --> 24th	
+
+****************************************************************
+
+Recent change in project --> recent chenge in my project is we integrate the djnago from 2.x to 3.x
+
+django 3.0 release date - december 2,2019
+
+Django 1.11.x
+supports Python 2.7 / Python 3.4~3.7
+
+Django 2.2.x
+supports Python 3.5, 3.6~3.8
+Mobile-friendly 的 Django Admin
+URLconf api change, from url to path
+
+Django 3.x
+supports Python 3.6~3.8
+MariaDB support
+ASGI support (For Async-capable)
+Dropped support for PostgreSQL 9.4 / Oracle
+
+Django 3.0 supports Python 3.6, 3.7, 3.8, and 3.9 (as of 3.0.11). We highly recommend and only officially support the latest release of each series.
+The Django 2.2.x series is the last to support Python 3.5.	
+
+1. support MariaDB 10.1 and higher
+2. Asynchronous view and middleware support
+3. In older version JSONField only support Postgress Database, but in 3.X it Support all database backend
+4. DEFAULT_HASHING _ALGORATHIM setting
+5. Exclusive Constraints on PostgreSQL: 
+	The new ExclusionConstraint class enable adding exclusion constraints on PostgreSQL. 
+	Constraints are added to models using the Meta.constraints option.
+6. Filter Expression:
+	Expressions that output BooleanField may now be used directly in QuerySet filters, 
+	without having to first annotate and then filter against the annotation.
+7. Enumeration for model choice
+Custom enumeration types TextChoices, IntegerChoices, and Choices are now available as a way to define Field.choices. 
+TextChoices and IntegerChoices types are provided for text and integer fields. The Choices class allows defining a 
+compatible enumeration for other concrete data types. These custom enumeration types support human-readable labels 
+that can be translated and accessed via a property on the enumeration or its members. See Enumeration types for more 
+details and examples.
+8. ASGI support¶
+	Django 3.0 begins our journey to making Django fully async-capable by providing support for running as an ASGI application.
+
+Features removed in 3.0¶
+
+The django.db.backends.postgresql_psycopg2 module is removed.
+django.shortcuts.render_to_response() is removed.
+The DEFAULT_CONTENT_TYPE setting is removed.
+HttpRequest.xreadlines() is removed.
+Support for the context argument of Field.from_db_value() and Expression.convert_value() is removed.
+The field_name keyword argument of QuerySet.earliest() and latest() is removed.
+See Features deprecated in 2.1 for details on these changes, including how to remove usage of these features.
+
+The ForceRHR GIS function is removed.
+django.utils.http.cookie_date() is removed.
+The staticfiles and admin_static template tag libraries are removed.
+django.contrib.staticfiles.templatetags.staticfiles.static() is removed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,474 @@
+
+What is OOP -->
+1. Object-oriented programming is a programming paradigm based on the concept of "objects", 
+   The object is related to real-word entities such as book, house, pencil, etc. 
+   The oops concept focuses on writing the reusable code. It is a widespread technique to solve the problem by creating objects.
+      
+2. Object-oriented programming is a programming paradigm that provides a means of structuring programs so that 
+   properties and behaviors are bundled into individual objects.
+
+3. For instance, an object could represent a person with properties like a name, age, and address and behaviors 
+   such as walking, talking, breathing, and running. Or it could represent an email with properties like a recipient list, 
+   subject, and body and behaviors like adding attachments and sending.
+
+4. Put another way, object-oriented programming is an approach for modeling concrete, real-world things, like cars, 
+   as well as relations between things, like companies and employees, students and teachers, and so on. 
+   OOP models real-world entities as software objects that have some data associated with them and can perform certain functions.
+
+5. Another common programming paradigm is procedural programming, which structures a program like a recipe in that 
+   it provides a set of steps, in the form of functions and code blocks, that flow sequentially in order to complete a task.
+
+
+What is the difference between Procedural programming and OOPS?
+1. Procedural language is based on functions but object oriented language is based on real world objects.
+2. Procedural language gives importance on the sequence of function execution but object oriented language gives 
+   importance on states and behaviors of the objects.
+3. Procedural language exposes the data to the entire program but object oriented language encapsulates the data.
+4. Procedural language follows top down programming paradigm but object oriented language follows bottom up programming paradigm.
+5. Procedural language is complex in nature so it is difficult to modify, extend and maintain but object oriented language 
+   is less complex in nature so it is easier to modify, extend and maintain.
+6. Procedural language provides less scope of code reuse but object oriented language provides more scope of code reuse.
+
+
+Advantages of OOP :
+Object-Oriented Programming makes the program easy to understand as well as efficient.
+Since the class is sharable, the code can be reused.
+Data is safe and secure with data abstraction.
+Polymorphism allows the same interface for different objects, so programmers can write efficient code.
+
+----------------------------------------------------------------------------------------------------------------------------------
+Abstraction -->
+Abstraction in Python is the process of hiding the real implementation of an application from the user and 
+emphasizing only on usage of it. For example, consider you have bought a new electronic gadget. 
+Along with the gadget, you get a user guide, instructing how to use the application, 
+but this user guide has no info regarding the internal working of the gadget.
+
+Through the process of abstraction in Python, a programmer can hide all the irrelevant data/process of an application 
+in order to reduce complexity and increase efficiency. An abstract class allows you to create functionality that 
+subclasses can implement or override
+
+An abstract class is a class that generally provides incomplete functionality and contains one or more abstract methods. 
+Abstract methods are the methods that generally don’t have any implementation, it is left to the sub classes to provide 
+implementation for the abstract methods.
+
+A class which contains one or more abstract methods is called an abstract class. 
+An abstract method is a method that has a declaration but does not have an implementation4
+
+
+Why use Abstract Base classes -->
+By defining an abstract base class, you can define a common Application Program Interface(API) for a set of subclasses. 
+This capability is especially useful in situations where a third-party is going to provide implementations, 
+such as with plugins, but can also help you when working in a large team or with a large code-base where keeping 
+all classes in your mind is difficult or not possible.
+
+
+By default, Python does not provide abstract classes. Python comes with a module that provides the base for defining Abstract 
+Base classes(ABC) and that module name is ABC. ABC works by decorating methods of the base class as abstract and then registering 
+concrete classes as implementations of the abstract base. A method becomes abstract when decorated with the keyword @abstractmethod.
+
+
+from abc import ABC, abstractmethod
+class Polygon(ABC):
+ 
+    @abstractmethod
+    def noofsides(self):
+	pass
+ 
+class Triangle(Polygon):
+ 
+    # overriding abstract method
+    def noofsides(self):
+        print("I have 3 sides")
+ 
+class Pentagon(Polygon):
+ 
+    # overriding abstract method
+    def noofsides(self):
+        print("I have 5 sides")
+ 
+class Hexagon(Polygon):
+ 
+    # overriding abstract method
+    def noofsides(self):
+        print("I have 6 sides")
+ 
+class Quadrilateral(Polygon):
+ 
+    # overriding abstract method
+    def noofsides(self):
+        print("I have 4 sides")
+ 
+# Driver code
+R = Triangle()
+R.noofsides()
+ 
+K = Quadrilateral()
+K.noofsides()
+ 
+R = Pentagon()
+R.noofsides()
+ 
+K = Hexagon()
+K.noofsides()
+
+
+Abstract Class Instantiation -->
+Abstract classes are incomplete because they have methods that have nobody. 
+If python allows creating an object for abstract classes then using that object if anyone calls the abstract method,
+but there is no actual implementation to invoke. So we use an abstract class as a template and according to the need,
+we extend it and build on it before we can use it. Due to the fact, an abstract class is not a concrete class, 
+it cannot be instantiated. When we create an object for the abstract class it raises an error. 
+
+It can also prevent any attempt to instantiate a subclass that doesn’t override a particular method in the superclass. 
+And finally, using an abstract class, a class can derive identity from another class without any object inheritance.
+
+**********************************************************************************************************************************
+
+What is Polymorphism -->  
+The word polymorphism means having many forms.
+In programming, polymorphism means same function name (but different signatures) being uses for different types.
+
+We know that the + operator is used extensively in Python programs. But, it does not have a single usage.
+For integer data types, + operator is used to perform arithmetic addition operation.
+num1 = 1
+num2 = 2
+print(num1+num2)
+Hence, the above program outputs 3.
+
+Similarly, for string data types, + operator is used to perform concatenation.
+str1 = "Python"
+str2 = "Programming"
+print(str1+" "+str2)
+
+
+One such function is the len() function. It can run with many data types in Python. 
+Let's look at some example use cases of the function.
+
+print(len("Programiz"))
+print(len(["Python", "Java", "C"]))
+print(len({"Name": "John", "Address": "Nepal"}))
+
+ex -->
+Examples of used defined polymorphic functions :
+# A simple Python function to demonstrate 
+# Polymorphism
+  
+def add(x, y, z = 0): 
+    return x + y+z
+  
+# Driver code 
+print(add(2, 3))
+
+
+ex2-->
+Polymorphism with class methods:
+class India():
+    def capital(self):
+        print("New Delhi is the capital of India.")
+  
+    def language(self):
+        print("Hindi is the most widely spoken language of India.")
+  
+    def type(self):
+        print("India is a developing country.")
+  
+class USA():
+    def capital(self):
+        print("Washington, D.C. is the capital of USA.")
+  
+    def language(self):
+        print("English is the primary language of USA.")
+  
+    def type(self):
+        print("USA is a developed country.")
+  
+obj_ind = India()
+obj_usa = USA()
+for country in (obj_ind, obj_usa):
+    country.capital()
+    country.language()
+    country.type()
+	
+
+ex3-->
+
+Polymorphism with Inheritance:
+In Python, Polymorphism lets us define methods in the child class that have the same name as the methods in the parent class. 
+In inheritance, the child class inherits the methods from the parent class. However, it is possible to modify a method in a child
+class that it has inherited from the parent class. This is particularly useful in cases where the method inherited from the 
+parent class doesn’t quite fit the child class. In such cases, we re-implement the method in the child class. 
+This process of re-implementing a method in the child class is known as Method Overriding.
+
+
+class Bird:
+  def intro(self):
+    print("There are many types of birds.")
+      
+  def flight(self):
+    print("Most of the birds can fly but some cannot.")
+    
+class sparrow(Bird):
+  def flight(self):
+    print("Sparrows can fly.")
+      
+class ostrich(Bird):
+  def flight(self):
+    print("Ostriches cannot fly.")
+      
+obj_bird = Bird()
+obj_spr = sparrow()
+obj_ost = ostrich()
+  
+obj_bird.intro()
+obj_bird.flight()
+  
+obj_spr.intro()
+obj_spr.flight()
+  
+obj_ost.intro()
+obj_ost.flight()	
+	
+
+
+
+Method Overloading -->  
+By default, Python does not support method overloading, but we can achieve it by modifying out methods.
+Given a single function sum (), the number of parameters can be specified by you. 
+This process of calling the same method in different ways is called method overloading.
+
+ex1:
+class GFG:
+    def sum(self, a = None, b = None, c = None):         
+        s = 0
+        if a != None and b != None and c != None:
+            s = a + b + c
+        elif a != None and b != None:
+            s = a + b
+        else:
+            s = a
+        return s
+        
+s = GFG()
+  
+# sum of 1 integer
+print(s.sum(1))
+  
+# sum of 2 integers
+print(s.sum(3, 5))
+  
+# sum of 3 integers
+print(s.sum(1, 2, 3))
+
+
+Operator Overloading --> 
+Operator Overloading: Operator overloading in Python is the ability of a single operator 
+to perform more than one operation based on the class (type) of operands.
+
+We know + operator is used for adding numbers and at the same time to concatenate strings. 
+It is possible because the + operator is overloaded by both int class and str class. 
+The operators are actually methods defined in respective classes.
+
+class Student:
+    def __init__(self, m1, m2):
+        self.m1 = m1
+        self.m2 = m2
+  
+S1 = Student (58, 60)
+S2 = Student (60, 58)
+  
+# this will generate an error
+S3 = S1 + S2
+
+
+******************************************************************************************
+
+Encapsulation:
+Encapsulation means binding the code and the data together. A Python class is an example of encapsulation.
+This puts restrictions on accessing variables and methods directly and can prevent the accidental modification of data
+
+protected: '_'
+private: '__'
+
+class Computer:
+ 
+    def __init__(self):
+        self.__maxprice = 900
+
+    def sell(self):
+        print("Selling Price: {}".format(self.__maxprice))
+
+    def setMaxPrice(self, price):
+        self.__maxprice = price
+
+c = Computer()
+c.sell()
+
+# change the price
+c.__maxprice = 1000
+c.sell()
+
+# using setter function
+c.setMaxPrice(1000)
+c.sell()
+
+************************************************************************************************************************************
+
+--> Inheritance in Python
+
+Inheritance is the capability of one class to derive or inherit the properties from another class. The benefits of inheritance are: 
+ 
+It represents real-world relationships well.
+It provides reusability of a code. We don’t have to write the same code again and again. Also, it allows us to add more features to a class without modifying it.
+It is transitive in nature, which means that if class B inherits from another class A, then all the subclasses of B would automatically inherit from class A.
+
+Different forms of Inheritance: 
+
+1. Single inheritance: When a child class inherits from only one parent class, it is called single inheritance.
+
+2. Multiple inheritance: When a child class inherits from multiple parent classes, it is called multiple inheritance. 
+
+3. Multilevel inheritance: When we have a child and grandchild relationship
+
+4. Hierarchical inheritance: More than one derived classes are created from a single base.
+
+5. Hybrid inheritance: This form combines more than one form of inheritance. Basically, it is a blend of more than one type of inheritance.
+
+**********************************************************************************************************************************
+
+
+Class Method						 	Static Method
+1.The class method takes cls (class) as first argument.	   1. The static method does not take any specific parameter.
+2.Class method can access and modify the class state.	   2. Static Method cannot access or modify the class state.
+3. The class method takes the class as parameter           3. Static methods do not know about class state. These methods   
+to know about the state of that class.	                      are used to do some utility tasks by taking some parameters.
+4. @classmethod decorator is used here.			   4. @staticmethod decorator is used here.
+
+
+Class Method --> 
+
+class C(object):
+    @classmethod
+    def fun(cls, arg1, arg2, ...):
+       ....
+fun: function that needs to be converted into a class method
+returns: a class method for function.
+
+- A class method is a method that is bound to the class and not the object of the class.
+- They have the access to the state of the class as it takes a class parameter that points to the class and not the object instance.
+- It can modify a class state that would apply across all the instances of the class. For example, it can modify a class variable that will 
+  be applicable to all the instances.
+
+
+Static Method -->
+A static method does not receive an implicit first argument. 
+
+Syntax: 
+
+class C(object):
+    @staticmethod
+    def fun(arg1, arg2, ...):
+        ...
+returns: a static method for function fun.
+
+A static method is also a method that is bound to the class and not the object of the class.
+A static method can’t access or modify the class state.
+It is present in a class because it makes sense for the method to be present in class.
+
+
+Class method vs Static Method
+1. A class method takes cls as the first parameter while a static method needs no specific parameters.
+2. A class method can access or modify the class state while a static method can’t access or modify it.
+3. In general, static methods know nothing about the class state. They are utility-type methods that take some parameters and work upon those parameters. On the other hand class methods must have class as a parameter.
+4. We use @classmethod decorator in python to create a class method and we use @staticmethod decorator to create a static method in python.
+
+
+When to use what?
+We generally use class method to create factory methods. Factory methods return class objects ( similar to a constructor ) for different use cases.
+We generally use static methods to create utility functions.
+
+
+why static method can not access class state in python?
+static methods can't access class or instance state because they don't take a cls or self argument.
+
+Instance Methods: The most common method type. Able to access data and properties unique to each instance.
+Static Methods: Cannot access anything else in the class. Totally self-contained code.
+Class Methods: Can access limited methods in the class. Can modify class specific details.
+
+*************************************************************************************************************************************
+
+--> Class variable and instance variable
+
+All variables which are assigned a value in the class declaration are class variables. And variables that are assigned values inside methods are instance variables.
+
+1. Class Variables — Declared inside the class definition (but outside any of the instance methods). 
+They are not tied to any particular object of the class, hence shared across all the objects of the class. 
+Modifying a class variable affects all objects instance at the same time.
+
+2. Instance Variable — Declared inside the constructor method of class (the __init__ method). 
+They are tied to the particular object instance of the class, hence the contents of an instance variable are completely 
+independent from one object instance to the other.
+
+3. Local Variables
+Local variables are those which are initialized inside a function and belongs only to that particular function. 
+It cannot be accessed anywhere outside the function. 
+
+def f():
+    # local variable
+    s = "I love Geeksforgeeks"
+    print(s)
+f()
+
+
+4. Global Variables
+The global variables are those which are defined outside any function and which are accessible throughout the program 
+i.e. inside and outside of every function
+
+def f():
+    print("Inside Function", s)
+ 
+# Global scope
+s = "I love Geeksforgeeks"
+f()
+print("Outside Function", s)
+
+
+*************************************************************************************************************************************
+
+Method overloading in python
+Python does not support method overloading, that is, it is not possible to define more than one method 
+with the same name in a class in python.This is because method arguments in python do not have a type. 
+A method accepting one argument can be called with an integer value, a string or a double
+
+
+*********************************************************************************************************************************************88
+Python hash() -->
+The hash() method returns the hash value of an object if it has one.
+Hash values are just integers that are used to compare dictionary keys during a dictionary lookup quickly.
+Internally, hash() method calls __hash__() method of an object which is set by default for any object.
+
+
+
+The main difference between MVC and MVT is that in a Model View Controller pattern, 
+we have to write all the control specific code. But in an MVT, the controller part is 
+taken care of by the framework itself.
+
+
+Let me explain this with an example. Imagine you have to display a list of books you have in a library, 
+stored in a table named books. In MVC architecture, you have to write the code to fetch the list of books 
+from the database, write the presentation layer (I am talking about HTML, CSS), map it with a URL and 
+send it to the user.
+
+But in frameworks like Django (It uses MVT architecture), you don't have to write any code related to 
+fetching data from the database and mapping it with the URL. All these activities are handled by the 
+framework itself. The only thing that you have to do is to tell the framework what data should be 
+presented to the user (Books table). The framework will then create a view based on the data and send 
+it to the user.
+
+
+
+
+
+
+
+
+

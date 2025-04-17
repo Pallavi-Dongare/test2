@@ -1,0 +1,512 @@
+
+Flask runs on port 5000
+
+django 8000
+
+Django==3.2.7
+
+Python 3.6.9
+
+--------------------------------------------------------------------------------------------------------------------
+1. What is the purpose of PYTHONPATH environment variable
+
+--PYTHONPATH is an environment variable which is used to set the path for the user-defined modules so that it can be 
+  directly imported into a Python program.
+  
+-- It is also responsible for handling the default search path for Python Modules.
+
+-- The PYTHONPATH variable holds a string with the name of various directories that need to be added to the sys.path 
+   directory list by Python. The primary use of this variable is to allow users to import modules that are not made 
+   installable yet.
+   
+  PYTHONPATH -- C:\Users\HP\AppData\Local\Programs\Python\Python38
+
+
+---------------------------------------------------------------------------------------------------------
+
+2.Whenever Python exits, why isn’t all the memory de-allocated?
+
+--Objects referenced from the global namespaces of Python modules are not always deallocated when Python exits. 
+  This may happen if there are circular references. 
+  
+--There are also certain bits of memory that is reserved by the C library that are impossible to free 
+  (e.g. a tool like Purify will complain about these). 
+
+--Python is, however, aggressive about cleaning up memory on exit and does try to destroy every single object.
+
+The Global Namespace -->
+	The global namespace contains any names defined at the level of the main program. Python creates the global 
+	namespace when the main program body starts, and it remains in existence until the interpreter terminates.
+
+---------------------------------------------------------------------------------------------------------
+
+3.How can the ternary operators be used in python?
+
+-- The Ternary operator is the operator that is used to show the conditional statements. 
+   This consists of the true or false values with a statement that has to be evaluated for it.
+
+--Ternary operators also known as conditional expressions are operators that evaluate something based on
+  a condition being true or false. It simply allows to test a condition in a single line replacing the 
+  multiline if-else making the code compact.
+  
+
+--------------------------------------------------------------------------------------------------------------
+
+4.How is memory managed in Python?  
+
+-- Memory management in python is managed by Python private heap space. All Python objects and data structures 
+   are located in a private heap. The programmer does not have access to this private heap. 
+   The python interpreter takes care of this instead.
+   
+-- The allocation of heap space for Python objects is done by Python’s memory manager. 
+   The core API gives access to some tools for the programmer to code.
+
+-- Python also has an inbuilt garbage collector, which recycles all the unused memory and so that it can 
+   be made available to the heap space.
+
+
+-------------------------------------------------------------------------------------------------------------
+
+5.Explain Inheritance in Python with an example.
+
+Inheritance allows One class to gain all the members(say attributes and methods) of another class. 
+Inheritance provides code reusability, makes it easier to create and maintain an application. 
+The class from which we are inheriting is called super-class and the class that is inherited is called a derived / child class.
+
+They are different types of inheritance supported by Python:
+--Single Inheritance - where a derived class acquires the members of a single super class.
+--Multi-level inheritance - a derived class d1 in inherited from base class base1, and d2 are inherited from base2.
+--Hierarchical inheritance - from one base class you can inherit any number of child classes
+--Multiple inheritance - fa derived class is inherited from more than one base class.
+
+---------------------------------------------------------------------------------------------------
+
+
+6.How to check if a class is subclass of another?
+
+Python provides a function issubclass() that directly tells us if a class is subclass of another class.
+The syntax of issubclass() is:issubclass(object, classinfo)
+
+The issubclass() takes two parameters:
+
+object - class to be checked
+classinfo - class, type, or tuple of classes and types
+
+ex:
+
+class Polygon:
+  def __init__(polygonType):
+    print('Polygon is a ', polygonType)
+
+class Triangle(Polygon):
+  def __init__(self):
+    Polygon.__init__('triangle')
+    
+print(issubclass(Triangle, Polygon))  # True
+print(issubclass(Triangle, list))	  # False
+
+
+-----------------------------------------------------------------------------------------------
+
+7.How to check if the object is an instance of class?
+
+Python provides a function isinstance() that directly tells us if the object is instance of class.
+The syntax of isinstance() is:isinstance(object, classinfo)
+
+The isinstance() takes two parameters:
+object - object to be checked
+classinfo - class, type, or tuple of classes and types
+
+ex:
+class Polygon:
+  def __init__(polygonType):
+    print('Polygon is a ', polygonType)
+
+class Triangle(Polygon):
+  def __init__(self):
+    Polygon.__init__('triangle')
+
+triangleInstance=Triangle()
+    
+print(isinstance(triangleInstance, Polygon)) # True
+print(isinstance(triangleInstance, list))	 # False
+
+----------------------------------------------------------------------------------------------
+
+8.Explain what Flask is and its benefits?
+
+Flask is a web microframework for Python based on “Werkzeug, Jinja2 and good intentions” BSD license. 
+Werkzeug and Jinja2 are two of its dependencies. This means it will have little to no dependencies on external libraries. 
+It makes the framework light while there is a little dependency to update and fewer security bugs.
+
+A session basically allows you to remember information from one request to another. 
+In a flask, a session uses a signed cookie so the user can look at the session contents and modify. 
+The user can modify the session if only it has the secret key Flask.secret_key.
+
+
+----------------------------------------------------------------------------------------
+
+9.What is the usage of help() and dir() function in Python?
+
+-- help() function: The help() function is used to display the documentation string and also facilitates you to see the help 
+   related to modules, keywords, attributes, etc.
+
+-- dir() function: The dir() function is used to display the defined symbols.
+
+
+------------------------------------------------------------------------------------------
+
+10.What is monkey patching in Python?
+
+In Python, the term monkey patch only refers to dynamic modifications of a class or module at run-time.
+
+ex:
+import m
+class MyClass:
+   def f(self):
+    print("f()")
+​
+   def monkey_f(self):
+     print("monkey_f()")
+ 
+m.MyClass.f = monkey_f
+obj = m.MyClass()
+obj.f()
+​
+RESULT
+monkey_f()
+
+
+------------------------------------------------------------------------------------------------------
+
+11.Explain split(), sub(), subn() methods of “re” module in Python.
+
+split() -->
+
+This function splits the string according to the occurrences of a character or a pattern. 
+When it finds that pattern, it returns the remaining characters from the string as part of the resulting list.  
+The split method should be imported before using it in the program.
+
+Syntax:  re.split (pattern, string, maxsplit=0, flags=0)
+
+Example: 
+
+From re import split
+
+print(split('\W+', 'On 12th Jan 2016, at 11:02 AM'))
+print(split('\d+', 'On 12th Jan 2016, at 11:02 AM'))
+
+output:
+
+['On', '12th', 'Jan', '2016', 'at', '11', '02', 'AM']
+['On ', 'th Jan ', ', at ', ':', ' AM']
+
+
+sub() - finds all substrings where the regex pattern matches and then replace them with a different string
+
+subn() – being similar to sub() it also returns the new string along with the number of replacements.
+
+
+----------------------------------------------------------------------------------------------------
+
+12.What is the difference between lists and tuples?
+
+	  Lists								     		 Tuples
+Lists are mutable, 	            			Tuples are immutable 
+i.e., they can be edited					(they are lists that cannot be edited)
+
+Lists are usually slower than tuples		Tuples are faster than lists
+
+Lists consume a lot of memory				Tuples consume less memory when compared to lists
+
+Lists are less reliable in terms of     	Tuples are more reliable as it is hard for 
+errors as unexpected changes are more   	any unexpected change to occur.
+likely to occur.
+
+Lists consist of many built-in functions.	Tuples do not consist of any built-in functions.
+Syntax:										Syntax:
+list_1 = [10, ‘Intellipaat’, 20]			tup_1 = (10, ‘Intellipaat’ , 20)
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+13.What is pep 8?
+PEP in Python stands for Python Enhancement Proposal.It is a set of rules that specify how to write and design 
+Python code for maximum readability.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+sorted() -->
+sorted() method sorts the given sequence either in ascending order or in descending order and always return a sorted list. 
+This method does not effect the original sequence.
+
+sort()
+sort() function is very similar to sorted() but unlike sorted it returns nothing and makes changes to the original sequence. 
+Moreover, sort() is a method of list class and can only be used with lists.
+
+------------------------------------------------------------------------------------------------------------------------------
+
+read()-->
+The .read() would treat each character in the file separately, meaning that the iteration would happen for every character.
+
+readline()-->
+The readline method reads one line from the file and returns it as a string.
+This method returns the empty string when it reaches the end of the file
+
+readlines()-->
+The readlines method returns the contents of the entire file as a list of strings, 
+where each item in the list represents one line of the file.
+
+Mode	Description
+r	  Opens a file for reading. (default)
+w	  Opens a file for writing. Creates a new file if it does not exist or truncates the file if it exists.
+x	  Opens a file for exclusive creation. If the file already exists, the operation fails.
+a	  Opens a file for appending at the end of the file without truncating it. Creates a new file if it does not exist.
+t	  Opens in text mode. (default)
+b	  Opens in binary mode.
++	  Opens a file for updating (reading and writing)
+
+
+
+Python File Methods -->
+
+Method				Description
+close()				Closes an opened file. It has no effect if the file is already closed.
+detach()			Separates the underlying binary buffer from the TextIOBase and returns it.
+fileno()			Returns an integer number (file descriptor) of the file.
+flush()				Flushes the write buffer of the file stream.
+isatty()			Returns True if the file stream is interactive.
+read(n)				Reads at most n characters from the file. Reads till end of file if it is negative or None.
+readable()	    	Returns True if the file stream can be read from.
+readline(n=-1)		Reads and returns one line from the file. Reads in at most n bytes if specified.
+readlines(n=-1)		Reads and returns a list of lines from the file. Reads in at most n bytes/characters if specified.
+seek(offset,
+from=SEEK_SET)		Changes the file position to offset bytes, in reference to from (start, current, end).
+seekable()			Returns True if the file stream supports random access.
+tell()				Returns the current file location.
+truncate(size=None)	Resizes the file stream to size bytes. If size is not specified, resizes to current location.
+writable()			Returns True if the file stream can be written to.
+write(s)			Writes the string s to the file and returns the number of characters written.
+writelines(lines)	Writes a list of lines to the file.
+
+
+---------------------------------------------------------------------------------------------------------------
+
+Q. What is lambda function?
+A lambda function is a small anonymous function, an anonymous function is a function that is defined without a name.
+It is a single-line function declared with no name.
+A lambda function can take any number of arguments, but can only have one expression.
+Lambda functions can be used wherever function objects are required.
+
+------------------------------------------------------------------------------------------------------------------
+
+Q. what is map() function?
+The map() function applies a given function to each item of an iterable (list, tuple etc.) and returns a list of the results.
+
+--------------------------------------------------------------------------------------------------------------------
+
+Q. What is __init__?
+
+Constructors are generally used for instantiating an object. The task of constructors is to initialize(assign values) 
+to the data members of the class when an object of the class is created. In Python the __init__() method is called 
+the constructor and is always called when an object is created.
+
+Types of constructors : 
+
+default constructor: The default constructor is a simple constructor which doesn’t accept any arguments.
+Its definition has only one argument which is a reference to the instance being constructed.
+
+parameterized constructor: constructor with parameters is known as parameterized constructor. 
+The parameterized constructor takes its first argument as a reference to the instance being constructed known 
+as self and the rest of the arguments are provided by the programmer.
+
+--------------------------------------------------------------------------------------------------------------------
+
+Q. magic methods -->
+
+1. __new__():
+the __new__() magic method is implicitly called before the __init__() method. 
+The __new__() method returns a new object, which is then initialized by __init__().
+
+2. __ge__():
+The following method is added in the distance class to overload the >= operator.
+
+3. __str__():
+This method returns the string representation of the object.
+
+4. __repr__()
+Python __repr__() function returns the object representation in string format. 
+
+
+What’s the difference between __str and __repr__?
+If both the functions return strings, which is supposed to be the object representation, what’s the difference?
+
+Well, the __str__ function is supposed to return a human-readable format, which is good for logging or 
+to display some information about the object. Whereas, the __repr__ function is supposed to return an 
+“official” string representation of the object, which can be used to construct the object again.
+
+ex:
+class Person:
+
+    def __init__(self, person_name, person_age):
+        self.name = person_name
+        self.age = person_age
+
+    def __str__(self):
+        return f'Person name is {self.name} and age is {self.age}'
+
+    def __repr__(self):
+        return f'Person(name={self.name}, age={self.age})'
+
+
+p = Person('Pankaj', 34)
+
+print(p.__str__())
+print(p.__repr__())
+Output:
+
+Person name is Pankaj and age is 34
+Person(name=Pankaj, age=34)
+
+----------------------------------------------------------------------------------------------------------------------
+
+Q. what is the difference between ==, is and eq()
+
+1. == (content equility):
+The == operator is used when the values of two operands are equal, then the condition becomes true.
+The “==” operator compares the value or equality of two objects
+
+2. is:
+The is operator evaluates to true if the variables on either side of the operator point to the same 
+object and false otherwise.
+“is” operator checks whether two variables point to the same object in memory.
+
+3. eq():
+To get called on comparison using == operator.
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+Q. List Comprehension
+List comprehensions are used for creating new lists from other iterables like tuples, strings, arrays, lists, etc.
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+Destructors in Python
+
+The __del__() method is a known as a destructor method in Python. It is called when all references to the object 
+have been deleted i.e when an object is garbage collected. 
+
+def __del__(self):
+  # body of destructor
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+10. shallo copy v/s deep copy
+
+Shallow Copy:
+A shallow copy creates a new object which stores the reference of the original elements.
+So, a shallow copy doesn't create a copy of nested objects, instead it just copies the reference of nested objects.
+However, when you change any nested objects in old_list, the changes appear in new_list.
+
+Deep copy():
+The deep copy creates independent copy of original object and all its nested objects. 
+It clones the original list. This means if we make changes in new list, it will not affect the original list.
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Q 14. What is the difference between reverse() and reversed()?
+reverse( ):
+reverse() is a method of list class and can only be used with lists that reverses objects of the list in place.
+The reverse() method does not return any value but It will make changes in the original list. It is a method of list class and can only be used with lists.
+reversed( ):
+reversed() is an inbuilt method in Python programming language that reverses objects of the list. It accepts a sequence and returns an iterator.
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+20. What is the difference Array and list?
+
+	List								Array
+
+Lists are a part of Python’s syntax,			Arrays need to first be imported, or declared, from other libraries (i.e. numpy).
+so they do not need to be declared first.
+    
+Lists can also be re-sized quickly so we can 		Arrays cannot be resized. Instead, an array’s values would need to be copied to another larger array.
+perform insertion and deletion operation on it.
+    
+Lists can hold heterogeneous data.			Arrays can only store homogenous data. They have values with uniform data types.
+    
+Mathematical functions cannot be directly applied 	Arrays are specially optimized for arithmetic computations.
+to lists. Instead, they have to be individually 
+applied to each element.
+
+The entire list can be printed without any explicit 	A loop has to be formed to print or access the components of array
+looping
+ 
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Python Exception -->
+
+Exception	Description
+IndexError	When the wrong index of a list is retrieved.
+AssertionError	It occurs when the assert statement fails
+AttributeError	It occurs when an attribute assignment is failed.
+ImportError	It occurs when an imported module is not found.
+KeyError	It occurs when the key of the dictionary is not found.
+NameError	It occurs when the variable is not defined.
+MemoryError	It occurs when a program runs out of memory.
+TypeError	It occurs when a function and operation are applied in an incorrect type.
+
+---------------------------------------------------------------------------------------------------------------
+
+-->tools used to design and analysis of website design.
+1 — WordPress
+2 — InVision Studio
+3 — Photoshop
+4 — ProofHub
+5 — Sketch
+6 — Adobe Dreamweaver
+7 — Bluefish
+8 — Google Web Designer
+
+
+
+
+--> difference between range and xrange: 
+
+1.range() function returns the list of integers whereas x range() function returns a generator object. 
+  This generator object can be used to return a list of integers by using for loop. Also, only a specific range 
+  is displayed when needed and hence it is called lazy evaluation.
+
+2.It is obvious that range() consumes more memory than xrange() as it returns a list of integers.
+
+3.As the range() function returns a list of integers, we can perform all these operators on range() as well. 
+Whereas these operations cannot be performed on xrange as the return type is a generator function.
+
+4.xrange() evaluates the generator object only when required and not when the generator function is created. 
+Therefore it is faster in implementation than range().
+
+
+
+
+
+--> Types of generic authentication:
+	Basic authentication -- you need to kinow Username and Password
+	Token baesd authentication
+	Session baesd authentication
+	Remote authentication -- 
+	Multifactor authentication  -- send OTP on email and SMS
+	Possesion Based authentication  --  card/mobile/biometric/eye retina
+	
+
+--> which architecture Webservices follows:
+	Webservices follows monolythic architecture --> monolythic means depend on one server
+	

@@ -1,0 +1,111 @@
+
+BSS -->
+Primary function of BSS:
+1. Product Management
+2. New order management
+3. Revenue Management
+4. Customer management
+
+
+Product management stores the details of -->
+1. Existing and new product
+2. Pricing 
+3. Discount
+4. New offers(Plan)
+5. Individual user and business
+product management process deals with all the product so the telecom provider may offer product bundles or cross product discount.
+customer can buy single product or multiple products.
+
+**************************************************************************
+
+New order Management -->
+1. Decompose order, if needed
+2. Service provisioning and activation(OSS)
+3. Fault management, if needed(OSS)
+4. Provide order status
+New order Management process deals with processing orders and providing status update.
+
+*****************************************************************************
+
+Revenue Management -->
+1. Billing(Timely and accurately)
+2. Payment collection
+3. customers(Individual customer,Businesses, and wholesale customer)
+
+or 
+
+1. Revenue management and billing is responsible for collection of usage records, determaining charging and billing information
+2. It is also responsible for production of timely and acurate bills, for providing proper used information and billing to 
+customer, for processing their payments and performing payment collections.
+3. In addition it handles customer inquiries about bills, provide billing inquiries that is responsible for reserving billing
+problems to the customer satisfaction in a timely manner. 
+4. This process also supports prepeyment for services.
+
+
+A telecom billing consist following type of charger -->
+1. Usage charges --> this charges against the usage of the operator network resources. the activities like:
+		-- Local call
+		-- SMS/MMS Charges
+		-- Long distance call charges
+		-- Internet usage
+		-- content download
+		
+2. Recurring charges --> recurring charges recurrs repetatively and the subscriber is charged and tell he is connected to the network:
+the example for such charger are:	
+       -- Charges for the landline
+	   -- subscribtion to services like voice mail
+	   -- subscribtion to a price rate plans etc
+	   
+
+3. One Time Charges -->	This charges charged only once.
+the example of such charges are connection free :
+		-- Installation
+		-- Equipment
+		-- Deposite
+		-- Price paln charge
+		
+
+Other affecting charges are
+1. Tax:
+Tax free from country to country
+
+2. Penalties:
+The penalties are the charges which are charged in a scenario like when a bill is not paid on time, for late payment of bill
+
+3.Discounts:
+The discounts are given to the subscribers by the telecom to attract them.
+a typical discount condition can be defined as --
+	-- If total your time is greater than 600 minutes then give a discount of 20rs.
+	-- if long distance call charges is greater than 2000rs then give discount of 50rs etc.
+
+how is usage collected -->	
+1. customer uses the services and network management stores the usage details. 
+2. CDR(call detail record) that are generated throughout the service provider network capturing the usage information	
+3. 
+	
+	
+	 
+**************************************************************************************
+customer Management -->
+1. Telecom uses CRM to provider customer care for new orders or billing issues.
+2. The customer can be provided by human agents(from call centers)/web applications/mobile app
+3. metrics eg. Customer Satisfaction Rating.
+
+
+How to Create Django Form using Form API in Django
+
+
+onboarding@neosofttech.com
+
+9193171204
+
+create a blog application using FastApi
+
+Creating a Blog application using FastApi.
+The blog contains users, posts, likes, and comments.
+Learning more about FastApi and working on it.
+
+
+Creating a Blog application using FastApi.
+The blog contains users, posts, likes, and comments.
+creating the 'create the post' and 'like post'	

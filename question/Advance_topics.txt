@@ -1,0 +1,168 @@
+------------------------------------------------------------------------------------------------------------------
+
+
+web crawling --> 
+It is the process of using tool to read, copy and store the content of websites for archiving or indexing purpose.
+basically the search engine like google and yahoo, they use crawling to look through the website discover what content 
+they include and build entries for search engine index.	
+
+
+web scrapping --> 
+It is the process of extracting a large amount of specific data from online sources.
+
+
+Iterators in Python -->
+1.Iterator in Python is simply an object that can be iterated upon. An object which will return data, one element at a time.
+2.a Python iterator object must implement two special methods, __iter__() and __next__(), 
+  collectively called the iterator protocol.
+
+The __iter__() method returns the iterator object itself. If required, some initialization can be performed.
+
+The __next__() method must return the next item in the sequence. On reaching the end, and in subsequent calls, 
+it must raise Stop Iteration.
+
+	
+ex:
+class Mynumner:
+    def __iter__(self):
+        self.a = 0
+        return self
+    
+    def __next__(self):
+        if self.a<=20:
+            x = self.a
+            self.a+=1
+            return x
+        else:
+            raise StopIteration
+
+obj = Mynumner()
+for x in obj:
+    print(x)	
+
+------------------------------------------------------------------------------------------------------------------------
+
+Generators in Python -->
+There is a lot of work in building an iterator in Python. We have to implement a class with __iter__() and __next__() method, 
+keep track of internal states, and raise StopIteration when there are no values to be returned.
+This is both lengthy and counterintuitive. Generator comes to the rescue in such situations.
+Python generators are a simple way of creating iterators. All the work we mentioned above are automatically handled by generators in Python.
+Simply speaking, a generator is a function that returns an object (iterator) which we can iterate over (one value at a time).
+
+Yield: Yield statement return the element from a generator function into a generator object
+Next:  next() function is used to retrieve element by element from a generator object.
+next(generator_object)
+
+Differences between Generator function and Normal function
+
+	• Normal function has only one return statement in the loop whereas generator function can use one or more yield statement in the loop.
+	• When called, it returns an object (iterator) but does not start execution immediately.
+	• Methods like __iter__() and __next__() are implemented automatically. So we can iterate through the items using next().
+	• Once the function yields, the function is paused and the control is transferred to the caller.
+	• Local variables and their states are remembered between successive calls.
+	• Finally, when the function terminates, StopIteration is raised automatically on further calls.
+	  Presence of yield statement shows that the function is not normal function but a generator
+	  Calling the function like normal functions, does not actually execute the function, but it creates an instance of the function.
+
+
+	
+-->Python yield vs return statement:
+
+	1.Return statement just returns the value to its caller.
+	2.It does not preserve any state from last function call.
+	3.Whatever you write after the return statement does not execute. 
+	4.So you have to write return statement usually at the end of the function.
+	5.You can write yield functions anywhere in generator function. 
+	6.The code after the yield statement is executed in next function call.
+	7.Return statement does not retain any state. Every time you call function, it executed independently.
+	8.In yield, the function is executed from where it is paused in last function call.
+	9.A return statement terminates a function entirely.
+	10.yield statement pauses the function saving all its states and later continues from there on successive calls.
+	    
+	
+	
+	     Iterator						        Generator
+
+Class is used to implement an iterator  		Function is used to implement a generator.
+
+Local Variables aren’t used here.                       All the local variables before the yield function are stored.                          
+
+Iterators are used mostly to iterate 			Generators are mostly used in loops to generate an 
+or convert other objects to an iterator 		iterator by returning all the values in the loop 
+using iter() function.					without affecting the iteration of the loop
+
+Iterator uses iter() and next() functions 		Generator uses yield keyword
+
+Every iterator is not a generator			Every generator is an iterator	
+	
+In Inerator we have to keep track of			The local variable and its state are remember between 
+internal state.						successive calls 
+	
+when function terminates,It will raise 			when function terminates, StopIteration is raised automatically  
+StopIteration when there is no value to 		on furthe calls.
+return.	
+	
+	
+----------------------------------------------------------------------------------------------------------------------------
+
+Decorators in Python
+Python has an interesting feature called decorators to add functionality to an existing code.
+This is also called metaprogramming because a part of the program tries to modify another part of the program at compile time.
+
+Basically, a decorator takes in a function, adds some functionality and returns it. 
+In Decorators, functions are taken as the argument into another function and then called inside the wrapper function.
+
+
+def smart_divide(func):
+    def inner(a, b):
+        print("I am going to divide", a, "and", b)
+        if b == 0:
+            print("Whoops! cannot divide")
+            return
+
+        return func(a, b)
+    return inner
+
+
+@smart_divide
+def divide(a, b):
+    print(a/b)
+
+divide(2,5)
+divide(2,0)
+
+
+	
+------------------------------------------------------------------------------------------------------------------
+
+Closure-->
+This technique by which some data gets attached to the code is called closure in Python. 
+
+These three conditions must be met:
+1.	We must have a nested function.
+2.	This nested function must refer to a variable nonlocal to it(a variable in the scope enclosing it).
+3.	The enclosing scope must return this function.
+	
+	
+	
+Accessing Request Data
+To access the request data, use the following
+from flask import request
+You can use the following attributes to fetch the data sent with the request:
+request.data → Access incoming request data as string
+request.args → Access the parsed URL parameters. Returns ImmutableMultiDict
+request.form → Access the form parameters. Return ImmutableMultiDict
+request.values → Returns CombinedMultiDict which combines args and form
+request.json → Returns parsed JSON data if mimetype is application/json
+request.files → Returns MultiDict object which contains all uploaded files. Each key is the name of the file and value is the FileStorage object.
+request.authorization → Returns an object of Authorization class .It represents an Authorization header sent by the client.	
+
+
+
+
+
+Creating a Blog application using FastApi. The blog contains users, posts, likes, and comments. 
+and working in importing and exporting data using xml.
+	
+	
+-+

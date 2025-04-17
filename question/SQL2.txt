@@ -1,0 +1,327 @@
+Trigger: 
+A trigger is a stored procedure in database which automatically invokes whenever a special event in the database occurs.
+
+
+
+SQL Commands -->
+1.SQL commands are instructions. It is used to communicate with the database. It is also used to perform specific tasks, 
+  functions,and queries of data.
+2.SQL can perform various tasks like create a table, add data to tables, drop the table, modify the table, 
+  set permission for users.
+  
+Types of SQL Commands -->
+There are five types of SQL commands: DDL, DML, DCL, TCL, and DQL.  
+
+
+							  SQL Commands
+								   |	
+								   |
+	|--------------|------------|-----------|---------------|------------							
+	|			   |			|			 |				 |
+   DDL			  DML		   DCL   		TCL				DQL
+    |              |			|			 |				 |
+	|--create 	   |--Insert 	|--Grant	 |--commit       |--Select
+	|			   | 			|			 |				 |
+	|--Drop        |--Update	|--Revoke	 |--Rollback	 |
+	|       	   | 			|			 |				 |
+	|--Alter	   |--Delete	|			 |--Save		 |
+	|			   |			|    		 |  Point		 |
+	|--Truncate    | 			| 			 |				 |
+
+
+1. Data Definition Language (DDL) -->
+DDL changes the structure of the table like creating a table, deleting a table, altering a table, etc.
+All the command of DDL are auto-committed that means it permanently save all the changes in the database.
+Here are some commands that come under DDL:
+
+	*CREATE
+	*ALTER
+	*DROP
+	*TRUNCATE
+
+a. CREATE It is used to create a new table in the database.
+	
+	CREATE TABLE EMPLOYEE(Name varchar(20), Email varchar(100), DOB DATE);  
+
+b. DROP: It is used to delete both the structure and record stored in the table.
+	
+	DROP TABLE EMPLOYEE;  
+	
+c. ALTER: It is used to alter the structure of the database. This change could be either to modify the characteristics of an existing attribute or probably to add a new attribute.
+To add a new column in the table:
+ALTER TABLE table_name ADD column_name COLUMN-definition;    
+
+To modify existing column in the table:
+ALTER TABLE MODIFY(COLUMN DEFINITION....);  
+
+EXAMPLE:
+ALTER TABLE STU_DETAILS ADD(ADDRESS varchar(20));  
+ALTER TABLE STU_DETAILS MODIFY (NAME varchar(20));	
+
+
+d. TRUNCATE: It is used to delete all the rows from the table and free the space containing the table.
+TRUNCATE TABLE table_name;  
+
+Example:
+TRUNCATE TABLE EMPLOYEE; 
+
+-------------------------------------------------------------------------------------------------	
+
+2. Data Manipulation Language
+DML commands are used to modify the database. It is responsible for all form of changes in the database.
+The command of DML is not auto-committed that means it can't permanently save all the changes in the database. They can be rollback.
+Here are some commands that come under DML:
+
+	*INSERT
+	*UPDATE
+	*DELETE
+	
+a. INSERT: The INSERT statement is a SQL query. It is used to insert data into the row of a table.
+
+insert into EMPLOYEE(Name,Email,DOB,Address) values ('Pallavi','pallavi123@gmail.com','22 Aug 1996','Pune');
+
+b. UPDATE: This command is used to update or modify the value of a column in the table.
+UPDATE table_name SET [column_name1= value1,...column_nameN = valueN] [WHERE CONDITION]   
+
+For example:
+UPDATE students    
+SET User_Name = 'Sonoo'    
+WHERE Student_Id = '3'  
+
+
+c. DELETE: It is used to remove one or more row from a table.
+
+Syntax:
+
+DELETE FROM table_name [WHERE condition];  
+For example:
+
+DELETE FROM javatpoint  
+WHERE Author="Sonoo";  
+
+------------------------------------------------------------------------------------------------------------------
+
+3. Data Control Language
+DCL commands are used to grant and take back authority from any database user.
+
+Here are some commands that come under DCL:
+
+Grant
+Revoke
+a. Grant: It is used to give user access privileges to a database.
+
+Example
+
+GRANT SELECT, UPDATE ON MY_TABLE TO SOME_USER, ANOTHER_USER;  
+b. Revoke: It is used to take back permissions from the user.
+
+Example
+
+REVOKE SELECT, UPDATE ON MY_TABLE FROM USER1, USER2;  
+
+-------------------------------------------------------------------------------------------------------------
+
+
+Next →← Prev
+SQL Commands
+SQL commands are instructions. It is used to communicate with the database. It is also used to perform specific tasks, functions, and queries of data.
+SQL can perform various tasks like create a table, add data to tables, drop the table, modify the table, set permission for users.
+Types of SQL Commands
+There are five types of SQL commands: DDL, DML, DCL, TCL, and DQL.
+
+
+DBMS SQL command
+1. Data Definition Language (DDL)
+DDL changes the structure of the table like creating a table, deleting a table, altering a table, etc.
+All the command of DDL are auto-committed that means it permanently save all the changes in the database.
+Here are some commands that come under DDL:
+
+CREATE
+ALTER
+DROP
+TRUNCATE
+a. CREATE It is used to create a new table in the database.
+
+
+PauseUnmute
+Fullscreen
+Syntax:
+
+CREATE TABLE TABLE_NAME (COLUMN_NAME DATATYPES[,....]);  
+Example:
+
+CREATE TABLE EMPLOYEE(Name VARCHAR2(20), Email VARCHAR2(100), DOB DATE);  
+b. DROP: It is used to delete both the structure and record stored in the table.
+
+Syntax
+
+DROP TABLE ;  
+Example
+
+DROP TABLE EMPLOYEE;  
+c. ALTER: It is used to alter the structure of the database. This change could be either to modify the characteristics of an existing attribute or probably to add a new attribute.
+
+Syntax:
+
+To add a new column in the table
+
+ALTER TABLE table_name ADD column_name COLUMN-definition;    
+To modify existing column in the table:
+
+ALTER TABLE MODIFY(COLUMN DEFINITION....);  
+EXAMPLE
+
+ALTER TABLE STU_DETAILS ADD(ADDRESS VARCHAR2(20));  
+ALTER TABLE STU_DETAILS MODIFY (NAME VARCHAR2(20));  
+d. TRUNCATE: It is used to delete all the rows from the table and free the space containing the table.
+
+Syntax:
+
+TRUNCATE TABLE table_name;  
+Example:
+
+TRUNCATE TABLE EMPLOYEE;  
+2. Data Manipulation Language
+DML commands are used to modify the database. It is responsible for all form of changes in the database.
+The command of DML is not auto-committed that means it can't permanently save all the changes in the database. They can be rollback.
+Here are some commands that come under DML:
+
+INSERT
+UPDATE
+DELETE
+a. INSERT: The INSERT statement is a SQL query. It is used to insert data into the row of a table.
+
+Syntax:
+
+INSERT INTO TABLE_NAME    
+(col1, col2, col3,.... col N)  
+VALUES (value1, value2, value3, .... valueN);  
+Or
+
+INSERT INTO TABLE_NAME    
+VALUES (value1, value2, value3, .... valueN);    
+For example:
+
+INSERT INTO javatpoint (Author, Subject) VALUES ("Sonoo", "DBMS");  
+b. UPDATE: This command is used to update or modify the value of a column in the table.
+
+Syntax:
+
+UPDATE table_name SET [column_name1= value1,...column_nameN = valueN] [WHERE CONDITION]   
+For example:
+
+UPDATE students    
+SET User_Name = 'Sonoo'    
+WHERE Student_Id = '3'  
+c. DELETE: It is used to remove one or more row from a table.
+
+Syntax:
+
+DELETE FROM table_name [WHERE condition];  
+For example:
+
+DELETE FROM javatpoint  
+WHERE Author="Sonoo";  
+3. Data Control Language
+DCL commands are used to grant and take back authority from any database user.
+
+Here are some commands that come under DCL:
+
+Grant
+Revoke
+a. Grant: It is used to give user access privileges to a database.
+
+Example
+
+GRANT SELECT, UPDATE ON MY_TABLE TO SOME_USER, ANOTHER_USER;  
+b. Revoke: It is used to take back permissions from the user.
+
+Example
+
+REVOKE SELECT, UPDATE ON MY_TABLE FROM USER1, USER2;  
+4. Transaction Control Language
+TCL commands can only use with DML commands like INSERT, DELETE and UPDATE only.
+These operations are automatically committed in the database that's why they cannot be used while creating tables 
+or dropping them.
+
+Here are some commands that come under TCL:
+	*COMMIT
+	*ROLLBACK
+	*SAVEPOINT
+
+a. Commit: Commit command is used to save all the transactions to the database.
+
+Syntax:
+
+COMMIT;  
+Example:
+
+DELETE FROM CUSTOMERS  
+WHERE AGE = 25;  
+COMMIT;  
+
+b. Rollback: Rollback command is used to undo transactions that have not already been saved to the database.
+
+Syntax:
+
+ROLLBACK;  
+Example:
+
+DELETE FROM CUSTOMERS  
+WHERE AGE = 25;  
+ROLLBACK; 
+ 
+c. SAVEPOINT: It is used to roll the transaction back to a certain point without rolling back the entire transaction.
+
+Syntax:
+
+SAVEPOINT SAVEPOINT_NAME;  
+
+------------------------------------------------------------------------------------------------------
+5. Data Query Language
+DQL is used to fetch the data from the database.
+
+It uses only one command:
+SELECT
+
+a. SELECT: This is the same as the projection operation of relational algebra. It is used to select the attribute based on the condition described by WHERE clause.
+
+Syntax:
+
+SELECT expressions    
+FROM TABLES    
+WHERE conditions;  
+For example:
+
+SELECT emp_name  
+FROM employee  
+WHERE age > 20;  
+
+
+
+emp_id | emp_name | job_name  | manager_id | hire_date  | salary  | commission | dep_id
+--------+----------+-----------+------------+------------+---------+------------+--------
+  68319 | KAYLING  | PRESIDENT |            | 1991-11-18 | 6000.00 |            |   1001
+  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 | 2750.00 |            |   3001
+  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 | 2550.00 |            |   1001
+  65646 | JONAS    | MANAGER   |      68319 | 1991-04-02 | 2957.00 |            |   2001
+  67858 | SCARLET  | ANALYST   |      65646 | 1997-04-19 | 3100.00 |            |   2001
+  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 | 3100.00 |            |   2001
+  63679 | SANDRINE | CLERK     |      69062 | 1990-12-18 |  900.00 |            |   2001
+  64989 | ADELYN   | SALESMAN  |      66928 | 1991-02-20 | 1700.00 |     400.00 |   3001
+  65271 | WADE     | SALESMAN  |      66928 | 1991-02-22 | 1350.00 |     600.00 |   3001
+  66564 | MADDEN   | SALESMAN  |      66928 | 1991-09-28 | 1350.00 |    1500.00 |   3001
+  68454 | TUCKER   | SALESMAN  |      66928 | 1991-09-08 | 1600.00 |       0.00 |   3001
+  68736 | ADNRES   | CLERK     |      67858 | 1997-05-23 | 1200.00 |            |   2001
+  69000 | JULIUS   | CLERK     |      66928 | 1991-12-03 | 1050.00 |            |   3001
+  69324 | MARKER   | CLERK     |      67832 | 1992-01-23 | 1400.00 |            |   1001
+
+
+1. Write a query in SQL to display all the information of the employees.
+
+-->SELECT * FROM employees;
+
+
+2. Write a query in SQL to find the salaries of all employees.
+
+-->SELECT salary FROM employees;

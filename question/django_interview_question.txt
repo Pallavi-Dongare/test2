@@ -1,0 +1,973 @@
+ 
+what is Django -->
+1. Django is a high level python web framework that follows the model-template-views architectural pattern that 
+   enables rapid development of secure and maintainable websites.
+2. A framework is simply a collection of modules that are grouped together for creating web applications from a reliable, 
+   pre-existing source. Django offers a large collection of theses modules.
+
+---------------------------------------------------------------------------------------------------------------------------------
+Django vs. Flask -->
+
+Flask is pretty simple and lets you make your own choices. Flask is based on the concept of doing one thing and doing it well.
+You are free to choose whatever you like.
+It is classified as a microframework because it does not require particular tools or libraries.
+It has no database abstraction layer, form validation, or any other components where pre-existing third-party 
+libraries provide common functions. However, Flask supports extensions that can add application features as if 
+they were implemented in Flask itself. Extensions exist for object-relational mappers(SQLAlchmey), form validation(WTForms), 
+upload handling, caching(Flask-Caching), various open authentication(Flask-Login: to handle the user sessions after 
+authentication) technologies and several common framework related tools.
+
+Django, on the other hand, is a batteries included framework that provides many things out of the box. 
+It offers less control than Flask, with the inclusion of an admin panel, an ORM (Object Relational Mapping). 
+Django has the goal of simplifying website creation.
+
+So, which is better? There isn’t really a solution that is better or worse. It comes down to your requirements. 
+They are both great in their own market and domains. At a high-level, Django provides the advantage of being a full stack 
+framework. Generally, teams prefer Django over Flask for its variety.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+Question 4. Mention What Does The Django Templates Consists Of?
+
+Answer :
+The template is a simple text file. It can create any text-based format like XML, CSV, HTML, etc.  
+A template contains variables that get replaced with values when the template is evaluated and tags (% tag %) 
+that controls the logic of the template.
+
+Django framework efficiently handles and generates dynamically HTML web pages that are visible to end-user. 
+Django mainly functions with a backend so, in order to provide frontend and provide a layout to our website, we use templates. 
+There are two methods of adding the template to our website depending on our needs.
+
+We can use a single template directory which will be spread over the entire project.
+For each app of our project, we can create a different template directory.
+
+Templates not only show static data but also the data form different databases connected to the application through 
+a context dictionary.
+
+The main ones are variables and tags. As we used for loop in above example, we used it as a tag. 
+similarly, we can used various other conditions such as if, else, if-else, empty, etc. 
+Main characterisitcs of django Template language are Variables, Tags, Filters and Comments.
+
+Variables--> 
+Variables outputs a value from the context, which is a dict-like object mapping keys to values. 
+The context object we sent from the view can be accesses in template using variables of Django Template.
+Syntax
+{{ variable_name }}
+
+
+Tags -->
+Tags provide arbitrary logic in the rendering process. For example, a tag can output content, serve as a control structure 
+e.g. an “if” statement or a “for” loop, grab content from a database, or even enable access to other template tags.
+Syntax
+{% tag_name %}
+
+ex:
+{% csrf_token %}
+{% cycle 'odd' 'even' %}
+
+
+Template Inheritance -->
+Template inheritance allows you to build a base “skeleton” template that contains all the common elements of your site and 
+defines blocks that child templates can override. extends tag is used for inheritance of templates in django.
+Syntax
+{% extends 'template_name.html' %}
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+4) Why Django should be used for web-development?
+
+--It allows you to divide code modules into logical groups to make it flexible to change
+--To ease the website administration, it provides auto-generated web admin
+--It provides pre-packaged API for common user tasks
+--It gives you template system to define HTML template for your web page to avoid code duplication
+--It enables you to define what URL for a given function
+--It enables you to separate business logic from the HTML
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+2) Mention what are the features available in Django?
+
+Features available in Django are:
+Admin Interface (CRUD)
+Templating
+Form handling
+Internationalization
+Session, user management, role-based permissions
+Object-relational mapping (ORM)
+Testing Framework
+Fantastic Documentation
+
+------------------------------------------------------------------------------------------
+
+What Is The Use Of Session Framework In Django?
+
+A session is a mechanism to store information on the server side during the interaction with the web application. 
+Session is generally used with a middle-ware. It also helps in receiving and sending cookies for authentication of a user.
+
+Session data is stored in a database table named django_session . Django only sends a cookie if it needs to. 
+If you don't set any session data, it won't send a session cookie.
+
+The session can be stored on the server, or on the client. If it's on the client, it will be stored by the browser, 
+most likely in cookies and if it is stored on the server, the session ids are created and managed by the server.
+
+Sessions are the mechanism used by Django for you store and retrieve data on a per-site-visitor basis. 
+Django uses a cookie containing a special session id.
+
+--------------------------------------------------------------------------------------------------------
+
+Is session stored in browser?
+
+To track sessions, a web session ID is stored in a visitor's browser. This session ID is passed along with any HTTP 
+requests that the visitor makes while on the site (e.g., clicking a link). “Session” is the term used to refer to a 
+visitor's time browsing a web site.
+
+---------------------------------------------------------------------------------------------------------
+
+How long is session data stored?
+
+By default, session variables last until the user closes the browser. So; Session variables hold information about 
+one single user, and are available to all pages in one application. 
+Tip: If you need a permanent storage, you may want to store the data in a database.
+
+------------------------------------------------------------------------------------------------------------------
+
+What is session in python?
+
+Unlike cookies, Session (session) data is stored on the server. The session is the interval at which the client logs on 
+to the server and logs out the server. The data that is required to be saved in the session is stored in a temporary directory on the server.
+
+--------------------------------------------------------------------------------------------------------------------
+
+difference between session and cookie
+
+Cookie:		
+
+1. Cookies are client-side files on a local computer that hold user information.
+2. Cookies end on the lifetime set by the user.
+3. It can only store a certain amount of info.
+4. The browser’s cookies have a maximum capacity of 4 KB.
+5. Because cookies are kept on the local computer, we don’t need to run a function to start them.
+6. Cookies are not secured.
+7. Cookies stored data in text file.
+
+Session:
+1. Sessions are server-side files that contain user data.
+2. When the user quits the browser or logs out of the programmed, the session is over.
+3. It can hold an indefinite quantity of data.
+4. We can keep as much data as we like within a session, however there is a maximum memory restriction 
+   of 128 MB that a script may consume at one time.
+5. To begin the session, we must use the session start() method.
+6. Session are more secured compare than cookies.
+7. Session save data in encrypted form.
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Question 16. What Is Some Typical Usage Of Middlewares In Django?
+
+Answer :
+Some usage of middlewares in Django is:
+Session management
+Use authentication
+Cross-site request forgery protection
+Content Gzipping, etc.
+
+----------------------------------------------------------------------------------------
+
+Question 17. What Does Of Django Field Class Types Do?
+
+Answer :
+The Django field class types specify:
+	-- The column type, which tells the database what kind of data to store (e.g. INTEGER, VARCHAR, TEXT).
+	-- The default HTML widget to use when rendering a form field (e.g. <input type=”text”>, <select>).
+	-- The minimal validation requirements, used in Django’s admin
+	-- in automatically-generated forms.
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+Question 22. Mention Caching Strategies That You Know In Django?
+
+Answer :
+Few caching strategies that are available in Django are as follows:
+File sytem caching
+In-memory caching
+Using Memcached
+Database caching
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+--> Cookies
+
+cookies are a small piece of text data set by the web server that resides on the client's machine. ones's it's been set,
+client automatically returns the cookie to the server with each request that it makes.
+It is used to store user's data in a file permanently (or for the specified time). 
+Cookie has its expiry date and time and removes automatically when gets expire. 
+Django provides built-in methods to set and fetch cookie.
+
+The set_cookie() method is used to set a cookie and get() method is used to get the cookie.
+The request.COOKIES['key'] array can also be used to get cookie values.
+
+Cookies are small text files stored and maintained by the browser. It contains some information about the user and every 
+time a request is made to the same server, the cookie is sent to the server so that the server can detect that the user 
+has visited the site before or is a logged in user.
+
+The cookies also have their drawbacks and a lot of times they become a path for the hackers and malicious websites to 
+damage the target site.
+
+
+from django.shortcuts import render  
+from django.http import HttpResponse  
+  
+def setcookie(request):  
+    response = HttpResponse("Cookie Set")  
+    response.set_cookie('java-tutorial', 'javatpoint.com')  
+    return response  
+def getcookie(request):  
+    tutorial  = request.COOKIES['java-tutorial']  
+    return HttpResponse("java tutorials @: "+  tutorial);  
+	
+	
+
+types of cookies:
+1.Session cookies:
+cookies that are set without the expires field are called session cookies. it is destroyed when user quits the browser. 
+
+2.Persistent cookie:
+The browser keep it up until their expiration date is reached.
+
+----------------------------------------------------------------------------------------
+
+1) Explain the advantages of Django?
+
+Advantages of Django:
+Django is a Python's framework which is easy to learn.
+It is clear and readable.
+It is versatile.
+It is fast to write.
+No loopholes in design.
+It is secure.
+It is scalable.
+It is versatile.
+
+----------------------------------------------------------------------------------------------------------------------
+
+12) What are the disadvantages of Django?
+
+Following is the list of disadvantages of Django:
+Django' modules are bulky.
+It is completely based on Django ORM.
+Components are deployed together.
+You must know the full system to work with it.
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+13) What are the inheritance styles in Django?
+There are three possible inheritance styles in Django:
+
+1) Abstract base classes: This style is used when you only want parent's class to hold information that you don't want to 
+type out for each child model.
+
+2) Multi-table Inheritance: This style is used if you are sub-classing an existing model and need each model to have 
+its database table.
+
+3) Proxy models: This style is used, if you only want to modify the Python level behavior of the model, 
+without changing the model's fields.
+
+-------------------------------------------------------------------------------------------------------------------
+
+15) How can you set up static files in Django?
+There are three main things required to set up static files in Django:
+
+1) Set STATIC_ROOT in settings.py
+
+2) run manage.py collect static
+
+3) set up a Static Files entry on the PythonAnywhere web tab
+
+---------------------------------------------------------------------------------------------------------------------
+
+What is the difference between get() and filter() methods of a django queryset object?
+
+get() raises MultipleObjectsReturned if more than one object was found.
+get() raises a DoesNotExist exception if an object wasn't found for the given parameters.
+Basically use get() when you want to get a single unique object.
+
+use filter() when you want to get all objects that match your lookup parameters.
+
+---------------------------------------------------------------------------------------------------------------------
+
+19) What are the signals in Django?
+
+Signals are used to perform some action on modification/creation of a particular entry in Database. 
+For example, if we want to create a profile of a user as soon as the user is created using post_save signal
+
+There are 3 types of signal.
+
+pre_save/post_save: This signal  works before/after the method save().
+pre_delete/post_delete: This signal  works before after delete a model’s instance (method delete()) this signal is thrown.
+pre_init/post_init: This signal is thrown before/after instantiating a model (__init__() method).
+
+task:
+I have used SMTP to send mail.I have to do some modification in settings.py file to add email configurations
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+
+---------------------------------------------------------------------------------------------
+
+23) What are the different types of Django Exception Classes?
+The django.core.exceptions module contains the following classes
+
+	Exception					Description
+AppRegistryNotReady	   		It is raised when attempting to use models before the app loading process.
+ObjectDoesNotExist	   		The base class for DoesNotExist exceptions.
+EmptyResultSet	       		If a query does not return any result, this exception is raised.
+FieldDoesNotExist	   		It raises when the requested field does not exist.
+MultipleObjectsReturned		This exception is raised by a query if only one object is expected, but multiple objects are returned.
+SuspiciousOperation			This exception is raised when a user has performed an operation that should be considered suspicious from a security perspective.
+PermissionDenied			It is raised when a user does not have permission to perform the action requested.
+ViewDoesNotExist			It is raised by django.urls when a requested view does not exist.
+MiddlewareNotUsed			It is raised when a middleware is not used in the server configuration.
+ImproperlyConfigured		The ImproperlyConfigured exception is raised when Django is somehow improperly configured.
+FieldError					It is raised when there is a problem with a model field.
+ValidationError				It is raised when data validation fails to form or model field validation.
+
+-------------------------------------------------------------------------------------------
+
+Django Request and Respon:
+
+Whenever a request comes into Django, it is handled by middlewares. When the Django server starts, 
+the first thing it loads after settings.py is middlewares.The Request is processed by various middlewares one at a time.
+
+Once, our request is processed by these middlewares it is passed to the URL Router. The URL router simply extracts 
+the URL from the request and will try to match it to defined urls.
+
+Once, we get a matching URL, the corresponding view function is called.Once, the view function has been executed, 
+it’s time to give a response. The response is given in the form of HttpResponse. The Response can be PDF, JSON, CSV.
+
+When the response is a render, then HTML send as a response.
+------------------------------------------------------------------------------------------------
+
+How middleware works -->
+
+Middlewares are used to modify the request i.e. HttpRequest object which is sent to the view, 
+to modify the HttpResponse object returned from the view and to perform an operation before the view executes.
+
+Your Middleware class should define at least one of the following methods:
+
+Called during request:
+process_request(request)
+process_view(request, view_func, view_args, view_kwargs)
+
+Called during response:
+process_exception(request, exception) (only if the view raised an exception)
+process_template_response(request, response) (only for template responses)
+process_response(request, response)
+
+
+How it works?
+The Middlware classes are called twice during the request/response life cycle. For that reason, 
+the order you define the Middlwares in the MIDDLEWARE_CLASSES configuration is important.
+
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+During the request cycle, the Middleware classes are executed top-down, meaning it will first 
+execute SecurityMiddleware, then SessionMiddleware all the way until XFrameOptionsMiddleware. 
+For each of the Middlewares it will execute the 
+process_request() and process_view() methods.
+
+At this point, Django will do all the work on your view function. 
+After the work is done (e.g. querying the database, paginating results, processing information, etc), 
+it will return a response for the client.
+
+During the response cycle, the Middleware classes are executed bottom-up, meaning it will first execute 
+XFrameOptionsMiddleware, then MessageMiddleware all the way until SecurityMiddlewa0re. 
+For each of the Middlewares it will execute the process_exception(), 
+process_template_response() and process_response() methods.
+
+Finally Django will deliver the response for the client. It is important to note that process_exception() 
+is only executed if a exception occurs inside the view function and process_template_response() is only executed 
+if there is a template in the response.
+
+-----------------------------------------------------------------------------------------------
+
+62. In what order does middlewares listed in settings.py are executed when request comes ? Top to bottom or bottom to up.
+Top to bottom
+
+-----------------------------------------------------------------------------------------------------
+
+63. In what order does middlewares listed in settings.py are executed when response goes ? Top to bottom or bottom to up.
+bottom to up
+
+-----------------------------------------------------------------------------------------------
+How does session framework works in Django
+
+To set and get the session in views, we can use request.session and can set multiple times too.
+The class backends.base.SessionBase is a base class of all session objects. It contains the following standard methods.
+
+	Method						Description
+__getitem__(key)			It is used to get session value.
+__setitem__(key, value)		It is used to set session value.
+__delitem__(key)			It is used to delete session object.
+__contains__(key)			It checks whether the container contains the particular session object or not.
+get(key, default=None)		It is used to get session value of the specified key.
+
+
+//views.py
+
+from django.shortcuts import render  
+from django.http import HttpResponse  
+  
+def setsession(request):  
+    request.session['sname'] = 'irfan'  
+    request.session['semail'] = 'irfan.sssit@gmail.com'  
+    return HttpResponse("session is set")  
+def getsession(request):  
+    studentname = request.session['sname']  
+    studentemail = request.session['semail']  
+    return HttpResponse(studentname+" "+studentemail);  
+
+
+
+// urls.py
+
+from django.contrib import admin  
+from django.urls import path  
+from myapp import views  
+urlpatterns = [  
+    path('admin/', admin.site.urls),  
+    path('index/', views.index),  
+    path('ssession',views.setsession),  
+    path('gsession',views.getsession)  
+]  
+
+-------------------------------------------------------------------------------------------
+
+What is CSRF ? How can you prevent csrf attack	
+The Cross-Site Request Forgery (CSRF) attack forces an end-user to execute unwanted actions on a web application 
+in which they have authenticated themselves.
+
+The attacker uses the user’s authenticated state to their advantage by changing the user’s request, which prompts 
+users to perform actions that they do not intend to perform.
+
+csrf_token:
+Django has a {% csrf_token %} tag that is implemented to avoid malicious attacks. It generates a token on the 
+server-side when rendering the page and makes sure to cross-check this token for any requests coming back in. 
+If the incoming requests do not contain the token, they are not executed.
+	
+
+How to Prevent Cross-Site Request Forgery Attacks
+An attacker can launch a CSRF attack when he knows which parameters and value combination are being used in a form. 
+Therefore, by adding an additional parameter with a value that is unknown to the attacker and can be validated by the 
+server, you can prevent CSRF attacks. Below is a list of some of the methods you can use to block cross-site request 
+forgery attacks.	
+
+	-- Implement an Anti-CSRF Token
+	-- Use the SameSite Flag in Cookies
+
+--------------------------------------------------------------------------------------------------
+
+67. What are Django forms ?
+
+Forms are basically used for taking input from the user in some manner and using that information for logical operations 
+on databases. For example, Registering a user by taking input as his name, email, password, etc.
+
+Django maps the fields defined in Django forms into HTML input fields. 
+Django handles three distinct parts of the work involved in forms:
+
+preparing and restructuring data to make it ready for rendering
+creating HTML forms for the data
+receiving and processing submitted forms and data from the client	
+
+forms.py
+from django import forms  
+class StudentForm(forms.Form):  
+    firstname = forms.CharField(label="Enter first name",max_length=50)  
+    lastname  = forms.CharField(label="Enter last name", max_length = 100)  
+	
+
+// views.py
+from django.shortcuts import render  
+from myapp.form import StudentForm  
+  
+def index(request):  
+    student = StudentForm()  
+    return render(request,"index.html",{'form':student})  
+
+
+// index.html
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+</head>  
+<body>  
+<form method="POST" class="post-form">  
+        {% csrf_token %}  
+        {{ form.as_p }}  
+        <button type="submit" class="save btn btn-default">Save</button>  
+</form>  
+</body>  
+</html>  
+
+
+Provide the URL in urls.py
+from django.contrib import admin  
+from django.urls import path  
+from myapp import views  
+urlpatterns = [  
+    path('admin/', admin.site.urls),  
+    path('index/', views.index),  
+]  
+
+
+There are other output options though for the <label>/<input> pairs:
+
+{{ form.as_table }} will render them as table cells wrapped in <tr> tags
+{{ form.as_p }} will render them wrapped in <p> tags
+{{ form.as_ul }} will render them wrapped in <li> tags
+
+
+------------------------------------------------------------------------------------------
+
+What are model manager and how do you write custom manager
+A Manager is the interface through which database query operations are provided to Django models. 
+At least one Manager exists for every model in a Django application. 
+By default, Django adds a Manager with the name “objects” to every Django model class.
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+75. What are Django template tags ?
+block
+Defines a block that can be overridden by child templates.
+
+------------------------------------------------------------------------------------------------------------------------
+
+What is the use of context processors in Django
+
+“A context processor has a simple interface: it’s a Python function that takes one argument, an HttpRequest object, 
+and returns a dictionary that gets added to the template context. Each context processor must return a dictionary.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Statelessness in REST APIs
+As per the REST (REpresentational “State” Transfer) architecture,
+the server does not store any state about the client session on the server-side. 
+This restriction is called Statelessness.
+
+REST stands for REpresentational State Transfer and is an architectural style used 
+in modern web development. It defines a set or rules/constraints for a web application 
+to send and receive data. In this article, 
+we will build a REST API in Python using the Flask framework.
+
+------------------------------------------------------------------------------------------------------------------------
+
+Serializers: 
+
+Serializers allow complex data such as querysets and model instances to be converted to native Python datatypes 
+that can then be easily rendered into JSON, XML or other content types. Serializers also provide deserialization, 
+allowing parsed data to be converted back into complex types, after first validating the incoming data.
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+router
+
+Routers generate automatic URL patterns and maps every URL to its respective method based 
+on a type of the request. It is the collection or urls. one viewset holds 6 method operation(CRUD)
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+Mention some key characteristics of REST?
+
+Some key characteristics of REST includes
+
+REST is stateless, therefore the SERVER has no state (or session data)
+With a well-applied REST API, the server could be restarted between two calls as every data is passed to the server
+Web service mostly uses POST method to make operations, whereas REST uses GET to access resources
+
+------------------------------------------------------------------------------------------------------
+
+What is Pickling and Unpickling?
+
+Pickle module accepts any Python object and converts it into a string representation and dumps it into a file by 
+using the dump function, this process is called pickling. While the process of retrieving original Python objects 
+from the stored string representation is called unpickling.
+
+
+-----------------------------------------------------------------------------------------------------
+
+5. How memory management is done in Python?
+Python uses its private heap space to manage the memory. Basically, all the objects and data structures are stored in 
+the private heap space. Even the programmer can not access this private space as the interpreter takes care of this space. 
+Python also has an inbuilt garbage collector, which recycles all the unused memory and frees the memory and makes it 
+available to the heap space.
+
+-----------------------------------------------------------------------------
+
+Is Django A Content Management System (cms)?
+No, Django is not a CMS. Instead, it is a Web framework and a programming tool that makes you able to build websites.
+A content management system is a computer software used to manage the creation and modification of digital content
+
+
+---------------------------------------------------------------------------------
+
+Which architectural pattern does Django follow?
+
+Django follows Model-View-Template (MVT) architectural pattern.
+See the following graph that shows the MVT based control flow.
+
+Here, a user requests for a resource to the Django, Django works as a controller and check to the available resource in URL.
+If URL maps, a view is called that interact with model and template, it renders a template.
+Django responds back to the user and sends a template as a response.
+
+
+---------------------------------------------------------------------------------------------------------------
+
+--> how to get session key from django request object
+
+request.session.session_key
+----------------------------------------------------------------------------------------------------------------
+
+generic View -->
+
+from django.views.generic.base import RedirectView, TemplateView, View
+
+from django.views.generic.dates import (
+    ArchiveIndexView, DateDetailView, DayArchiveView, MonthArchiveView,
+    TodayArchiveView, WeekArchiveView, YearArchiveView,)
+	
+from django.views.generic.detail import DetailView
+
+from django.views.generic.edit import (
+    CreateView, DeleteView, FormView, UpdateView,)
+	
+from django.views.generic.list import ListView
+
+
+__all__ = [
+    'View', 'TemplateView', 'RedirectView', 'ArchiveIndexView',
+    'YearArchiveView', 'MonthArchiveView', 'WeekArchiveView', 'DayArchiveView',
+    'TodayArchiveView', 'DateDetailView', 'DetailView', 'FormView',
+    'CreateView', 'UpdateView', 'DeleteView', 'ListView', 'GenericViewError',
+]
+
+
+--------------------------------------------------------------------------------------------
+
+What’s the difference between select_related and prefetch_related in Django ORM?
+
+select_related() “follows” foreign-key relationships, selecting additional related-object data when it executes its query.
+prefetch_related() does a separate lookup for each relationship, and does the “joining” in Python.
+
+
+--------------------------------------------------------------------------------------------
+
+
+The Django authentication system handles both authentication and authorization. 
+Briefly, authentication verifies a user is who they claim to be, and authorization determines what an authenticated user 
+is allowed to do.
+
+
+--------------------------------------------------------------------------------------------------
+
+how to check user is authenticate or not or How to Check if a User is Logged In or Not in Django -->
+
+1.Django uses sessions and middleware to hook the authentication system into request objects.
+2.By calling request.user, we are able to access the user that is currently logged in.
+3.We then can use the is_authenticated property to determine if a user is currently authenticated (logged into the account).
+
+
+---------------------------------------------------------------------------------------------------------------
+
+Permissions and authorization:
+
+django comes with a built in permission system. It provide the way to assign the permission to specific user and a group of user.
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Inbuilt decorator in django:
+
+1. login_required
+2. api_view :  It converts the function based view into a subclass of API view.
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+Generic Views(Class Based Views - CBV):
+
+CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListCreateAPIView,
+RetrieveUpdateAPIView, RetrieveDestroyAPIView, RetrieveUpdateDestroyAPIView
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+viewsets:
+
+Django REST framework allows you to combine the logic for a set of related views in a single class, called a ViewSet
+A ViewSet class is simply a type of class-based View, that does not provide any method handlers such as .get() or .post(), 
+and instead provides actions such as .list() and .create().
+
+----------------------------------------------------------------------------------------------------------------
+
+What is Model Meta?
+
+Model Meta is basically the inner class of your model class.
+Model Meta is basically used to change the behavior of your model fields like changing order options,verbose_name 
+and lot of other options. It’s completely optional to add Meta class in your model.
+
+class student(models.Model):
+    class Meta:
+        options........
+		
+Model Meta Options -->		
+
+1. abstract
+
+If abstract = True , this model will be an abstract  base class
+
+class student(models.Model):
+  class Meta:
+      abstract = True
+
+
+2. app_label
+
+If a model is defined outside of an applications in INSTALLED_APPS, it must declare which app  it belongs to:
+
+class student(models.Model):
+  class Meta:
+      app_label = 'myapp' # add app name here
+
+
+3. verbose_name
+
+verbose_name is basically a human-readable name for your model
+
+class student(models.Model):
+  class Meta:
+      verbose_name = "stu" # add verbose_name  here
+	  
+
+4. ordering 
+
+Ordering is basically is used to change the order of your model fields.
+
+class student(models.Model):
+  class Meta:
+      ordering = [-1]  -->  it change the order in descending order
+
+5. proxy
+
+If we add proxy = True a model which subclasses another model will be treated as a proxty model
+
+class Teacher(models.Model):
+  pass
+  
+class Student(Teacher):
+  class Meta:
+      proxy = True	  
+
+
+6. permissions 
+Extra permissions to enter into the permissions table when creating this object. 
+Add, change ,delete and view permissions are automatically created for each model.
+
+class student(models.Model):
+  class Meta:
+      permissions = []
+	  
+
+---------------------------------------------------------------------------------------------------------
+
+Model field reference :
+Field Options:
+
+1. null : If True, Django will store empty values as NULL in the database. Default is False.	
+
+2. blank: If True, the field is allowed to be blank. Default is False.
+
+3. choices : A sequence consisting itself of iterables of exactly two items (e.g. [(A, B), (A, B) ...]) 
+		     to use as choices for this field
+  
+4.db_column : The name of the database column to use for this field. If this isn’t given, Django will use the field’s name.
+
+5.db_index : If True, a database index will be created for this field.
+
+6.db_tablespace: The name of the database tablespace to use for this field’s index, if this field is indexed. 
+				 The default is the project’s DEFAULT_INDEX_TABLESPACE setting, if set, or the db_tablespace of the model, 
+				 if any. If the backend doesn’t support tablespaces for indexes, this option is ignored.
+
+7.default : The default value for the field. This can be a value or a callable object. If callable it will be called every time a new object is created.
+
+8.editable : If False, the field will not be displayed in the admin or any other ModelForm. 
+			 They are also skipped during model validation. Default is True.
+
+
+9.error_messages:
+The error_messages argument lets you override the default messages that the field will raise. 
+Pass in a dictionary with keys matching the error messages you want to override.
+
+Error message keys include null, blank, invalid, invalid_choice, unique, and unique_for_date. Additional error 
+message keys are specified for each field in the Field types section below.
+
+
+10.help_text: 
+Extra “help” text to be displayed with the form widget. It’s useful for documentation even if your field isn’t used on a form.
+
+
+11.primary_key: 
+If True, this field is the primary key for the model.
+If you don’t specify primary_key=True for any field in your model, Django will automatically add a field to hold the primary key, 
+so you don’t need to set primary_key=True on any of your fields unless you want to override the default primary-key behavior.
+
+
+12.unique: If True, this field must be unique throughout the table.
+
+13.unique_for_date: 
+-Set this to the name of a DateField or DateTimeField to require that this field be unique for the value of the date field.
+-For example, if you have a field title that has unique_for_date="pub_date", then Django wouldn’t allow the entry of two 
+records with the same title and pub_date.
+-Note that if you set this to point to a DateTimeField, only the date portion of the field will be considered. 
+Besides, when USE_TZ is True, the check will be performed in the current time zone at the time the object gets saved.
+
+
+14.unique_for_month: Like unique_for_date, but requires the field to be unique with respect to the month.
+
+15. unique_for_year: Like unique_for_date and unique_for_month.
+
+
+16.verbose_name: A human-readable name for the field. If the verbose name isn’t given, Django will automatically create 
+				 it using the field’s attribute name, converting underscores to spaces
+
+17.validators: A list of validators to run for this field.
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Model Field types:
+
+1.AutoField:
+An IntegerField that automatically increments according to available IDs. You usually won’t need to use this directly; 
+a primary key field will automatically be added to your model if you don’t specify otherwise.
+
+
+2.BigAutoField:
+A 64-bit integer, much like an AutoField except that it is guaranteed to fit numbers from 1 to 9223372036854775807.
+
+
+3.BigIntegerField:
+A 64-bit integer, much like an IntegerField except that it is guaranteed to fit numbers from -9223372036854775808 to 
+9223372036854775807. The default form widget for this field is a NumberInput.
+
+
+4.BinaryField:
+A field to store raw binary data. It can be assigned bytes, bytearray, or memoryview.
+By default, BinaryField sets editable to False, in which case it can’t be included in a ModelForm.
+
+
+5.BooleanField:
+A true/false field.
+The default form widget for this field is CheckboxInput, or NullBooleanSelect if null=True.
+The default value of BooleanField is None when Field.default isn’t defined.
+
+
+6.CharField:
+A string field, for small- to large-sized strings.
+
+
+7.DateField:
+A date, represented in Python by a datetime.date instance. Has a few extra, optional arguments:
+
+--> DateField.auto_now: Automatically set the field to now every time the object is saved.
+	
+--> DateField.auto_now_add: Automatically set the field to now when the object is first created.
+
+For DateField: default=date.today - from datetime.date.today()
+For DateTimeField: default=timezone.now - from django.utils.timezone.now()
+
+
+8.DateTimeField:
+A date and time, represented in Python by a datetime.datetime instance. Takes the same extra arguments as DateField.
+
+
+9.DecimalField:
+A fixed-precision decimal number, represented in Python by a Decimal instance. It validates the input using DecimalValidator.
+
+Has two required arguments:
+--DecimalField.max_digits
+	The maximum number of digits allowed in the number. Note that this number must be greater than or equal to decimal_places.
+
+--DecimalField.decimal_places
+	The number of decimal places to store with the number.
+
+
+10.EmailField: A CharField that checks that the value is a valid email address using EmailValidator.
+
+
+11.FileField: A file-upload field.
+
+
+12.FloatField: A floating-point number represented in Python by a float instance.
+
+
+13.ImageField: Inherits all attributes and methods from FileField, but also validates that the uploaded object is a valid image.
+
+
+14.IntegerField: An integer. Values from -2147483648 to 2147483647 are safe in all databases supported by Django.
+
+
+15.GenericIPAddressField: An IPv4 or IPv6 address, in string format (e.g. 192.0.2.30 or 2a02:42fe::4). The default form widget for this field is a TextInput.
+
+
+16.JSONField: 
+A field for storing JSON encoded data. In Python the data is represented in its Python native format: dictionaries, 
+lists, strings, numbers, booleans and None.
+
+
+17.TextField: A large text field. The default form widget for this field is a Textarea.
+
+
+18.TimeField: A time, represented in Python by a datetime.time instance. Accepts the same auto-population options as DateField.
+
+
+19.URLField: A CharField for a URL, validated by URLValidator.
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Tables created django -->
+               
+| auth_group                 
+| auth_group_permissions     
+| auth_permission            
+| auth_user                  
+| auth_user_groups           
+| auth_user_user_permissions 
+| django_admin_log           
+| django_content_type        
+| django_migrations          
+| django_session  
+           

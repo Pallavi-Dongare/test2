@@ -1,0 +1,162 @@
+
+
+HTTP Methods -->
+
+PUT -->
+
+1. PUT means update the whole records fileds with the given data.
+2. It can also create the supplied entity's record if not existed in database.
+3. for example: if you want to change the first name only, then you need to send the complete entity.
+
+if you want entire resourse to be updated, means if you need to update almost all fileds or entire fileds of your
+database resourse entity then you must use the PUT method.
+
+PUT is used to update fileds, eventhough you want to update a single the filed, you need to provide all the fields.if you not
+provide the fileds,it insert the filed as NULL.
+
+PUT is idenpotent, which means if you send PUT request multiple times it will update the same record multiple times.
+it will not update any other record.that should be equivalent to a single request modification
+
+
+PATCH -->
+
+1. PATCH means update only specified filed values, you want to update.
+2. It will only modify, if record exists, otherwise it return not found error.
+3. for example: if you want to update first name, you only need to send the first name not entire entity.  
+4.  HTTP PATCH is basically said to be non-idempotent. So if you send the patch request N times, 
+    you will end up having N resources with N different URIs created on the server.
+
+If you want partially update, means if you need only few or single filed of an resourse to be update then you
+must use the PATCH method.
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+What are HTTP status codes?
+An HTTP status code is a server response to a browser’s request. 
+When you visit a website, your browser sends a request to the site’s server, 
+and the server then responds to the browser’s request with a three-digit code: the HTTP status code.
+
+Status code -->
+Common HTTP status code classes:
+
+1.Informational - 1xx
+This class of status code indicates a provisional response. There are no 1xx status codes used in REST framework by default.
+
+HTTP_100_CONTINUE
+HTTP_101_SWITCHING_PROTOCOLS	   
+	   
+	   
+2.Successful - 2xx
+This class of status code indicates that the client's request was successfully received, understood, and accepted.
+
+	HTTP_200_OK --> The request was fulfilled.
+
+	HTTP_201_CREATED
+
+	HTTP_202_ACCEPTED -->
+		The request has been accepted for processing, but the processing has not been completed. 
+		The request may or may not eventually be acted upon, as it may be disallowed when processing actually takes place. 
+		there is no facility for status returns from asynchronous operations such as this.
+
+	HTTP_203_NON_AUTHORITATIVE_INFORMATION
+	
+	HTTP_204_NO_CONTENT -->
+		Server has received the request but there is no information to send back, and the client should stay 
+		in the same document view. This is mainly to allow input for scripts without changing the document at the same time.
+		
+	HTTP_205_RESET_CONTENT
+	HTTP_206_PARTIAL_CONTENT
+	HTTP_207_MULTI_STATUS
+	HTTP_208_ALREADY_REPORTED
+	HTTP_226_IM_USED
+
+
+3.Redirection - 3xx
+This class of status code indicates that further action needs to be taken by the user agent in order to fulfill the request.
+
+HTTP_300_MULTIPLE_CHOICES
+HTTP_301_MOVED_PERMANENTLY
+HTTP_302_FOUND
+HTTP_303_SEE_OTHER
+HTTP_304_NOT_MODIFIED
+HTTP_305_USE_PROXY
+HTTP_306_RESERVED
+HTTP_307_TEMPORARY_REDIRECT
+HTTP_308_PERMANENT_REDIRECT
+
+
+4.Client Error - 4xx
+The 4xx class of status code is intended for cases in which the client seems to have erred. Except when responding to a HEAD request, the server SHOULD include an entity containing an explanation of the error situation, and whether it is a temporary or permanent condition.
+
+HTTP_400_BAD_REQUEST -->
+	The request had bad syntax or was inherently impossible to be satisfied.
+	
+HTTP_401_UNAUTHORIZED :
+	The parameter to this message gives a specification of authorization schemes which are acceptable. 
+	The client should retry the request with a suitable Authorization header.
+	
+HTTP_402_PAYMENT_REQUIRED:
+	The parameter to this message gives a specification of charging schemes acceptable. 
+	The client may retry the request with a suitable ChargeTo header.
+	
+HTTP_403_FORBIDDEN:
+	The request is for something forbidden. Authorization will not help.
+	
+HTTP_404_NOT_FOUND:
+	The server has not found anything matching the URI given
+	
+HTTP_405_METHOD_NOT_ALLOWED
+HTTP_406_NOT_ACCEPTABLE
+HTTP_407_PROXY_AUTHENTICATION_REQUIRED
+HTTP_408_REQUEST_TIMEOUT
+HTTP_409_CONFLICT
+HTTP_410_GONE
+HTTP_411_LENGTH_REQUIRED
+HTTP_412_PRECONDITION_FAILED
+HTTP_413_REQUEST_ENTITY_TOO_LARGE
+HTTP_414_REQUEST_URI_TOO_LONG
+HTTP_415_UNSUPPORTED_MEDIA_TYPE
+HTTP_416_REQUESTED_RANGE_NOT_SATISFIABLE
+HTTP_417_EXPECTATION_FAILED
+HTTP_422_UNPROCESSABLE_ENTITY
+HTTP_423_LOCKED
+HTTP_424_FAILED_DEPENDENCY
+HTTP_426_UPGRADE_REQUIRED
+HTTP_428_PRECONDITION_REQUIRED
+HTTP_429_TOO_MANY_REQUESTS
+HTTP_431_REQUEST_HEADER_FIELDS_TOO_LARGE
+HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS
+
+
+
+5.Server Error - 5xx
+Response status codes beginning with the digit "5" indicate cases in which the server is aware that it has erred or is incapable of performing the request. Except when responding to a HEAD request, the server SHOULD include an entity containing an explanation of the error situation, and whether it is a temporary or permanent condition.
+
+HTTP_500_INTERNAL_SERVER_ERROR:
+	The server encountered an unexpected condition which prevented it from fulfilling the request.
+	
+HTTP_501_NOT_IMPLEMENTED:
+	The server does not support the facility required.
+HTTP_502_BAD_GATEWAY
+HTTP_503_SERVICE_UNAVAILABLE
+HTTP_504_GATEWAY_TIMEOUT
+HTTP_505_HTTP_VERSION_NOT_SUPPORTED
+HTTP_506_VARIANT_ALSO_NEGOTIATES
+HTTP_507_INSUFFICIENT_STORAGE
+HTTP_508_LOOP_DETECTED
+HTTP_509_BANDWIDTH_LIMIT_EXCEEDED
+HTTP_510_NOT_EXTENDED
+HTTP_511_NETWORK_AUTHENTICATION_REQUIRED
+
+
+
+Helper functions
+The following helper functions are available for identifying the category of the response code.
+
+is_informational()  # 1xx
+is_success()        # 2xx
+is_redirect()       # 3xx
+is_client_error()   # 4xx
+is_server_error()   # 5xx

@@ -1,0 +1,141 @@
+github password - Pdongare@22
+
+ 
+difference between Git and Github -->
+
+1. Github is a cloud server on which we store our application code
+2. Git is a Software and It is an interface through which we communicate with Github Server.
+
+
+stepts --> 
+
+1. login to your Github account and create a repository  --> This repository is called Remote repository(Master)
+
+1. nevigate to the location of file in cmd
+	C:\Users\HP\PycharmProjects\online\demos
+	
+2. write a command 'git init' --> initialize a particular repository to this location	
+	It creates '.git' repository to this location.  --> This repository is called Local repository
+	
+	C:\Users\HP\PycharmProjects\online\demos>git init
+	Initialized empty Git repository in C:/Users/HP/PycharmProjects/online/demos/.git/
+	
+The repository on Github is called Remote repository and repository at the file location is called Local repository.	
+	
+
+3. then specify the user name who commit the code to the Master repository(Remote)
+
+		git config --global user.name "Pallavi"
+		
+4.then specify the email of that user
+
+		git config --global user.email "dongarepallavi1996@gmail.com"
+		
+
+5.this command add all the files from demos and that files are ready to commit
+
+	-->git add -A	
+	--> git add .  --> it add the direcory
+
+6.command to chech the git status -->  git status	
+
+
+when new file is creted it is  --> untracked/unmodified
+when we made changes in that file then it is --> Modified
+when we add files by git add . or get add -A  --> Modified and inside stage area 
+												and the files which are in only staging area are ready to commit.
+												Not all files are commit to local repository. only files in staging are
+												are ready to commit
+
+all the above process in our IDE/Pycharm
+
+our IDE and local repository is present in one machine
+
+
+git rm --cached a  --> this command is used to get file in untracked/unmodified  --> remove from stage area
+
+git restore sample.py  --> This command remove the latest change in modified file from working copy(from IDE)(not after commit or before adding the file) 
+
+git restore --staged sample.py   --> this command is used to remove latest change from staging area(after add)
+
+7. To push the code into a local repository we have to commit it.
+
+	git commit -m "Initial Commit"  --> it push the code from IDE to local repository
+										-m is the message "Initial Commit"
+
+	
+	git commit -m "Second commit"   --> commit second time
+	
+	
+	git log  --> It shows all commit
+
+
+	git reset HEAD~  --> It remove the changes from local repository(after commit) --> get back from local repository to modified
+
+
+				IDE     				.Git  (git init --> to create local repository)
+
+	untracked   Modified   Stage		(Local repository)
+	
+	Newly 
+	created		  
+	file		  
+	
+	  ----------------------->
+			git add .
+			git add -A
+	
+	 ------------->		
+	add some data to 
+	file						git commit
+							------------------->	
+						git reset HEAD~
+				 <-------------------------------					
+							
+							
+				
+				
+8. create new branch on Github  -->  
+		
+		git branch -M main  (main is branch name)	
+
+		git remote add origin https://github.com/pallavi22-dongare/gitsample.git   --> and call this repository
+		
+		
+		git push -u origin main  --> push the code in master(remote repository)
+		
+		
+		git branch --> list all the branches
+		
+		
+		git branch -d xxx  --> delete branch name xxx  --> deleting a branch locally
+		
+		
+		git checkout branch_name--> switch to another branch and check it out into your working directory
+		
+		
+		
+		
+		
+		
+		
+		
+pallavi.dongare@neosoftmail.com	
+		
+PNeosoft21 --> pass
+
+DongareP --> username		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+										

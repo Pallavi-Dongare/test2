@@ -1,0 +1,236 @@
+Python Collection Module
+The Python collection module is defined as a container that is used to store collections of data, for example - 
+list, dict, set, and tuple, etc. It was introduced to improve the functionalities of the built-in collection containers.
+
+1.OrderDict() -->
+An OrderedDict is also a sub-class of dictionary but unlike dictionary, it remembers the order in which the keys were inserted. 
+The Python OrderedDict() is similar to a dictionary object where keys maintain the order of insertion. 
+If we try to insert key again, the previous value will be overwritten for that key.
+OrderDict is deprecated(not in use) after python3.6 version. all the features are available in normal dict.
+Ex1:
+from collections import OrderDict    
+d1=OrderedDict()    
+d1['A']=10    
+d1['C']=12    
+d1['B']=11    
+d1['D']=13    
+	
+for k,v in d1.items():    
+	print (k,v) 
+
+op: 
+A 10
+C 12
+B 11
+D 13
+   
+Ex2:
+from collections import OrderDict   
+d1.move_to_end(‘A’, last=TRUE)
+print(d1) 
+
+op:
+OrderedDict([(‘C’, 12), (‘B’, 11), (‘D’, 13), (‘A’, 10)])
+Ex3.
+from collections import OrderDict   
+d1.move_to_end(‘B’, last=FALSE)
+print(d1) 
+
+op: OrderedDict([(‘B’, 11), (‘A’, 10), (‘C’, 12), (‘D’, 13)])
+
+***********************************************************************************************************
+
+2.defaultdict() -->
+
+Defaultdict is a container like dictionaries present in the module collections. Defaultdict is a sub-class of 
+the dictionary class that returns a dictionary-like object. The functionality of both dictionaries and defaultdict
+are almost same except for the fact that defaultdict never raises a KeyError. It provides a default value for the key that does not exists.
+
+Syntax: class collections.defaultdict(default_factory)
+default_factory is a function that provides the default value for the dictionary created. If this parameter is absent then the KeyError is raised.
+
+Ex1.
+1.	from collections import defaultdict      
+2.	number = defaultdict(int)      
+3.	number['one'] = 1      
+4.	number['two'] = 2      
+5.	print(number['three'])   
+
+op:0  (int value)
+
+*****************************************************************************************************************
+
+3.deque() -->
+The Python deque() is a double-ended queue which allows us to add and remove elements from both the ends.
+Deque objects support the following methods:
+
+Appentleft(x):  Add x to the left side of the deque.
+Append(x)  :    Add x to the right side of the deque.
+Clear() :       Remove all elements from the deque leaving it with length 0.
+copy() :        Create a shallow copy of the deque.
+count() :       Count the number of deque elements equal to x.
+extend(iterable) : Extend the right side of the deque by appending elements from the iterable argument.
+Extendleft(iterable) :  Extend the left side of the deque by appending elements from iterable. Note, the series of left appends results in reversing the order of elements in the iterable argument.
+Index(x[, start[, stop]])) : Return the position of x in the deque (at or after index start and before index stop). Returns the first match or raises ValueError if not found.
+Insert(i,x) : Insert x into the deque at position i. If the insertion would cause a bounded deque to grow beyond maxlen, an IndexError is raised.
+pop() :Remove and return an element from the right side of the deque. If no elements are present, raises an IndexError.
+popleft(): Remove and return an element from the left side of the deque. If no elements are present, raises an IndexError.
+remove(value): Remove the first occurrence of value. If not found, raises a ValueError.
+reverse(): Reverse the elements of the deque in-place and then return None.
+rotate(n=1): Rotate the deque n steps to the right. If n is negative, rotate to the left.
+When the deque is not empty, rotating one step to the right is equivalent to d.appendleft(d.pop()), and rotating one step to the left is equivalent to d.append(d.popleft()).
+Deque objects also provide one read-only attribute:
+Maxlen: Maximum size of a deque or None if unbounded.
+
+>>> from collections import deque
+>>> d = deque('ghi')                 # make a new deque with three items
+>>> for elem in d:                   # iterate over the deque's elements
+...     print(elem.upper())
+G
+H
+I
+
+>>> d.append('j')                    # add a new entry to the right side
+>>> d.appendleft('f')                # add a new entry to the left side
+>>> d                                # show the representation of the deque
+deque(['f', 'g', 'h', 'i', 'j'])
+
+>>> d.pop()                          # return and remove the rightmost item
+'j'
+>>> d.popleft()                      # return and remove the leftmost item
+'f'
+>>> list(d)                          # list the contents of the deque
+['g', 'h', 'i']
+>>> d[0]                             # peek at leftmost item
+'g'
+>>> d[-1]                            # peek at rightmost item
+'i'
+
+>>> list(reversed(d))                # list the contents of a deque in reverse
+['i', 'h', 'g']
+>>> 'h' in d                         # search the deque
+True
+>>> d.extend('jkl')                  # add multiple elements at once
+>>> d
+deque(['g', 'h', 'i', 'j', 'k', 'l'])
+>>> d.rotate(1)                      # right rotation
+>>> d
+deque(['l', 'g', 'h', 'i', 'j', 'k'])
+>>> d.rotate(-1)                     # left rotation
+>>> d
+deque(['g', 'h', 'i', 'j', 'k', 'l'])
+
+>>> deque(reversed(d))               # make a new deque in reverse order
+deque(['l', 'k', 'j', 'i', 'h', 'g'])
+>>> d.clear()                        # empty the deque
+>>> d.pop()                          # cannot pop from an empty deque
+Traceback (most recent call last):
+    File "<pyshell#6>", line 1, in -toplevel-
+        d.pop()
+IndexError: pop from an empty deque
+
+>>> d.extendleft('abc')              # extendleft() reverses the input order
+>>> d
+deque(['c', 'b', 'a'])
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+4.Counter ():
+The Python Counter is a subclass of dictionary object which helps to count hashable objects.
+
+Ex1.
+from collection import Counter
+list = [1,2,3,4,5,2,4,3,6,7,3,4,2,1]
+count_value = Counter(list) 
+print(count_value)
+
+op: Counter({2: 3, 3: 3, 4: 3, 1: 2, 5: 1, 6: 1, 7: 1})
+
+most_common(n):
+Return a list of the n most common elements and their counts from the most common to the least.
+Ex.
+list = [1,2,3,4,5,2,4,3,6,7,3,4,2,1]
+count_value = Counter(list) 
+print(count_value.most_common(3))
+
+op: [(1, 1), (3, 1), (2, 0)]
+
+ element () :
+Return an iterator over elements repeating each as many times as its count. 
+
+
+
+Ex.
+list = [11,12,33,11,12]
+count_value = Counter(list) 
+for item in count_value.element():
+	print(item)
+op: 
+11
+11
+12
+12
+33
+
+subtract ():
+Elements are subtracted from an iterable or from another mapping (or counter)
+Ex.
+c = Counter(a=4, b=2, c=0, d=-2)   
+>>> d = Counter(a=1, b=2, c=3, d=4)
+>>> c.subtract(d)
+>>> c
+Counter({'a': 3, 'b': 0, 'c': -3, 'd': -6})
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+5.Chainmap ():
+A ChainMap groups multiple dicts or other mappings together to create a single, updateable view. If no maps are specified, a single empty dictionary is provided so that a new chain always has at least one mapping.
+
+parent() : skip the first dict.
+New_child()  : add the given dict at first position.
+map (): return list 
+
+from collections import defaultdict, deque, Counter,ChainMap
+import random
+
+dict1 = {chr(item):item-64 for item in range(65,70)}
+dict2 = {chr(item):item-40 for item in range(65,70)}
+dict3 = {chr(item):item-84 for item in range(65,70)}
+
+
+dict3['S'] = 100
+print("dict1: ",dict1)
+print("dict2: ",dict2)
+print("dict3: ",dict3)
+
+
+chmap = ChainMap(dict1,dict2,dict3)
+print(chmap)
+print(chmap['S'])    # search for 'S',when it search for 'S' ,it start searching from dict1,dict2 and so on
+
+chmap['A'] = 40   # change the value of 'A' from dict1,only first dict is available for add/update/remove
+print(chmap)
+
+#if we want add/remove/update in second dict the we can use 'parent'. parent skipp the first dict1 so we can modify the second dict2
+chain1 = chmap.parents    # parent skipp the first dict from chain
+print("chain1: ",chain1)
+
+chain2 = chain1.parents    # if we again do it, it skipp again first dict
+print("chain2: ",chain2)
+
+#this is the second method to modify the second or any dict after first dict
+data = chmap.maps    # return a list of dict
+print("data: ",data)
+
+data[1]['B'] = 70
+print("new updated data in second dict:",data)
+ch = ChainMap(data)
+print(ch)
+
+# new_child add the given dict to first position,if we does not pass any value then it add empty dict
+dict4 = {chr(item):item-11 for item in range(65,71)}    
+new = chmap.new_child(dict4)
+print("new dict: ",new)
+
+

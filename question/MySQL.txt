@@ -1,0 +1,387 @@
+
+What is MySQL -->
+Let us first learn what MySQL is:
+
+MySQL is an open-source, relational database management system(RDBMS) that is based on Structured Query Language(SQL). 
+One important thing to note here is that MySQL is used to store data and it is not used to create programs; 
+Thus it is not a Programming Language.
+
+In Python, We can use the following modules to communicate with MySQL.
+	1.MySQL Connector Python
+	2.PyMySQL
+	3.MySQLDB
+	4.MySqlClient
+	5.OurSQL
+
+
+Advantages and benefits of MySQL Connector Python: –
+1.MySQL Connector Python is written in pure Python, and it is self-sufficient to execute database queries through Python.
+2.It is an official Oracle-supported driver to work with MySQL and Python.
+3.It is Python 3 compatible, actively maintained.
+
+
+MySQL Connector --> 
+Basically Python needs a MySQL Driver which is used to access the MySQL Database an in this case "MySQL Connector" is the Driver.
+MySQL Connector for Python is a connector that enables the Python programs to access the MySQL database.
+
+
+How to Connect to MySQL Database in Python -->
+
+1.Install MySQL connector module:-
+Use the pip command to install MySQL connector Python.
+pip install mysql-connector-python
+
+2.Import MySQL connector module:-
+Import using a import mysql.connector statement so you can use this module’s methods to communicate with the MySQL database.
+
+3.Use the connect() method:-
+Use the connect() method of the MySQL Connector class with the required arguments to connect MySQL. 
+It would return a MySQLConnection object if the connection established successfully
+
+4.Use the cursor() method:-
+Use the cursor() method of a MySQLConnection object to create a cursor object to perform various SQL operations.
+
+5.Use the execute() method:-
+The execute() methods run the SQL query and return the result.
+
+6.Extract result using fetchall():-
+Use cursor.fetchall() or fetchone() or fetchmany() to read query result.
+
+7.Close cursor and connection objects:-
+use cursor.clsoe() and connection.clsoe() method to close open connections after your work completes
+
+
+
+Creating the Connection -->
+
+import mysql.connector as mysql
+mydb = mysql.connect(
+  host="localhost",
+  user="yourusername",
+  password="yourpassword"
+)
+
+print(mydb)
+
+------------------------------------------------------------------------------------------------------------------
+
+
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword"
+)
+
+cursor = db.cursor()
+#cursor.execute("CREATE DATABASE studytonight")
+
+cursor.execute("SHOW DATABASES")
+for x in cursor:
+  print(x)
+  
+------------------------------------------------------------------------------------------------------ 
+
+create tables-->
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database="studytonight"
+)
+cursor = db.cursor()
+cursor.execute("create table student (id int, name varchar(90),age int,address varchar(90))")
+
+cursor.execute('show tables')  # show all tables
+tables = cursor.fetchall()
+for x in tables:
+    print(x)
+	
+
+-----------------------------------------------------------------------------------------------------------
+
+Add Primary Key during Table creation-->
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+cursor = db.cursor()
+
+## creating the 'students' table with the 'PRIMARY KEY'
+cursor.execute("create table emp (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(90),age int,address varchar(90))")
+
+-----------------------------------------------------------------------------------------------------------
+Python MySQL - Describe the Table--> 
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+
+cursor.execute("DESC students")
+
+print(cursor.fetchall())	
+	
+------------------------------------------------------------------------------------------------------	
+#Inserting Single Row in MySQL Table-->
+
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "himaniroot@99",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+query ="INSERT INTO students(name, branch, address) VALUES (%s, %s,%s)"
+
+values = ("Sherlock", "CSE", "220 Baker Street, London")
+cursor.execute(query, values)
+db.commit()
+
+print(cursor.rowcount, "record inserted")
+
+
+
+Inserting Multiple Rows in MySQL Table-->
+
+import mysql.connector as mysql
+db = mysql.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "himaniroot@99",
+    database = "studytonight"
+)
+cursor = db.cursor()
+query ="INSERT INTO students(Name, Branch,Address) VALUES (%s, %s, %s)"
+
+values = [
+    ("Peter", "ME","Noida"),
+    ("Amy", "CE","New Delhi"),
+    ("Michael", "CSE","London")
+]
+cursor.executemany(query, values)
+db.commit()
+
+print(cursor.rowcount, "records inserted")
+
+-----------------------------------------------------------------------------------------------------
+
+#Retrieve All records from MySQL Table
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+query = "SELECT * FROM students"
+cursor.execute(query)
+records = cursor.fetchall()
+
+for record in records:
+    print(record)
+	
+
+#Retrieve data from specific Column(s) of a Table -->	
+query = "SELECT name FROM students"
+cursor.execute(query)
+names = cursor.fetchall()
+
+for name in names:
+    print(name)	
+	
+	
+#Selecting Multiple columns from a Table -->
+query = "SELECT name, branch FROM students"
+cursor.execute(query)
+data = cursor.fetchall()
+
+for pair in data:
+    print(pair)	
+	
+
+#To fetch the first record - fetchone() -->	
+cursor = db.cursor()
+cursor.execute("SELECT * FROM students")
+myresult = cursor.fetchone() ##fetches first row of the record
+
+print(myresult)
+
+
+---------------------------------------------------------------------------------------
+#Python MySQL UPDATE Table Data
+
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+cursor = db.cursor()
+## defining the Query
+query = "UPDATE students SET name = 'Navin' WHERE rollno = 3"
+cursor.execute(query)
+db.commit()
+
+
+---------------------------------------------------------------------------------------
+#Python MySQL DELETE Table Data
+db = mysql.connect(
+    host = "localhost",
+    user = "yoursername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+query = "DELETE FROM students WHERE Rollno = 4"
+
+cursor.execute(query)
+db.commit()
+
+------------------------------------------------------------------------------
+#Python MySQL DROP TABLE: Example
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+sql = "DROP TABLE customers"
+cursor.execute(sql)
+	
+	
+-----------------------------------------------------------------------------
+Python MySQL - Drop Table if it exists
+
+import mysql.connector as mysql
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+
+sql = "DROP TABLE IF EXISTS customers"
+
+cursor.execute(sql)	
+	
+	
+------------------------------------------------------------------------------
+The ORDER BY in MySQL is mainly used for the sorting purpose. 
+That is with the help of ORDER BY one can sort the result either in Ascending or Descending Order.
+By default ORDER BY statement will sort the result in the Ascending order, or we can also use the ASC keyword.
+
+In order to sort the result in the Descending order, the DESC keyword will be used.
+Below we have a basic syntax to sort the result in ascending order which is the default:	
+
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+query = "SELECT * FROM students ORDER BY name"
+#query = "SELECT * FROM students ORDER BY name Desc"   # for Decending order
+cursor.execute(query)
+records = cursor.fetchall()
+
+for record in records:
+    print(record)
+
+-----------------------------------------------------------------------------------------------
+limit clause limit the number of rows-->
+	
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+cursor.execute("SELECT * FROM students LIMIT 2")
+
+myresult = cursor.fetchall()
+
+for x in myresult:
+  print(x)
+
+
+Using OFFSET Keyword with LIMIT clause -->
+If you do not want to start from the first position then by using OFFSET keyword in the LIMIT query you can start from any 
+other position. Let us see the code example for the same:
+
+import mysql.connector as mysql
+
+db = mysql.connect(
+    host = "localhost",
+    user = "yourusername",
+    passwd = "yourpassword",
+    database = "studytonight"
+)
+
+cursor = db.cursor()
+
+cursor.execute("SELECT * FROM students LIMIT 2 OFFSET 1")
+
+myresult = cursor.fetchall()
+
+for x in myresult:
+  print(x)	
+  
+   
+*****************************************************************************************************************
+
+What is Database Transaction -->
+	The database transaction represents a single unit of work. 
+	Any operation which modifies the state of the MySQL database is a transaction. 
+	For example, take a sample of a Bank amount transfer, which involves two significant transactions.
+
+1.Withdrawal of money from account A
+2.Deposit Money to Account B
+
+If the first Transaction is executed successfully but the second failed, in this case, 
+we need to re-deposit money back to account A. To manage such instances, we need transaction management.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
